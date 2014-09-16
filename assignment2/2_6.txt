@@ -1,0 +1,11 @@
+Problem 2.6: Explain the differences between a character pointer and a character array.
+
+A character array is simply an array made up of characters. It can be defined as: 
+    char greeting[] = "Hello, world!";
+
+The variable 'greeting' by itself is a character pointer. It points to the address of the first character in "Hello, world!" as in, printing out the value of 'greeting' will print the memory addres of 'H'. (greeting == &greeting[0]).
+
+A character pointer can also be defined as so:
+    char* greeting = "Hello, world!";
+
+One cannot change the above one character at a time, but in the case that it was defined as an array, 'greeting[1] = 'J'' is legal.
