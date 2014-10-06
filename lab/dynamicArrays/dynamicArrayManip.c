@@ -29,9 +29,10 @@ void insertValue(int* array, int value) {
 void insertMiddle(int* array, int value) {
 	int i, place, length = getLength(array);
 	place = length / 2;
-	for (i=0;i<10;i++) {
-		
-	}
+	checkSize(array);
+	for (i=place;i<length;i++)
+		array[length+i] = array[length-i+1];
+	array[place+2] = value;
 }
 
 /* Checks the size of the array and if there's not enough room, doubles the size
@@ -85,6 +86,11 @@ int main(void) {
 	for (i=0;i<10;i++) {
 		insertValue(myarray, i);
 	}	
+	printList(myarray);
+	insertMiddle(myarray, 10);
+	insertMiddle(myarray, 15);
+	insertMiddle(myarray, 20);
+	printf("\n");
 	printList(myarray);
 	printf("\n");
     printf("Used:\t\t%d\n", myarray[0]);
