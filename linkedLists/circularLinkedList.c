@@ -1,129 +1,110 @@
-/* file: circularLinkedList.c
- * date: 2014/09/25
- * author: Brendon Walter
- *
- * Linked Lists Assignment task #1
- *
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node{
-	int data;
-	struct node *next;
+typedef struct node {
+    int data;
+    struct node *next;
 } Node, *NodePtr;
 
-/* creates a new node that contains value n
- */ 
-NodePtr makeNode(NodePtr top, int n) {
-	NodePtr np = (NodePtr)malloc(sizeof(Node));	// allocate memory
-	np -> data = n;			// set data to the value passed in
-	np -> next = top;		// have it point back to top to make it circular
-	return np;				// return a pointer to the new node
-
-}
-
-/* Insert a new node with value n at the head of the linked list
+/* Parameters: value of a new node
+ * Returns: a pointer to the newly created node
+ * creates a new node and puts the given data into it
  */
-void insert(NodePtr top, int n) {
-	NodePtr np = makeNode(top, n);	// make a new node pointer
-	np -> next = top -> next;		// set the new pointer to point to where 
-									// top did
-	top -> next = np;				// set top to point to the new pointer
-}
+NodePtr makeNode(int n) {
+    NodePtr np = (NodePtr)malloc(sizeof(Node)); // allocate memory
+    np->data = n;       // input the data into the new node
+    np->next = NULL;    // points to NULL for now  
+    return np;          // return the newly created node
+}   
 
-/* itterates through the list to find the given value n
+/* Parameters: Pointer to top, value of new node
+ * Returns: nothing
+ * creates a new node and adds it to the linked list
  */
-NodePtr search(NodePtr top, int n) {
-	NodePtr np;
-	np = top;
-	while(np->data != n) {			// so long as the data is not n
-		np = np->next;				// go to the next pointer
-		if (np->next == top->next)	// if the next node is top
-			return NULL;			// you're at the end of the list
-	}
-	return np;						// return the found node
+void insert(NodePtr *top, int n) {
+    NodePtr np = makeNode(n);       // create node
+    if (*top == NULL) {             // if it's the first node in the list
+        *top = np;                  // set top to point to new node
+        np->next = *top;            // node points to what top does (itself)
+    } else {                        // if there are other nodes in the list
+        np->next = (*top)->next;    // node points to what the first node did
+        (*top)->next = np;          // first node now points to new node
+    }
 }
 
-/* Searches for a node in top with value n. Then deletes it from the list.
+/* Parameters: pointer to top of list, value to search for
+ * Returns: Pointer to the found pointer
+ * Searches through the list to find a given value, then returns a pointer to it
  */
-void delete(NodePtr top, int n) {
-	NodePtr np, prev;
-	np = search(top, n);	// set np to the node returned from seach()
+NodePtr searchList(NodePtr top, int n) {
+    NodePtr np;
+    np = top;
+    while(np->data != n) {              // while data isn't in current node
+        np = np->next;                  // go to the next node
+        if (np == top) return NULL;     // reached end of the list, reutrn null
+    }
+    return np;                          // return pointer to the found node
+}
 
-	if (np == NULL) {		// if the value doesn't exist
-		printf("Node with value %d not found\n", n);
-		return;				// return nothing
-	}
+/* Parameters: pointer to top of the list, value to delete
+ * Returns: -1 if value not found, 1 if opperation was a success
+ * searches through a list to find the value to delete, fixes pointers of nodes
+ * around the node, and then frees its place in memory
+ *
+ * this works fine if you don't delete the top of the list :/
+ */
+int delete(NodePtr top, int n) {
+    NodePtr np, prev;
+    np = searchList(top, n);    // search for element to delete
 
-	prev = top;
+    if (np == NULL)             // if the element wasn't found
+        return -1;              // it doesn't exist
 
-	while(prev->next->data != np->data) // find the previous node
-		prev = prev->next;
+    prev = top;
 
-	prev->next = prev->next->next;		// remove node from the list
-	
-	free(np);	// free space in memory
+    if (top->data == n)
+        top = top->next;
+
+    while (prev->next->data != np->data)    // walk through list to the node
+        prev = prev->next;      // previous node now points to the next one
+
+    prev->next = prev->next->next;  
+
+    free(np);       // free place in memory
+    return 1;       // return success
 }
 
 
-/* Iterates through the linked list and prints out the node address, the data in
- * the node, and a pointer to the address of the next node.
+
+/* Parameters: pointer to top of list
+ * Returns: none
+ * iterates through a linked list and prints each node out
  */
 void printList(NodePtr top) {
+    NodePtr np = top;               // create new node pointer that is top
+    if (np == NULL)                 // if the pointer is empty
+        printf("List is empty\n");  // the list is empty
 
-	NodePtr np = top;
-	printf("top : %p\n", top);
-
-	if (np -> next == NULL)			// if np is the only node
-		printf("List is empty\n");	// it means the list is empty
-
-	while(np -> next != NULL) {		// while np isn't the only node
-		printf("node: %p data: %d next: %p\n", np, np->data, np->next);
-		np = np -> next;			// print the data and set np to next node
-		if (np->next == top->next)	// keep from printing forever
-			break;
-	}
-
+    while(np != NULL) {     // so long as it isn't empty print the items        
+        printf("node: %p\tdata: %d\tnext: %p\n", np, np->data, np->next);
+        np = np->next;              // walk through the list
+        if (np == top) break;       // once we reach the end, break
+    }
 }
 
 int main(void) {
+    NodePtr top;
+    top = NULL;
 
-	NodePtr top, np, last;
-	top -> next = NULL;
+    int i;
+    for (i=0;i<10;i++)
+        insert(&top, i);
 
-	// put intial values into list
-	int i;
-	for(i=0;i<5;i++) {
-		np = makeNode(top, i);
-		if(top->next == NULL)
-			top->next = np;
-		else last->next = np;	// I'm really not sure why this is here
-		last = np;				// but it won't run correctly without it :/
-	}
-	
-	printf("\nINITIAL LIST\n");
-	printList(top);
+    printList(top);
+//    for (i=0;i<10;i++)
+        delete(top, 7);
+    printf("\n");
+    printList(top);
+    printf("%p\n", searchList(top, 12));
 
-	printf("\nADDING 40 TO HEAD\n");
-	insert(top, 40);
-	printList(top); 
-
-	printf("\nADDING 60 TO HEAD\n");
-	insert(top, 60);
-	printList(top); 
-
-	printf("\nREMOVING 3 FROM LIST\n");
-	delete(top, 3);
-	printList(top);
-
-	printf("\nREMOVING 6 FROM LIST\n");
-	delete(top, 6);
-	printList(top);
-
-	printf("\nSearching for %d, found at %p\n", 2, search(top, 2));
-	printf("\nSearching for %d, found at %p\n", 6, search(top, 6));
-
-	return 0;
-}
+}  
