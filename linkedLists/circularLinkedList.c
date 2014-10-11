@@ -1,3 +1,10 @@
+/* file: circularLinkedList.c
+ * date: 2014 October 11
+ * author: Brendon Walter
+ *
+ * implementation of a circular linked list
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
