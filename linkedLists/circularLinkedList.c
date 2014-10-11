@@ -29,6 +29,7 @@ void insert(NodePtr *top, int n) {
     } else {                        // if there are other nodes in the list
         np->next = (*top)->next;    // node points to what the first node did
         (*top)->next = np;          // first node now points to new node
+        *top = np;
     }
 }
 
@@ -47,34 +48,36 @@ NodePtr searchList(NodePtr top, int n) {
 }
 
 /* Parameters: pointer to top of the list, value to delete
- * Returns: -1 if value not found, 1 if opperation was a success
+ * Returns: 0 if value not found, 1 if opperation was a success
  * searches through a list to find the value to delete, fixes pointers of nodes
  * around the node, and then frees its place in memory
- *
- * this works fine if you don't delete the top of the list :/
  */
 int delete(NodePtr top, int n) {
     NodePtr np, prev;
+    prev = top;
     np = searchList(top, n);    // search for element to delete
 
     if (np == NULL)             // if the element wasn't found
-        return -1;              // it doesn't exist
+        return 0;              // it doesn't exist
 
-    prev = top;
+    if (np == top) {            // if the node to be deleted is the first node
+        top = np->next;         // have top point to the next node
+        free(np);               // free the node
+        return 1;
+    }
 
-    if (top->data == n)
-        top = top->next;
-
-    while (prev->next->data != np->data)    // walk through list to the node
-        prev = prev->next;      // previous node now points to the next one
-
-    prev->next = prev->next->next;  
-
-    free(np);       // free place in memory
-    return 1;       // return success
+    while(prev->next->data != np->data) // walk through the list until the
+        prev = prev->next;              // node is found
+   
+    if (np->next = np) {
+        top = NULL;
+        free(np);
+    } else {
+        prev->next = prev->next->next;  // previous node points to next one
+        free(np);                       // free the node
+    }
+    return 1;                           // return success!
 }
-
-
 
 /* Parameters: pointer to top of list
  * Returns: none
@@ -86,8 +89,9 @@ void printList(NodePtr top) {
         printf("List is empty\n");  // the list is empty
 
     while(np != NULL) {     // so long as it isn't empty print the items        
-        printf("node: %p\tdata: %d\tnext: %p\n", np, np->data, np->next);
         np = np->next;              // walk through the list
+        printf("node: %p\tdata: %d\tnext: %p\n", np, np->data, np->next);
+        sleep(.5);
         if (np == top) break;       // once we reach the end, break
     }
 }
@@ -97,12 +101,15 @@ int main(void) {
     top = NULL;
 
     int i;
-    for (i=0;i<10;i++)
+    for (i=0;i<5;i++)
         insert(&top, i);
-
     printList(top);
-//    for (i=0;i<10;i++)
-        delete(top, 7);
+    printf("top: %p\n", top);
+    for (i=4;i>=0;i--) {
+        printf("\n%d\n", i);
+        delete(top, i);
+        printList(top);
+    }
     printf("\n");
     printList(top);
     printf("%p\n", searchList(top, 12));
