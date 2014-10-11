@@ -29,7 +29,6 @@ void insert(NodePtr *top, int n) {
     } else {                        // if there are other nodes in the list
         np->next = (*top)->next;    // node points to what the first node did
         (*top)->next = np;          // first node now points to new node
-        *top = np;
     }
 }
 
@@ -47,6 +46,25 @@ NodePtr searchList(NodePtr top, int n) {
     return np;                          // return pointer to the found node
 }
 
+/* Parameters: pointer to top of list, value that you want to find the the 
+ * prevoius node of
+ * Returns: pointer to the previous node, or NULL if the current node doesn't
+ * exist
+ * Walks through the list to find the node that points to the node that 
+ * contains value 'n'
+ */
+NodePtr findPrev(NodePtr top, int n) {
+    NodePtr np, prev;
+    prev = top;                     // will be starting at top of the list
+    np = searchList(top, n);        // search for the node with value n
+    if (np == NULL) return NULL;    // if not found, return NULL
+
+    while (prev->next->data != n)   // walk through the list until the previous
+        prev = prev->next;          // node is found
+
+    return prev;                    // return found node
+}
+
 /* Parameters: pointer to top of the list, value to delete
  * Returns: 0 if value not found, 1 if opperation was a success
  * searches through a list to find the value to delete, fixes pointers of nodes
@@ -54,29 +72,41 @@ NodePtr searchList(NodePtr top, int n) {
  */
 int delete(NodePtr top, int n) {
     NodePtr np, prev;
-    prev = top;
     np = searchList(top, n);    // search for element to delete
-
-    if (np == NULL)             // if the element wasn't found
-        return 0;              // it doesn't exist
-
-    if (np == top) {            // if the node to be deleted is the first node
-        top = np->next;         // have top point to the next node
-        free(np);               // free the node
-        return 1;
-    }
-
-    while(prev->next->data != np->data) // walk through the list until the
-        prev = prev->next;              // node is found
    
-    if (np->next = np) {
-        top = NULL;
+    // case the node doesn't exist
+    if (np == NULL)             // if the element wasn't found
+        return 0;               // it doesn't exist
+
+    prev = findPrev(top, n);    // find the previous node
+    
+    // case that node is at top of the list
+    if (np == top) {            // if the node to be deleted is the first node
+        
+        // case that node is the only node
+        if (np->next == top) {  // check if only node
+            top = NULL;         // if it is, set top to point to nothing
+            free(np);           // free the node
+            return 1;           // return success
+        } else {                // otherwise, if np isn't the only node
+ 
+            prev->next = top->next;
+            top = prev;
+            free(np);
+            return 1;
+        }
+    } else if (np == top->next) {
+        // case the node is at the tail of the list
+        top->next = np->next;
         free(np);
+        return 1;
+
     } else {
-        prev->next = prev->next->next;  // previous node points to next one
-        free(np);                       // free the node
+        // case that node is in the middle of the list
+        prev->next = np->next;  //
+        free(np);   
+        return 1;                 // return success!
     }
-    return 1;                           // return success!
 }
 
 /* Parameters: pointer to top of list
@@ -91,7 +121,6 @@ void printList(NodePtr top) {
     while(np != NULL) {     // so long as it isn't empty print the items        
         np = np->next;              // walk through the list
         printf("node: %p\tdata: %d\tnext: %p\n", np, np->data, np->next);
-        sleep(.5);
         if (np == top) break;       // once we reach the end, break
     }
 }
