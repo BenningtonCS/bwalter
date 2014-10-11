@@ -81,34 +81,35 @@ int delete(NodePtr *top, int n) {
     if (np == NULL)             // if the element wasn't found
         return 0;               // it doesn't exist
 
-    prev = findPrev(*top, n);    // find the previous node
+    prev = findPrev(*top, n);   // find the previous node
     
     // case that node is at top of the list
-    if (np == *top) {            // if the node to be deleted is the first node
+    if (np == *top) {           // if the node to be deleted is the first node
         
         // case that node is the only node
-        if (np->next == *top) {  // check if only node
+        if (np->next == *top) { // check if only node
             *top = NULL;        // if it is, set top to point to nothing
             free(np);           // free the node
-            return 1;           // return success
+            return 1;           
         } else {                // otherwise, if np isn't the only node
- 
-            prev->next = (*top)->next;
-            *top = prev;
-            free(np);
-            return 1;
+            
+            // case that node at top of the list, but is not the only node
+            prev->next = (*top)->next;  // new head points to what old head did
+            *top = prev;                // top points to new head  
+            free(np);                   // old head is freed
+            return 1;                   
         }
     } else if (np == (*top)->next) {
         // case the node is at the tail of the list
-        (*top)->next = np->next;
-        free(np);
-        return 1;
+        (*top)->next = np->next;        // head points to new tail
+        free(np);                       // old tail is freed
+        return 1;                      
 
     } else {
         // case that node is in the middle of the list
-        prev->next = np->next;  //
-        free(np);   
-        return 1;                 // return success!
+        prev->next = np->next;  // previous node points around deleted node
+        free(np);               // free deleted node
+        return 1;              
     }
 }
 
@@ -120,7 +121,7 @@ void printList(NodePtr top) {
     NodePtr np = top;               // create new node pointer that is top
     printf("top : %p\n", top);
 
-    if (top == NULL) {               // if the pointer is empty
+    if (top == NULL) {              // if top doesn't point to anything
         printf("List is empty\n");  // the list is empty
         return;
     }
