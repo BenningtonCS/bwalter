@@ -13,15 +13,13 @@
 void reverse(NodePtr *top) {
     NodePtr np, prev;
     np = *top;
-    prev = findPrev(*top, (*top)->data);
    
-    printf("prev: %p\tprev->next: %p\ttop: %p", prev, prev->next, top);
-
     int i=0; 
     while (prev->next != *top) {
-        printf("%d\n", i);
-        np->next = prev;
         prev = findPrev(*top, np->data);
+        np->next = prev;
+        np = np->next;
+        printf("%d", i);
         i++;
     }
 
