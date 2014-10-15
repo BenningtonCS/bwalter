@@ -49,7 +49,7 @@ void deleteHead(NodePtr *top) {
  */
 void printList(NodePtr top) {
     while (top != NULL) {
-		printf("%c\n", top->data);
+		printf("%d\n", top->data);
 		top = top->next;
 	}
 }

@@ -12,20 +12,34 @@
 #include "stack.h"
 #include "linkedList.h"
 
+
 int main(void) {
-	NodePtr top = NULL;
+
+	NodePtr top1, top2, top3;
+	top1 = top2 = top3 = NULL;
 	Stack s = initStack();
 	int i;
-	NodePtr n;
 	
-	for (i=0;i<5;i++)
-		insertHead(&top, i);
+	for (i=0;i<5;i++) {				// put values into each linked list
+		insertHead(&top1, i);
+		insertHead(&top2, i+5);
+		insertHead(&top3, i+10);
+	}
 	
-	printf("%p\n", top);
+	// print the address of top for each linked list
+	printf("1: %p\t2: %p\t3: %p\n\n", top1, top2, top3);
 		
-	push(s, top);
-	pop(s, &n);
+	// push each list onto the stack
+	push(s, top1);
+	push(s, top2);
+	push(s, top3);
 	
-	printf("%p\n", n);
-	
+	NodePtr np;
+	int a = pop(s, &np);
+	while (a != 0) {			// so long as there's data in the stack
+		printf("%p\n", np);		// print the address of the top
+		printList(np);			// print the list that top points to
+		a = pop(s, &np);		// pop the next item
+		printf("\n");
+	}
 }
