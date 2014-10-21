@@ -34,7 +34,11 @@ void parseStr(Stack s, int* count, char* str) {
  * goes through a string and checks to see if the brackets in it match up
  */
 int checkBrackets(Stack s, char* str) {
-    
+  
+    // this functin only works for symetrical brackets (i.e. {[()]} ) but does
+    // not work for other legitmate types of brackets (i.e. (){[]} ). I can't 
+    // figure out the right algorithm to fix this.
+
     int i, count;
     i = count = 0;
 
