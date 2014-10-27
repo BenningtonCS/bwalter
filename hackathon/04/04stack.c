@@ -9,14 +9,14 @@
  
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedListInt.h"
+#include "../refs/linkedListInt.h"
  
 // struct for stack
 typedef struct {
 	NodePtr top;
 } StackType, *Stack;
 
-int length = 0;
+int length = 0;		// initialize length variable
 
 /* Parameters: none
  * Returns: pointer to stack struct
@@ -50,7 +50,7 @@ int isEmpty(Stack s) {
 int push(Stack s, int n) {
 	if (s == NULL) return -1;
 	insertHead(&(s->top), n);		// insert function from linkedListInt.c
-	length += 1;
+	length += 1;					// length is increased
 }
 
 /* Parameters:
@@ -70,10 +70,15 @@ int pop(Stack s, int *n) {
 	NodePtr tmp = s->top;
 	s->top = s->top->next;
 	free(tmp);
-	length -= 1;
+	length -= 1;			// length is decreased
 	return 1;
 }
 
+/* Parameters: Pointer to stack
+ * Returns: Total length of stack
+ * Prints out the variable called 'length' and returns it. 'length' is added to
+ * and subtracted from in the push and pop functions respectively.
+ */
 int getLength(Stack s) {
 	printf("Length: %d\n", length);
 	return length;

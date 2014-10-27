@@ -7,7 +7,7 @@
  */
 
 #include <stdio.h>
-#include "circularLinkedList.h"
+#include "../refs/circularLinkedList.h"
 
 
 /* Paramters: Pointer to top of a linked list

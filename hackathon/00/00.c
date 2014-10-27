@@ -7,7 +7,7 @@
  */
 
 #include <stdio.h>
-#include "linkedListInt.h"
+#include "../refs/linkedListInt.h"
 
 /* Parameters: Pointer to top of linked list
  * Returns: mean of list, -1 if list is empty
