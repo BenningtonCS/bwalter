@@ -1,3 +1,13 @@
+#ifndef STACK_H
+#define STACK_H
+
+#include "linkedListInt.h"
+
+// struct for stack
+typedef struct {
+   NodePtr top;
+} StackType, *Stack;
+
 /* Parameters: none
  * Returns: pointer to stack struct
  *			NULL if malloc fails
@@ -31,4 +41,11 @@ int push(Stack s, int n);
  */
 int pop(Stack s, int *n);
 
+/* Parameters: Pointer to stack
+ * Returns: Total length of stack
+ * Prints out the variable called 'length' and returns it. 'length' is added to
+ * and subtracted from in the push and pop functions respectively.
+ */
 int getLength(Stack s);
+
+#endif
