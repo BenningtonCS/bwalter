@@ -20,6 +20,7 @@ typedef struct {
 
 typedef struct {
 	NodePtr head, tail;
+	int length;
 } QueueType, *Queue;
 
 /* Parameters: None
@@ -31,6 +32,7 @@ Queue initQueue() {
 	if (qp == NULL) exit(1);	// or return NULL
 	qp->head = NULL;
 	qp->tail = NULL;
+	qp->length = 0;
 	return qp;
 }
 
@@ -50,6 +52,7 @@ int isEmpty(Queue q) {
 int enqueue(Queue q, QueueData d) {
 	NodePtr np = (NodePtr)malloc(sizeof(Node));
 	if (np == NULL) return -1;
+	q->length += 1;
 	np->data = d;		// put data into node
 	np->next = NULL;	// new node currently doesn't point to anything
 	if (isEmpty(q)) {	// if this new node is the only node in the queue
@@ -69,30 +72,12 @@ int enqueue(Queue q, QueueData d) {
  */
 int dequeue(Queue q, QueueData *d) {
 	if (q == NULL || isEmpty(q)) return -1;
+	q->length -= 1;
 	*d = q->head->data;			// puts data in output parameter
 	NodePtr oldHead = q->head;	// make a new pointer to the deleted node
 	q->head = q->head->next;
     free(oldHead);				// and then free it
 	return 0;
-}
-
-/* Paramters: Pointer to a queue
- * Returns: length of queue, -1 if queue doesn't exist
- * Gets the length of a queue and prints it out
- */
-int getLength(Queue q) {
-	if (q == NULL) return -1;	// NULL check
-	int length = 0;
-
-	NodePtr np = q->head;
-
-	while (np != q->tail) {		// walk through the list 
-		np = np->next;
-		length += 1;			// add 1 to length for each iteration
-	}
-
-	printf("Length: %d\n", length);
-	return length;
 }
 
 int main(void) {
@@ -106,6 +91,9 @@ int main(void) {
         enqueue(q, f);
     }
 
-	getLength(a);
-	getLength(q);
+	printf("Length: %d\n", q->length);
+	dequeue(q, &f);
+	printf("Length: %d\n", q->length);
+
 }
+

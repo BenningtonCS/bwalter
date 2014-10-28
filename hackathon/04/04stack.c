@@ -14,9 +14,8 @@
 // struct for stack
 typedef struct {
 	NodePtr top;
+	int length;
 } StackType, *Stack;
-
-int length = 0;		// initialize length variable
 
 /* Parameters: none
  * Returns: pointer to stack struct
@@ -27,6 +26,7 @@ Stack initStack() {
 	Stack sp = (Stack)malloc(sizeof(StackType));
 	if (sp == NULL) return NULL;
 	sp->top == NULL;
+	sp->length = 0;
 	return sp;
 }
 
@@ -50,7 +50,7 @@ int isEmpty(Stack s) {
 int push(Stack s, int n) {
 	if (s == NULL) return -1;
 	insertHead(&(s->top), n);		// insert function from linkedListInt.c
-	length += 1;					// length is increased
+	s->length += 1;					// length is increased
 }
 
 /* Parameters:
@@ -70,18 +70,8 @@ int pop(Stack s, int *n) {
 	NodePtr tmp = s->top;
 	s->top = s->top->next;
 	free(tmp);
-	length -= 1;			// length is decreased
+	s->length -= 1;			// length is decreased
 	return 1;
-}
-
-/* Parameters: Pointer to stack
- * Returns: Total length of stack
- * Prints out the variable called 'length' and returns it. 'length' is added to
- * and subtracted from in the push and pop functions respectively.
- */
-int getLength(Stack s) {
-	printf("Length: %d\n", length);
-	return length;
 }
 
 int main(void) {
@@ -91,12 +81,11 @@ int main(void) {
 	for (i=0;i<2;i++)
 		push(s, i);
 
-	getLength(s);
+	printf("Length: %d\n", s->length);
 
 	int d;
 	pop(s, &d);
-	getLength(s);
+	printf("Length: %d\n", s->length);
 	pop(s, &d);
-	getLength(s);
-	getLength(s);
+	printf("Length: %d\n", s->length);
 }
