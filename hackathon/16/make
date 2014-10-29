@@ -1,0 +1,2 @@
+gcc 16queue.c -o 16queue
+gcc 16stack.c ../refs/stack.c ../refs/linkedListInt.c -o 16stack
