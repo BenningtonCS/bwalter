@@ -34,5 +34,12 @@ int main(void) {
         i++;
     } 
 	printf("%d\n", getBalanceFactor(bt.root));
+	
+	TreeNode* pparent = NULL;
+	int isLeft = -1;
+	strcpy(d.val, "0");
+
+	insert(bt, d);
+	printf("%d\n", getBalanceFactor(bt.root));
 }
 

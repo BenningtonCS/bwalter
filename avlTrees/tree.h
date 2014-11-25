@@ -19,7 +19,8 @@ typedef struct {
 // struct for each node in the tree
 typedef struct treenode {
 	NodeData data;
-	struct treenode *left, *right;	// left / right children
+	int balance;
+	struct treenode *left, *right, *parent;	// left / right children
 } TreeNode;
 
 // struct for the whole tree
@@ -48,11 +49,15 @@ TreeNode* buildTree(FILE *in);
  * Returns: Pointer to newly created node
  * Creates and adds a new node to the binary search tree
  */
-TreeNode* newTreeNode(NodeData d); 
+TreeNode* newTreeNode(NodeData d, TreeNode* pparent); 
 
 /* Parameters: Pointer to root of a binary search tree, data to add
  * Returns: Pointer to the found/created node
  * Searches a binary search tree for a node and returns it if found. If the
  * Node doesn't exist, make a new one and return a pointer to it.
  */ 
-TreeNode* findOrInsert(BinaryTree *bt, NodeData d); 
+TreeNode* findOrInsert(BinaryTree *bt, NodeData d);
+
+TreeNode* find(BinaryTree bt, NodeData d, TreeNode** pparent, int* isLeft, TreeNode** unbalanced);
+
+TreeNode* insert(BinaryTree bt, NodeData d); 
