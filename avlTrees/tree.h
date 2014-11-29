@@ -57,7 +57,3 @@ TreeNode* newTreeNode(NodeData d, TreeNode* pparent);
  * Node doesn't exist, make a new one and return a pointer to it.
  */ 
 TreeNode* findOrInsert(BinaryTree *bt, NodeData d);
-
-TreeNode* find(BinaryTree bt, NodeData d, TreeNode** pparent, int* isLeft, TreeNode** unbalanced);
-
-TreeNode* insert(BinaryTree bt, NodeData d); 
