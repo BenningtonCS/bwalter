@@ -81,6 +81,42 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
 	}
 }
 
+void rotateRight(TreeNode* node, BinaryTree* tree) {
+	TreeNode* r = node;			// root of rotate tree
+	TreeNode* p = node->left;	// pivot point
+	TreeNode* parent = r->parent;
+
+	if (r->parent != NULL) {		// root is not the root of whole tree
+		if (parent->left == r) parent->left = p;
+		else parent->right = p;
+	} else tree->root = p;
+
+	p->parent = parent;
+	r->parent = p;
+
+	r->left = p->right;
+	if (r->left) r->left->parent = r;
+	p->right = r;
+}
+
+void rotateLeft(TreeNode* node, BinaryTree* tree) {
+	TreeNode* r = node;			// root of rotate tree
+	TreeNode* p = node->left;	// pivot point
+	TreeNode* parent = r->parent;
+	
+	if (r->parent != NULL) {		// root is not the root of whole tree
+		if (parent->left == r) parent->left = p;
+		else parent->right = p;
+	} else tree->root = p;
+	
+	p->parent = parent;
+	r->parent = p;
+	
+	r->right = p->left;
+	if (r->right) r->right->parent = r;
+	p->left = r;
+}
+
 int main(void) {
     BinaryTree bt;
     bt.root = NULL;
