@@ -65,23 +65,19 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
 	TreeNode* key = find(bt, d, &pparent, &isLeft, &unbalanced);
 	if (key != NULL) return key;
 
-	else {	
 	// create the new node
 	key = newTreeNode(d, pparent);
 	if (pparent == NULL) return bt.root = key;
-	printf("%p: %d\n", key->parent, key->data.val);
-	pparent = key->parent;
 
-	if (isLeft) key->parent->left = key;
-	else key->parent->right = key;
+	if (isLeft) pparent->left = key;
+	else pparent->right = key;
 	
-	for (;;) {	
-		if (pparent->left == key) pparent->balance--;
-		else pparent->balance++;
-		if (pparent == unbalanced) break;
+	while (pparent != NULL) {
+		if (pparent->left == key) pparent->balance++;
+		else pparent->balance--;
+		//if (pparent == unbalanced) break;
 		key = pparent;
 		pparent = pparent->parent;
-	}
 	}
 }
 
@@ -90,20 +86,19 @@ int main(void) {
     bt.root = NULL;
     NodeData d;
 
-/* 
     printf("Enter a node value: ");
     scanf("%s", d.val);
 	bt.root = insert(bt, d);
-*/  
-    int i=0;
-	while (i<5) {
+    
+	int i=0;
+	while (i<3) {
         printf("Enter a node value: ");
         scanf("%s", d.val);
-		bt.root = insert(bt, d);
+		insert(bt, d);
         i++;
     } 
 
-	printf("%p\n", bt.root);
+	printf("%d\n", getBalanceFactor(bt.root));
 	preOrder(bt.root);	
 }
 
