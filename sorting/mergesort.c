@@ -3,12 +3,11 @@
  */
 
 #include "sort.h"
-#define MAXNUM 10
 
 // A[lo..mid] and A[mid+1..hi] are sorted
 // merge the pieces so that A[lo..hi] is sorted
-void merge(int A[], int lo, int mid, int hi) {
-	static int T[MAXNUM];
+void merge(int A[], int lo, int mid, int hi, int maxNum) {
+	int T[maxNum];
 	int i = lo;
 	int j = mid+1;
 	int k = lo;
@@ -22,12 +21,12 @@ void merge(int A[], int lo, int mid, int hi) {
 }
 
 // use merge sort to sort A[lo..hi]
-void mergeSort(int A[], int lo, int hi) {
+void mergeSort(int A[], int lo, int hi, int maxNum) {
 	if (lo < hi) {					// list contains more than 2 elements
 		int mid = (lo + hi) / 2;	// get the mid-point subscript
-		mergeSort(A, lo, mid);		// sort first-half
-		mergeSort(A, mid+1, hi);	// sort second half
-		merge(A, lo, mid, hi);		// merge the sorted halves
+		mergeSort(A, lo, mid, maxNum);		// sort first-half
+		mergeSort(A, mid+1, hi, maxNum);	// sort second half
+		merge(A, lo, mid, hi, maxNum);		// merge the sorted halves
 	}
 }
 

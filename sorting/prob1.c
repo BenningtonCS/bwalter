@@ -16,32 +16,48 @@
 
 #include "sort.h"
 
-#define MAXNUM 1000
+#define MAXNUM 10000
+
+void makeLists(int num, int random[], int sorted[]) {
+	int i;
+	for (i=0;i<num;i++) {
+		random[i] = rand()/(RAND_MAX+1.0)*(99);	// sort of random, but not perfect
+		sorted[i] = i;
+	}
+}
+
+int checkOrder(int A[], int length) {
+	int i;
+	for (i=0;i<length;i++) if (A[i]>A[i+1]) return 0;
+	return 1;
+}
 
 int main(void) {
 	clock_t start, end;
 	double diff;
+	int random[MAXNUM], sorted[MAXNUM];
 
-	int random[MAXNUM], sorted[MAXNUM], i;
-	for (i=0;i<MAXNUM;i++) {
-		random[i] = rand() % 100;	// sort of random, but not perfect
-		sorted[i] = i;
-	}
 
 	printf("\n\nSELECTION SORT\n\n");
+	makeLists(MAXNUM, random, sorted);
+
 	start = clock();
 	selectionSort(random, 0, MAXNUM);
 	end = clock();
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Random order took %f seconds to complete\n", diff);
-	
+
 	start = clock();
 	selectionSort(sorted, 0, MAXNUM);
 	end = clock();
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Sorted order took %f seconds to complete\n", diff);
 
+
+
 	printf("\n\nQUICK SORT\n\n");
+	makeLists(MAXNUM, random, sorted);
+
 	start = clock();
 	quickSort(random, 0, MAXNUM);
 	end = clock();
@@ -54,7 +70,11 @@ int main(void) {
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Sorted order took %f seconds to complete\n", diff);
 
+	
+	
 	printf("\n\nINSERTION SORT\n\n");
+	makeLists(MAXNUM, random, sorted);
+
 	start = clock();
 	insertionSort(random, 0, MAXNUM);
 	end = clock();
@@ -67,15 +87,19 @@ int main(void) {
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Sorted order took %f seconds to complete\n", diff);
 
+
+
 	printf("\n\nMERGE SORT\n\n");
+	makeLists(MAXNUM, random, sorted);
+	
 	start = clock();
-	mergeSort(random, 0, MAXNUM);
+	mergeSort(random, 0, MAXNUM, MAXNUM);
 	end = clock();
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Random order took %f seconds to complete\n", diff);
 	
 	start = clock();
-	mergeSort(sorted, 0, MAXNUM);
+	mergeSort(sorted, 0, MAXNUM, MAXNUM);
 	end = clock();
 	diff = (double)(end-start) / CLOCKS_PER_SEC;
 	printf("Sorted order took %f seconds to complete\n", diff);

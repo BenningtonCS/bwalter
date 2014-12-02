@@ -9,10 +9,10 @@ void insertionSort(int list[], int lo, int hi);
 
 // A[lo..mid] and A[mid+1..hi] are sorted
 // merge the pieces so that A[lo..hi] is sorted
-void merge(int A[], int lo, int mid, int hi); 
+void merge(int A[], int lo, int mid, int hi, int maxNum); 
 
 // use merge sort to sort A[lo..hi]
-void mergeSort(int A[], int lo, int hi);
+void mergeSort(int A[], int lo, int hi, int maxNum);
 
 // partition A[lo] to A[hi] using A[lo] as the pivot
 int partition(int A[], int lo, int hi);
