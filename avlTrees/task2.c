@@ -56,7 +56,13 @@ TreeNode* find(BinaryTree bt, NodeData d, TreeNode** pparent, int* isLeft, TreeN
 	return curr; 
 }
 
+/*
+	Parameters: pointer to a node to rotate out, binary tree that the node exists in
+	Returns: None
+	Performs a left rotation of the AVL tree
+*/
 void rotateRight(TreeNode* node, BinaryTree* tree) {
+
 	TreeNode* r = node;			// root of rotate tree
 	TreeNode* p = node->left;	// pivot point
 	TreeNode* parent = r->parent;
@@ -74,6 +80,11 @@ void rotateRight(TreeNode* node, BinaryTree* tree) {
 	p->right = r;
 }
 
+/*
+	Parameters: pointer to a node to rotate out, binary tree that the node exists in
+	Returns: None
+	Performs a left rotation of the AVL tree
+*/
 void rotateLeft(TreeNode* node, BinaryTree* tree) {
 	TreeNode* r = node;			// root of rotate tree
 	TreeNode* p = node->left;	// pivot point
@@ -92,18 +103,23 @@ void rotateLeft(TreeNode* node, BinaryTree* tree) {
 	p->left = r;
 }
 
-TreeNode* insert(BinaryTree bt, NodeData d) {
+/*
+	Paremeters: Binary tree to insert node in, data to be put into node
+	Returns: Point to the new node
+	Insert a new node into binary tree bt that contains data d
+*/
+TreeNode* insert(BinaryTree *bt, NodeData d) {
 	TreeNode *pparent = NULL;		// set values
 	TreeNode *unbalanced;
 	int isLeft = -1;	
 	
 	// find the parent and position of the node in the tree
-	TreeNode* key = find(bt, d, &pparent, &isLeft, &unbalanced);
+	TreeNode* key = find(*bt, d, &pparent, &isLeft, &unbalanced);
 	if (key != NULL) return key;
 
 	// create the new node
 	key = newTreeNode(d, pparent);
-	if (pparent == NULL) return bt.root = key;
+	if (pparent == NULL) return bt->root = key;
 
 	if (isLeft) pparent->left = key;
 	else pparent->right = key;
@@ -119,7 +135,7 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
  			case 2: {
 				TreeNode* right = unbalanced->right;
 				if (right->balance == 1) {
-					rotateLeft(right, &bt);
+					rotateLeft(right, bt);
 					unbalanced->balance = 0;
 					right->balance = 0;
 				} else {
@@ -138,15 +154,15 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
 							break;
 					}
 					right->left->balance = 0;
-					rotateRight(right, &bt);
+					rotateRight(right, bt);
 				}
-				rotateLeft(unbalanced, &bt);
+				rotateLeft(unbalanced, bt);
 				break;
 			}	// case 2
 			case -2: {
 				TreeNode* left = unbalanced->left;
 				if (left->balance == 1) {
-					rotateRight(left, &bt);
+					rotateRight(left, bt);
 					unbalanced->balance = 0;
 					left->balance = 0;
 				} else {
@@ -165,9 +181,9 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
 							break;
 					}
 					left->right->balance = 0;
-					rotateLeft(left, &bt);
+					rotateLeft(left, bt);
 				}
-				rotateRight(unbalanced, &bt);
+				rotateRight(unbalanced, bt);
 				break;
 			}	// case -2
 		}	// switch (unbalanced->balance)
@@ -178,26 +194,26 @@ TreeNode* insert(BinaryTree bt, NodeData d) {
 	return NULL;
 }
 
-
-
 int main(void) {
     BinaryTree bt;
     bt.root = NULL;
     NodeData d;
 
+/*
     printf("Enter a node value: ");
     scanf("%s", d.val);
 	bt.root = insert(bt, d);
-    
+*/  
+
 	int i=0;
 	while (i<9) {
         printf("Enter a node value: ");
         scanf("%s", d.val);
-		insert(bt, d);
+		insert(&bt, d);
         i++;
     } 
 
 	printf("%d\n", getBalanceFactor(bt.root));
 	preOrder(bt.root);	
-}
 
+}
