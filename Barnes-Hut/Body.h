@@ -10,6 +10,7 @@ class Body {
 		double mass;		// mass of the particle
 		Point pos;			// x, y coordinates
 		Point vel;			// velocity in x and y
+		Point acc;			// acceleration in x and y
 		Point force;		// force in x and y
 
 

@@ -12,7 +12,7 @@ using namespace std;
 
 #define NUM_BODIES 1000	// number of particles in simulation
 #define UNIVERSE 750 
-#define TIME_STEP 0.01 
+#define TIME_STEP 1000
 
 
 int main(void) {
@@ -20,14 +20,17 @@ int main(void) {
 	srand(time(NULL));		// make it possible to generate random numbers
 
 	// S E T U P   U N I V E R S E
+
+	Universe uni;
+	uni.setSize(UNIVERSE); 	
 	
 	Body b[NUM_BODIES];
-	b[0].makeBody(1000, UNIVERSE/2, UNIVERSE/2, 0, 0);
+	b[0].makeBody(1000000, uni.getCenter().x, uni.getCenter().y, 0, 0);
 	
 
 	int i;
 	for (i=1;i<NUM_BODIES;i++) 
-		b[i].makeRandomBody(UNIVERSE/2); 
+		b[i].makeRandomBody(uni.getSize()); 
 
 	// S E T U P   X
 	
@@ -54,23 +57,23 @@ int main(void) {
 
 	while(1) {
 	
-		XClearWindow(dis, win);		// clear the window
+	
 		int i, j;
 		for (i=0;i<NUM_BODIES;i++) {
+			b[i].resetForce();
 			for (j=0;j<NUM_BODIES;j++) { 
 				if (i != j) b[i].calcForce(b[j]);
 			}
 		}
 
+		XClearWindow(dis, win);		// clear the window
 		for (i=0;i<NUM_BODIES;i++)	{
 			b[i].update(TIME_STEP);
 			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
-			XFlush(dis);				// send draw point requests to server
-			b[i].resetForce();
-		}
+		}		
 		
-//		cout << b[0].pos.x << ", " << b[0].pos.y <<endl;
+		XFlush(dis);				// send draw point requests to server
 		
-		usleep(10);
+		usleep(100);		
 	}
 }

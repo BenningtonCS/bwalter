@@ -18,6 +18,7 @@ void Body::makeBody(double m, double x, double y, double vx, double vy) {
 	mass = m;
 	pos.x = x;	pos.y = y;
 	vel.x = vx;	vel.y = vy;
+	acc.x = acc.y = 0;
 }
 
 /*
@@ -39,6 +40,8 @@ void Body::makeRandomBody(double range) {
 
 	// get random velocity
 //	vel.x = randomNum(0.1);	vel.y = randomNum(0.1);
+	vel.x = vel.y = 0;
+	acc.x = acc.y = 0;
 }
 
 /*
@@ -46,20 +49,20 @@ void Body::makeRandomBody(double range) {
 	Returns: None
 	Calculates the graviational force between two interacting bodies
 */
-void Body::calcForce(Body m2) {
-	Point Fg;
+void Body::calcForce( Body m2) {
 	double epsilon = pow(3, 4);	// softening parameter
 	
 	// calculate distance between the two objects
 	double distance = sqrt(pow(pos.x - m2.pos.x, 2) + 
 						   pow(pos.y - m2.pos.y, 2));
 	// calculate the graviational force
-	double force = (G * mass * m2.mass) / 
+	double Fg = (G * mass * m2.mass) / 
 				   (pow(distance, 2) + pow(epsilon, 2));
 
 	// break force into x and y componants
-	Fg.x = force * (m2.pos.x - pos.x) / distance;
-	Fg.y = force * (m2.pos.y - pos.y) / distance;
+	force.x = Fg * (m2.pos.x - pos.x) / distance;
+	force.y = Fg * (m2.pos.y - pos.y) / distance;
+	
 }
 
 /*
@@ -74,7 +77,6 @@ void Body::update(double dt) {
 	vel.y += dt * force.y / mass;
 
 	// update position
-	std::cout << vel.x <<std::endl;
 	pos.x += dt * vel.x;
 	pos.y += dt * vel.y;
 }

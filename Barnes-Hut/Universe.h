@@ -8,9 +8,26 @@ struct Point {
 };
 
 class Universe {
+
 	private:
 		Point center;			// coordinates for the center of the universe
+		int size;				// size of the universe in pixels 
 		Point halfDimension;	// half the side length of the universe
+
+	public:
+		
+		void setSize(int pixels) {
+			size = pixels;
+			center.x = center.y = pixels / 2;
+		}
+
+		int getSize() {
+			return size;
+		}
+
+		Point getCenter() {
+			return center;
+		}
 };
 
 #endif
