@@ -5,14 +5,13 @@
 
 class Body {
 
-	private:
+	public:
 
 		double mass;		// mass of the particle
 		Point pos;			// x, y coordinates
 		Point vel;			// velocity in x and y
 		Point force;		// force in x and y
 
-	public:
 
 		/*
 			Parameters: mass, positions in x and y, velocities in x and y
@@ -31,7 +30,7 @@ class Body {
 			Returns: None
 			Make a new body at a random position and with random a random velocity
 		*/
-		void makeRandomBody(); 
+		void makeRandomBody(int range); 
 
 		/*
 			Parameters: Other interacting body

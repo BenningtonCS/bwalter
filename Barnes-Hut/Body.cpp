@@ -1,10 +1,10 @@
 #include <cmath>
+#include <stdlib.h>
 #include <time.h>
 
 #include "Body.h"
 #include "Universe.h"
 
-#define UNIVERSE 100			// size of the universe
 #define G 6.67 * pow(10, -11)	// gravitational constant
 
 /*
@@ -19,24 +19,24 @@ void Body::makeBody(double m, double x, double y, double vx, double vy) {
 }
 
 /*
-	 generate a random number between -range and +range
+	 generate a random number between 0 and range
 */
 double Body::randomNum(int range) {
-	return rand() % range*2 + (-range);
+	return rand() % range;
 }
 /*
 	Parameters: None
 	Returns: None
 	Make a new body at a random position and with random a random velocity
 */
-void Body::makeRandomBody() {
+void Body::makeRandomBody(int range) {
 	mass = 1;
 
 	// get random position
-	pos.x = randomNum(10);	pos.y = randomNum(10);
+	pos.x = randomNum(range);	pos.y = randomNum(range);
 
 	// get random velocity
-	vel.x = randomNum(10);	vel.y = randomNum(10);
+	vel.x = randomNum(range);	vel.y = randomNum(range);
 }
 
 /*
@@ -46,14 +46,14 @@ void Body::makeRandomBody() {
 */
 void Body::calcForce(Body m2) {
 	Point Fg;
-	double epsilon = pow(3, 4)	// softening parameter
+	double epsilon = pow(3, 4);	// softening parameter
 	
 	// calculate distance between the two objects
 	double distance = sqrt(pow(pos.x - m2.pos.x, 2) + 
 						   pow(pos.y - m2.pos.y, 2));
 	// calculate the graviational force
 	double force = (G * mass * m2.mass) / 
-				   (pow(distance, 2) + pow(epsilon, 2);
+				   (pow(distance, 2) + pow(epsilon, 2));
 
 	// break force into x and y componants
 	Fg.x = force * (pos.x - m2.pos.x) / distance;
