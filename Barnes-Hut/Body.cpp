@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cmath>
 #include <stdlib.h>
 #include <time.h>
@@ -6,6 +7,7 @@
 #include "Universe.h"
 
 #define G 6.67 * pow(10, -11)	// gravitational constant
+#define UNIVERSE 750
 
 /*
 	Parameters: mass, positions in x and y, velocities in x and y
@@ -15,28 +17,28 @@
 void Body::makeBody(double m, double x, double y, double vx, double vy) {
 	mass = m;
 	pos.x = x;	pos.y = y;
-	vel.x = x;	vel.y = y;
+	vel.x = vx;	vel.y = vy;
 }
 
 /*
 	 generate a random number between 0 and range
 */
-double Body::randomNum(int range) {
-	return rand() % range;
+double Body::randomNum(double range) {
+	return  (rand()) / (RAND_MAX / range);
 }
 /*
-	Parameters: None
+	Parameters: Range in which the bodies can be positioned
 	Returns: None
 	Make a new body at a random position and with random a random velocity
 */
-void Body::makeRandomBody(int range) {
-	mass = 1;
+void Body::makeRandomBody(double range) {
+	mass = 100;
 
 	// get random position
 	pos.x = randomNum(range);	pos.y = randomNum(range);
 
 	// get random velocity
-	vel.x = randomNum(range);	vel.y = randomNum(range);
+//	vel.x = randomNum(0.1);	vel.y = randomNum(0.1);
 }
 
 /*
@@ -56,8 +58,8 @@ void Body::calcForce(Body m2) {
 				   (pow(distance, 2) + pow(epsilon, 2));
 
 	// break force into x and y componants
-	Fg.x = force * (pos.x - m2.pos.x) / distance;
-	Fg.y = force * (pos.y - m2.pos.y) / distance;
+	Fg.x = force * (m2.pos.x - pos.x) / distance;
+	Fg.y = force * (m2.pos.y - pos.y) / distance;
 }
 
 /*
@@ -72,6 +74,7 @@ void Body::update(double dt) {
 	vel.y += dt * force.y / mass;
 
 	// update position
+	std::cout << vel.x <<std::endl;
 	pos.x += dt * vel.x;
 	pos.y += dt * vel.y;
 }

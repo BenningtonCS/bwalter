@@ -23,14 +23,14 @@ class Body {
 		/*
 			 generate a random number between -range and +range
 		*/
-		double randomNum(int range);
+		double randomNum(double range);
 
 		/*
 			Parameters: None
 			Returns: None
 			Make a new body at a random position and with random a random velocity
 		*/
-		void makeRandomBody(int range); 
+		void makeRandomBody(double range); 
 
 		/*
 			Parameters: Other interacting body

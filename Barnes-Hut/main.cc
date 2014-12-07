@@ -10,19 +10,24 @@
 
 using namespace std;
 
-const int NUM_BODIES = 100;	// number of particles in simulation
+#define NUM_BODIES 1000	// number of particles in simulation
+#define UNIVERSE 750 
+#define TIME_STEP 0.01 
+
 
 int main(void) {
 
 	srand(time(NULL));		// make it possible to generate random numbers
+
+	// S E T U P   U N I V E R S E
 	
-	Body b[NUM_BODIES];				// create each body
-	b[0].makeBody(100, 0, 0, 0, 0);	// make large body in center
+	Body b[NUM_BODIES];
+	b[0].makeBody(1000, UNIVERSE/2, UNIVERSE/2, 0, 0);
 	
+
 	int i;
 	for (i=1;i<NUM_BODIES;i++) 
-		b[i].makeRandomBody(500);
-	
+		b[i].makeRandomBody(UNIVERSE/2); 
 
 	// S E T U P   X
 	
@@ -33,7 +38,7 @@ int main(void) {
 	int white = WhitePixel(dis, DefaultScreen(dis));
 	
 	// create window
-	Window win = XCreateSimpleWindow(dis, DefaultRootWindow(dis), 0, 0, 500, 500, 0, black, black);
+	Window win = XCreateSimpleWindow(dis, DefaultRootWindow(dis), 0, 0, UNIVERSE, UNIVERSE, 0, black, black);
 	
 	XSelectInput(dis, win, StructureNotifyMask);// want to get MapNotify events
 	XMapWindow(dis, win);					// map the window
@@ -44,11 +49,28 @@ int main(void) {
 	while (e.type != MapNotify)				// wait for MapNotify event
 		XNextEvent(dis, &e);
 
-	for(i=0;i<NUM_BODIES;i++) {
-		XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
+
+	// S T A R T   T I M E
+
+	while(1) {
+	
+		XClearWindow(dis, win);		// clear the window
+		int i, j;
+		for (i=0;i<NUM_BODIES;i++) {
+			for (j=0;j<NUM_BODIES;j++) { 
+				if (i != j) b[i].calcForce(b[j]);
+			}
+		}
+
+		for (i=0;i<NUM_BODIES;i++)	{
+			b[i].update(TIME_STEP);
+			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
+			XFlush(dis);				// send draw point requests to server
+			b[i].resetForce();
+		}
+		
+//		cout << b[0].pos.x << ", " << b[0].pos.y <<endl;
+		
+		usleep(10);
 	}
-
-	XFlush(dis);
-
-	sleep(10);
 }
