@@ -18,7 +18,7 @@ void Body::makeBody(double m, double x, double y, double vx, double vy) {
 	mass = m;
 	pos.x = x;	pos.y = y;
 	vel.x = vx;	vel.y = vy;
-	acc.x = acc.y = 0;
+	force.x = force.y = 0;
 }
 
 /*
@@ -40,7 +40,7 @@ void Body::makeRandomBody(int min, int max) {
 
 	// get random velocity
 	vel.x = vel.y = 0;
-	acc.x = acc.y = 0;
+	force.x = force.y = 0;
 }
 
 /*
@@ -59,8 +59,8 @@ void Body::calcForce( Body m2) {
 				   (pow(distance, 2) + pow(epsilon, 2));
 
 	// break force into x and y componants
-	force.x = Fg * (m2.pos.x - pos.x) / distance;
-	force.y = Fg * (m2.pos.y - pos.y) / distance;
+	force.x += Fg * (m2.pos.x - pos.x) / distance;
+	force.y += Fg * (m2.pos.y - pos.y) / distance;
 	
 }
 
