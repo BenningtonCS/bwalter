@@ -20,7 +20,7 @@
 
 using namespace std;
 
-#define NUM_BODIES 200	// number of particles in simulation
+#define NUM_BODIES 1000	// number of particles in simulation
 #define UNIVERSE 750 
 #define TIME_STEP 10 
 
@@ -37,8 +37,9 @@ int main(void) {
 	Body b[NUM_BODIES];
 
 	int i;
-	for (i=0;i<NUM_BODIES;i++) 
+	for (i=0;i<NUM_BODIES;i++) {
 		b[i].makeRandomBody(uni.getSize()* 3/8, uni.getSize() * 5/8); 
+	}
 
 	// S E T U P   X
 	
@@ -64,13 +65,15 @@ int main(void) {
 	// S T A R T   T I M E
 
 	while(1) {
-		
+
 		// calculate force on each particle	
 		int i, j;
 		for (i=0;i<NUM_BODIES;i++) {
 			b[i].resetForce();
 			for (j=0;j<NUM_BODIES;j++) { 
-				if (i != j) b[i].calcForce(b[j]);
+				if (i != j) {
+					b[i].calcForce(b[j]);
+				}
 			}
 		}
 
@@ -83,12 +86,6 @@ int main(void) {
 		}		
 		
 		XFlush(dis);				// send draw point requests to server
-/*
-		cout << b[1].pos.x << ", " << b[1].pos.y <<endl;
-		cout << b[1].vel.x << ", " << b[1].vel.y <<endl;
-		cout << b[1].force.x << ", " << b[1].force.y <<endl;
-		cout << "\n";	
-*/
 		usleep(100);	// keep program from over loading computer	
 	}
 }

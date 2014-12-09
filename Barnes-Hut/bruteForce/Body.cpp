@@ -10,12 +10,19 @@
 #include <cmath>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 
 #include "Body.h"
 #include "Universe.h"
 
 #define G 6.67 * pow(10, -11)	// gravitational constant
 #define UNIVERSE 750
+
+using namespace std;
+
+Body::Body() {
+//	std::cout << "Hello!" <<std::endl;	
+}
 
 /*
 	Parameters: mass, positions in x and y, velocities in x and y
@@ -41,11 +48,13 @@ double Body::randomNum(int min, int max) {
 	Make a new body at a random position and with random a random velocity
 */
 void Body::makeRandomBody(int min, int max) {
-	mass = 1E5;
+	mass = 1E6;
+
 
 	// get random position
 	pos.x = randomNum(min, max);	pos.y = randomNum(min, max);
 
+	
 	// get random velocity
 	vel.x = vel.y = 0;
 	force.x = force.y = 0;
@@ -56,7 +65,7 @@ void Body::makeRandomBody(int min, int max) {
 	Returns: None
 	Calculates the graviational force between two interacting bodies
 */
-void Body::calcForce( Body m2) {
+void Body::calcForce(Body m2) {
 	double epsilon = pow(3, 4);	// softening parameter
 	
 	// calculate distance between the two objects
@@ -65,6 +74,10 @@ void Body::calcForce( Body m2) {
 	// calculate the graviational force
 	double Fg = (G * mass * m2.mass) / 
 				   (pow(distance, 2) + pow(epsilon, 2));
+
+	if (pos.x == m2.pos.x && pos.y == m2.pos.y) {
+		return;
+	}
 
 	// break force into x and y componants
 	force.x += Fg * (m2.pos.x - pos.x) / distance;
@@ -82,6 +95,7 @@ void Body::update(double dt) {
 	// update velocity
 	vel.x += dt * force.x / mass;
 	vel.y += dt * force.y / mass;
+
 
 	// update position
 	pos.x += dt * vel.x;

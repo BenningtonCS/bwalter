@@ -21,6 +21,7 @@ class Body {
 		Point acc;			// acceleration in x and y
 		Point force;		// force in x and y
 
+		Body();
 
 		/*
 			Parameters: mass, positions in x and y, velocities in x and y

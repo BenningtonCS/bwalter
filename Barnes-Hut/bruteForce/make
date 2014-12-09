@@ -1,1 +1,1 @@
-g++ -o main main.cc Body.cpp -lX11
+g++ -o main main.cc Body.cpp -lX11 -g
