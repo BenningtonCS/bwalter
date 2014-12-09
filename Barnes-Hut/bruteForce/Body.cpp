@@ -1,3 +1,11 @@
+/*
+	Body.cpp
+	2014 December 5
+	Brendon Walter
+
+	Methods for Body class
+*/
+
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>

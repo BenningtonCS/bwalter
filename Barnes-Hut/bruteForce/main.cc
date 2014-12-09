@@ -1,3 +1,13 @@
+/*
+	main.cc
+	2014 December 5
+	Brendon Walter
+
+	Data Structures in C final project
+
+	Brute-Force N-body simulation
+*/
+
 #include <iostream>
 #include <cmath>
 #include <stdlib.h>
@@ -25,8 +35,6 @@ int main(void) {
 	uni.setSize(UNIVERSE); 	
 	
 	Body b[NUM_BODIES];
-//	b[0].makeBody(1E6, uni.getCenter().x, uni.getCenter().y, 0, 0);
-	
 
 	int i;
 	for (i=0;i<NUM_BODIES;i++) 
@@ -56,8 +64,8 @@ int main(void) {
 	// S T A R T   T I M E
 
 	while(1) {
-
-	
+		
+		// calculate force on each particle	
 		int i, j;
 		for (i=0;i<NUM_BODIES;i++) {
 			b[i].resetForce();
@@ -67,18 +75,20 @@ int main(void) {
 		}
 
 		XClearWindow(dis, win);		// clear the window
+
+		// update each particle and draw it to the screen
 		for (i=0;i<NUM_BODIES;i++)	{
 			b[i].update(TIME_STEP);
 			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
 		}		
 		
 		XFlush(dis);				// send draw point requests to server
-
+/*
 		cout << b[1].pos.x << ", " << b[1].pos.y <<endl;
 		cout << b[1].vel.x << ", " << b[1].vel.y <<endl;
 		cout << b[1].force.x << ", " << b[1].force.y <<endl;
 		cout << "\n";	
-
-		usleep(100);		
+*/
+		usleep(100);	// keep program from over loading computer	
 	}
 }

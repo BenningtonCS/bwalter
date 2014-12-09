@@ -1,3 +1,11 @@
+/*
+	Body.h
+	2014 December 5
+	Brendon Walter
+
+	Body class
+*/
+
 #ifndef BODY_H
 #define BODY_H
 
