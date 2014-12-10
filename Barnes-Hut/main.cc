@@ -21,7 +21,7 @@
 
 using namespace std;
 
-#define NUM_BODIES 200	// number of particles in simulation
+#define NUM_BODIES 1000	// number of particles in simulation
 #define UNIVERSE 750 
 #define TIME_STEP 10 
 
@@ -67,7 +67,7 @@ int main(void) {
 	// S T A R T   T I M E
 
 	while(1) {
-		
+/*		
 		// calculate force on each particle	
 		int i, j;
 		for (i=0;i<NUM_BODIES;i++) {
@@ -75,6 +75,16 @@ int main(void) {
 			for (j=0;j<NUM_BODIES;j++) { 
 				if (i != j) b[i].calcForce(b[j]);
 			}
+		}
+*/
+
+		int i;
+		for (i=0;i<NUM_BODIES;i++) {
+			insertNode(uni, &qt, b[i]);
+		}		
+		
+		for (i=0;i<NUM_BODIES;i++) {
+			b[i].resetForce();
 		}
 
 		XClearWindow(dis, win);		// clear the window
@@ -85,13 +95,9 @@ int main(void) {
 			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
 		}		
 		
-		XFlush(dis);				// send draw point requests to server
-/*
-		cout << b[1].pos.x << ", " << b[1].pos.y <<endl;
-		cout << b[1].vel.x << ", " << b[1].vel.y <<endl;
-		cout << b[1].force.x << ", " << b[1].force.y <<endl;
-		cout << "\n";	
-*/
+		deleteTree(qt.root);
+		
+		XFlush(dis);	// send draw point requests to server
 		usleep(100);	// keep program from over loading computer	
 	}
 }

@@ -1,1 +1,1 @@
-g++ -std=c++11 -I../includes -o main main.cc Body.cpp Quadtree.cpp -lX11
+g++ -std=c++11 -I../includes -o main main.cc Body.cpp Quadtree.cpp -lX11 -g

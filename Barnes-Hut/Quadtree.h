@@ -56,4 +56,11 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center);
 */
 TreeNode* insertNode(Universe uni, QuadTree* qt, Body b); 
 
+/*
+	Parameters: Pointer to root of tree node
+	Returns: None
+	Recursively travel through the entire tree and delete every node
+*/
+void deleteTree(TreeNode* root);
+
 #endif

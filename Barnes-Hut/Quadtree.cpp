@@ -11,6 +11,7 @@
 
 #include "Quadtree.h"
 
+
 /*
 	Parameters: Body to be inserted into tree
 	Returns: Pointer to the created node
@@ -51,8 +52,8 @@ int findQuadrant(Point center, Body b) {
 */
 
 TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
-	TreeNode* curr = node->ne;
-	Body empty;
+    TreeNode* curr = newNode(b);
+	node->ne = curr;
 	int quad;
 
 	if (curr->mass > 0) {	// there is already a node
@@ -67,16 +68,18 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 		if (quad == 4) SEinsert(curr, b, center);
 	}
 
-	curr->body = empty;
-	TreeNode* p = newNode(b);
-	p->body = b;
+	Body empty;
+	node->body = empty;
+	node->mass += b.mass;
+	curr->body = b;
 	curr->mass += b.mass;
-	return p;
+	
+	return curr;
 }
 
 TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
-	TreeNode* curr = node->nw;
-	Body empty;
+    TreeNode* curr = newNode(b);
+	node->nw = curr;
 	int quad;	
 
 	if (curr->mass > 0) {	// there is already a node
@@ -91,16 +94,17 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 		if (quad == 4) SEinsert(curr, b, center);
 	}
 
-	curr->body = empty;
-	TreeNode* p = newNode(b);
-	p->body = b;
+	Body empty;
+	node->body = empty;
+	node->mass += b.mass;
+	curr->body = b;
 	curr->mass += b.mass;
-	return p;
+	return curr;
 }
 
 TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
-    TreeNode* curr = node->se;
-	Body empty;
+	TreeNode* curr = newNode(b);
+	node->se = curr;
     int quad;
 
     if (curr->mass > 0) {   // there is already a node
@@ -115,16 +119,17 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
         if (quad == 4) SEinsert(curr, b, center);
     }
 
-	curr->body = empty;
-	TreeNode* p = newNode(b);
-	p->body = b;
+	Body empty;
+	node->body = empty;
+	node->mass += b.mass;
+	curr->body = b;
 	curr->mass += b.mass;
-	return p;
+	return curr;
 }
 
 TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
-    TreeNode* curr = node->sw;
-	Body empty;
+	TreeNode* curr = newNode(b);
+	node->sw = curr;
     int quad;
 
     if (curr->mass > 0) {   // there is already a node
@@ -139,11 +144,12 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
         if (quad == 4) SEinsert(curr, b, center);
     }
 
-	curr->body = empty;
-	TreeNode* p = newNode(b);
-	p->body = b;
+	Body empty;
+	node->body = empty;
+	node->mass += b.mass;
+	curr->body = b;
 	curr->mass += b.mass;
-	return p;
+	return curr;
 }
 
 /*
@@ -183,4 +189,17 @@ TreeNode* insertNode(Universe uni, QuadTree* qt, Body b) {
 	qt->root->mass += b.mass;
 
 	return curr;
+}
+
+/*
+	Parameters: Pointer to root of tree node
+	Returns: None
+	Recursively travel through the entire tree and delete every node
+*/
+void deleteTree(TreeNode* root) {
+	if (root->ne != NULL) deleteTree(root->ne);
+	if (root->nw != NULL) deleteTree(root->nw);
+	if (root->se != NULL) deleteTree(root->se);
+	if (root->sw != NULL) deleteTree(root->sw);
+	else delete root;
 }
