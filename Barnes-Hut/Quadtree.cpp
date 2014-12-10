@@ -43,17 +43,45 @@ int findQuadrant(Point center, Body b) {
 	}
 }
 
-TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
+/*
+	Parameters: Pointer to a treenode, body to be inserted, center of quadrant
+	Returns: A pointer to the newly created node
+	Each of the following functions insert a new node into the NE, NW, SE, or
+		SW quadrants
+*/
 
+TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
+	TreeNode* curr = node->ne;
+	Body empty;
+	int quad;
+
+	if (curr->mass > 0) {	// there is already a node
+		center.x *= 1.5;
+		center.y *= 0.5;
+
+		curr->ne = curr;
+		quad = findQuadrant(center, b);
+		if (quad == 1) NEinsert(curr, b, center);
+		if (quad == 2) NWinsert(curr, b, center);
+		if (quad == 3) SWinsert(curr, b, center);
+		if (quad == 4) SEinsert(curr, b, center);
+	}
+
+	curr->body = empty;
+	TreeNode* p = newNode(b);
+	p->body = b;
+	curr->mass += b.mass;
+	return p;
 }
 
 TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 	TreeNode* curr = node->nw;
+	Body empty;
 	int quad;	
 
-	while (curr->mass > 0) {	// there is already a node
-		center.x /= 2;
-		center.y /= 2;
+	if (curr->mass > 0) {	// there is already a node
+		center.x *= 0.5;
+		center.y *= 0.5;
 		curr->nw = curr;
 		
 		quad = findQuadrant(center, b);
@@ -62,17 +90,60 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 		if (quad == 3) SWinsert(curr, b, center);
 		if (quad == 4) SEinsert(curr, b, center);
 	}
-	
-	curr->body = b;
+
+	curr->body = empty;
+	TreeNode* p = newNode(b);
+	p->body = b;
 	curr->mass += b.mass;
+	return p;
 }
 
 TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
+    TreeNode* curr = node->se;
+	Body empty;
+    int quad;
 
+    if (curr->mass > 0) {   // there is already a node
+        center.x *= 1.5;
+        center.y *= 1.5;
+
+        curr->se = curr;
+        quad = findQuadrant(center, b);
+        if (quad == 1) NEinsert(curr, b, center);
+        if (quad == 2) NWinsert(curr, b, center);
+        if (quad == 3) SWinsert(curr, b, center);
+        if (quad == 4) SEinsert(curr, b, center);
+    }
+
+	curr->body = empty;
+	TreeNode* p = newNode(b);
+	p->body = b;
+	curr->mass += b.mass;
+	return p;
 }
 
 TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
+    TreeNode* curr = node->sw;
+	Body empty;
+    int quad;
 
+    if (curr->mass > 0) {   // there is already a node
+        center.x *= 0.5;
+        center.y *= 1.5;
+
+        curr->sw = curr;
+        quad = findQuadrant(center, b);
+        if (quad == 1) NEinsert(curr, b, center);
+        if (quad == 2) NWinsert(curr, b, center);
+        if (quad == 3) SWinsert(curr, b, center);
+        if (quad == 4) SEinsert(curr, b, center);
+    }
+
+	curr->body = empty;
+	TreeNode* p = newNode(b);
+	p->body = b;
+	curr->mass += b.mass;
+	return p;
 }
 
 /*
@@ -97,16 +168,16 @@ TreeNode* insertNode(Universe uni, QuadTree* qt, Body b) {
 	int quad = findQuadrant(center, b);
 
 	if (quad == 1)				// NORTH EAST QUADRANT
-		NEinsert(curr, b, center);
+		curr->ne = NEinsert(curr, b, center);
 
 	else if (quad == 2)			// NORTH WEST QUADRANT
-		NWinsert(curr, b, center);
+		curr->nw = NWinsert(curr, b, center);
 
 	else if (quad == 3)			// SOUTH WEST QAUDRANT
-		SWinsert(curr, b, center);
+		curr->sw = SWinsert(curr, b, center);
 
 	else if (quad == 4)			// SOUTH EAST QUADRANT
-		SEinsert(curr, b, center);
+		curr->se = SEinsert(curr, b, center);
 
 	// update mass of root
 	qt->root->mass += b.mass;
