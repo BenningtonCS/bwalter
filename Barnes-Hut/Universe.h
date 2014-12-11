@@ -13,6 +13,9 @@
 struct Point {
 	double x;
 	double y;
+
+	friend bool operator== (Point &p1, Point &p2); 
+	friend bool operator!= (Point &p1, Point &p2); 
 };
 
 class Universe {
@@ -24,6 +27,7 @@ class Universe {
 
 	public:
 		
+	
 		// set the size (in pixels) for the universe and calculates the center
 		void setSize(int pixels) {
 			size = pixels;

@@ -20,6 +20,10 @@ class Body {
 		Point vel;			// velocity in x and y
 		Point force;		// force in x and y
 
+		friend bool operator== (Body &m1, Body &m2); 
+
+		friend bool operator!= (Body &m1, Body &m2);
+
 		/*
 			Parameters: None
 			Returns: None

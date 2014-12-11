@@ -16,6 +16,17 @@
 #define G 6.67 * pow(10, -11)	// gravitational constant
 #define UNIVERSE 750
 
+// comparison functions for Body
+bool operator== (Body &m1, Body &m2) {
+	return (m1.mass == m2.mass &&
+			m1.pos == m2.pos &&
+			m1.vel == m2.vel &&
+			m1.force == m2.force);
+}
+
+bool operator!= (Body &m1, Body &m2) {
+	return !(m1 == m2);
+}
 
 /*
 	Parameters: None
