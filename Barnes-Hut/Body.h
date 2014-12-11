@@ -18,10 +18,15 @@ class Body {
 		double mass;		// mass of the particle
 		Point pos;			// x, y coordinates
 		Point vel;			// velocity in x and y
-		Point acc;			// acceleration in x and y
 		Point force;		// force in x and y
 
-
+		/*
+			Parameters: None
+			Returns: None
+			Creates a new body with 0 set for all values
+		*/
+		void makeEmptyBody();
+		
 		/*
 			Parameters: mass, positions in x and y, velocities in x and y
 			Returns: None

@@ -6,11 +6,41 @@
 	Methods for everything to do with Quadtrees
 */
 
+#include <cmath>
 #include <cstdlib>
 #include <new>
 
 #include "Quadtree.h"
 
+#define UNIVERSE 750 
+#define THETA 0.5
+
+void QuadTree::calcForce(TreeNode node, Body b) {
+	// if current node is an external node (and is not b)
+	if (node.external) b.calcForce(node.body);
+	// otherwise calculate the radio s/d
+	else {
+		double s = node.size.x;
+		double d = sqrt(pow(node.body.pos.x - b.pos.x, 2) + 
+						pow(node.body.pos.y - b.pos.y, 2));
+
+		double ratio = s/d;
+
+		// if the ratio is greater than theta, use internal node as a single
+		// body, and calculate the force it exerts on body b, and add this 
+		// amount to b's net force
+		if (ratio > THETA) b.calcForce(node.body);
+
+		// otherwise, run the procedure recursively on each of the current 
+		// node's children
+		else {
+			calcForce(*(node.ne), b); 
+			calcForce(*(node.nw), b); 
+			calcForce(*(node.se), b); 
+			calcForce(*(node.sw), b); 
+		}
+	}	
+}
 
 /*
 	Parameters: Body to be inserted into tree
@@ -22,7 +52,6 @@ TreeNode* newNode(Body b) {
 	if (p == 0) exit(1);
 
 	p->body = b;	// set body
-	p->mass = 0;	// set total mass of node to 0
 	p->nw = p->ne = p->sw = p->se = NULL;
 
 	return p;
@@ -45,6 +74,19 @@ int findQuadrant(Point center, Body b) {
 }
 
 /*
+	Parameters: Body node of root of tree, new body to be added to tree
+	Returns: Point to the new center of gravity
+	Adds a new star to a cluster and calculates the new center of mass
+*/
+Point findMassCenter(Body m1, Body m2) {
+	Point p;
+	double m = m1.mass + m2.mass;
+	p.x = ((m1.pos.x * m1.mass) + (m2.pos.x * m2.mass)) / m;
+	p.y = ((m1.pos.y * m1.mass) + (m2.pos.y * m2.mass)) / m;
+	return p;
+}
+
+/*
 	Parameters: Pointer to a treenode, body to be inserted, center of quadrant
 	Returns: A pointer to the newly created node
 	Each of the following functions insert a new node into the NE, NW, SE, or
@@ -56,7 +98,7 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 	node->ne = curr;
 	int quad;
 
-	if (curr->mass > 0) {	// there is already a node
+	if (curr->body.mass > 0) {	// there is already a node
 		center.x *= 1.5;
 		center.y *= 0.5;
 
@@ -69,10 +111,14 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 	}
 
 	Body empty;
+	empty.makeEmptyBody();
 	node->body = empty;
-	node->mass += b.mass;
+	node->body.mass += b.mass;
+	node->body.pos = findMassCenter(node->body, b);
 	curr->body = b;
-	curr->mass += b.mass;
+	curr->body.mass += b.mass;
+	curr->size.x = center.x / 2;
+	curr->size.y = center.y / 2;
 	
 	return curr;
 }
@@ -82,7 +128,7 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 	node->nw = curr;
 	int quad;	
 
-	if (curr->mass > 0) {	// there is already a node
+	if (curr->body.mass > 0) {	// there is already a node
 		center.x *= 0.5;
 		center.y *= 0.5;
 		curr->nw = curr;
@@ -95,10 +141,14 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 	}
 
 	Body empty;
+	empty.makeEmptyBody();
 	node->body = empty;
-	node->mass += b.mass;
+	node->body.mass += b.mass;
+	node->body.pos = findMassCenter(node->body, b);
 	curr->body = b;
-	curr->mass += b.mass;
+	curr->body.mass += b.mass;
+	curr->size.x = center.x / 2;
+	curr->size.y = center.y / 2;
 	return curr;
 }
 
@@ -107,7 +157,7 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
 	node->se = curr;
     int quad;
 
-    if (curr->mass > 0) {   // there is already a node
+    if (curr->body.mass > 0) {   // there is already a node
         center.x *= 1.5;
         center.y *= 1.5;
 
@@ -120,10 +170,14 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
     }
 
 	Body empty;
+	empty.makeEmptyBody();
 	node->body = empty;
-	node->mass += b.mass;
+	node->body.mass += b.mass;
+	node->body.pos = findMassCenter(node->body, b);
 	curr->body = b;
-	curr->mass += b.mass;
+	curr->body.mass += b.mass;
+	curr->size.x = center.x / 2;
+	curr->size.y = center.y / 2;
 	return curr;
 }
 
@@ -132,7 +186,7 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
 	node->sw = curr;
     int quad;
 
-    if (curr->mass > 0) {   // there is already a node
+    if (curr->body.mass > 0) {   // there is already a node
         center.x *= 0.5;
         center.y *= 1.5;
 
@@ -145,10 +199,14 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
     }
 
 	Body empty;
+	empty.makeEmptyBody();
 	node->body = empty;
-	node->mass += b.mass;
+	node->body.mass += b.mass;
+	node->body.pos = findMassCenter(node->body, b);
 	curr->body = b;
-	curr->mass += b.mass;
+	curr->body.mass += b.mass;
+	curr->size.x = center.x / 2;
+	curr->size.y = center.y / 2;
 	return curr;
 }
 
@@ -186,7 +244,7 @@ TreeNode* insertNode(Universe uni, QuadTree* qt, Body b) {
 		curr->se = SEinsert(curr, b, center);
 
 	// update mass of root
-	qt->root->mass += b.mass;
+	qt->root->body.mass += b.mass;
 
 	return curr;
 }

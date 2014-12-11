@@ -24,6 +24,7 @@ using namespace std;
 #define NUM_BODIES 1000	// number of particles in simulation
 #define UNIVERSE 750 
 #define TIME_STEP 10 
+#define THETA 0.5
 
 int main(void) {
 
@@ -67,30 +68,21 @@ int main(void) {
 	// S T A R T   T I M E
 
 	while(1) {
-/*		
-		// calculate force on each particle	
-		int i, j;
-		for (i=0;i<NUM_BODIES;i++) {
-			b[i].resetForce();
-			for (j=0;j<NUM_BODIES;j++) { 
-				if (i != j) b[i].calcForce(b[j]);
-			}
-		}
-*/
 
 		int i;
-		for (i=0;i<NUM_BODIES;i++) {
+		for (i=0;i<NUM_BODIES;i++) 
 			insertNode(uni, &qt, b[i]);
-		}		
+
 		
-		for (i=0;i<NUM_BODIES;i++) {
+		for (i=0;i<NUM_BODIES;i++) 
 			b[i].resetForce();
-		}
+		
 
 		XClearWindow(dis, win);		// clear the window
 
 		// update each particle and draw it to the screen
 		for (i=0;i<NUM_BODIES;i++)	{
+			qt.calcForce(*(qt.root), b[i]);
 			b[i].update(TIME_STEP);
 			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
 		}		

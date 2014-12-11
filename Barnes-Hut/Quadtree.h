@@ -13,13 +13,15 @@
 
 struct TreeNode {
 	Body body;			// body to be placed in tree
-	double mass;		// total mass in each node
-	Point center;		// center of mass
+	int external;		// 1 if it's external, 0 if it's an internal node
+	Point size;			// side lengths of the quad the node represents
 	TreeNode *nw, *ne, *sw, *se;	// sub trees
 };
 
 struct QuadTree {
 	TreeNode *root;
+
+	void calcForce(TreeNode node, Body b);
 };
 
 /*

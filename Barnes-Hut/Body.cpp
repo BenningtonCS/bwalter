@@ -12,10 +12,22 @@
 #include <time.h>
 
 #include "Body.h"
-#include "Universe.h"
 
 #define G 6.67 * pow(10, -11)	// gravitational constant
 #define UNIVERSE 750
+
+
+/*
+	Parameters: None
+	Returns: None
+	Creates a new body with 0 set for all values
+*/
+void Body::makeEmptyBody() {
+	mass = 0;
+	pos.x = pos.y = 0;
+	vel.x = vel.y = 0;
+	force.x = force.y = 0;
+}
 
 /*
 	Parameters: mass, positions in x and y, velocities in x and y
