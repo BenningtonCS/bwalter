@@ -6,6 +6,7 @@
 	Methods for everything to do with Quadtrees
 */
 
+#include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <new>
@@ -14,6 +15,8 @@
 
 #define UNIVERSE 750 
 #define THETA 0.5
+
+using namespace std;
 
 void QuadTree::calcForce(TreeNode node, Body b) {
 	// if current node is an external node (and is not b)
@@ -56,7 +59,8 @@ TreeNode* newNode(Body b) {
 	p->size.x = p->size.y = 0;
 	p->center.x = p->center.y = 0;
 	p->mass = 0;		
-	p->nw = p->ne = p->sw = p->se = NULL;
+	p->nw = p->ne = p->sw = NULL;
+	p->se = NULL;
 
 	return p;
 }
@@ -99,9 +103,11 @@ Point findMassCenter(Point center, double mass, Body b) {
 */
 
 TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
+	cout << "in ne insert" <<endl;
+	cout << node->ne <<endl;
 	TreeNode* curr = node->ne;
 
-	if (curr == NULL) {			// Node does not contain a body
+	if (node->ne == NULL) {			// Node does not contain a body
 		node->ne = newNode(b);
 	} else if (!curr->external) 	// node is internal
 		NEinsert(curr, b, center);
@@ -123,14 +129,18 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 		NEinsert(node, b, center);
 	}
 
+	curr = node->ne;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
+	cout << "done with ne insert" <<endl;
 }
 
 TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
+	cout << "in nw insert" <<endl;
+	cout << node->nw <<endl;
 	TreeNode* curr = node->nw;
 
-	if (curr == NULL) {			// Node does not contain a body
+	if (node->nw == NULL) {			// Node does not contain a body
 		node->nw = newNode(b);
 	} else if (!curr->external) 	// node is internal
 		NWinsert(curr, b, center);
@@ -152,14 +162,18 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 		NWinsert(node, b, center);
 	}
 
+	curr = node->nw;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
+	cout << "done with nw insert" <<endl;
 }
 
 TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
+	cout << "in se insert" <<endl;
+	cout << node->se <<endl;
 	TreeNode* curr = node->se;
 
-	if (curr == NULL) {			// Node does not contain a body
+	if (node->se == NULL) {			// Node does not contain a body
 		node->se = newNode(b);
 	} else if (!curr->external) 	// node is internal
 		SEinsert(curr, b, center);
@@ -181,14 +195,19 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
 		SEinsert(node, b, center);
 	}
 
+	curr = node->se;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
+
+	cout << "done with se insert" <<endl;
 }
 
 TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
+	cout << "in sw insert" <<endl;
+	cout << node->sw <<endl;
 	TreeNode* curr = node->sw;
 
-	if (curr == NULL) {			// Node does not contain a body
+	if (node->sw == NULL) {			// Node does not contain a body
 		node->sw = newNode(b);
 	} else if (!curr->external) 	// node is internal
 		SWinsert(curr, b, center);
@@ -210,8 +229,10 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
 		SWinsert(node, b, center);
 	}
 
+	curr = node->sw;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
+	cout << "done with sw insert" <<endl;
 }
 
 /*
