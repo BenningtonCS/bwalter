@@ -103,7 +103,6 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 
 	if (curr == NULL) {			// Node does not contain a body
 		node->ne = newNode(b);
-		curr = node->ne;
 	} else if (!curr->external) 	// node is internal
 		NEinsert(curr, b, center);
 	else {						// node is external
@@ -133,7 +132,6 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 
 	if (curr == NULL) {			// Node does not contain a body
 		node->nw = newNode(b);
-		curr = node->nw;
 	} else if (!curr->external) 	// node is internal
 		NWinsert(curr, b, center);
 	else {						// node is external
@@ -163,7 +161,6 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
 
 	if (curr == NULL) {			// Node does not contain a body
 		node->se = newNode(b);
-		curr = node->se;
 	} else if (!curr->external) 	// node is internal
 		SEinsert(curr, b, center);
 	else {						// node is external
@@ -193,7 +190,6 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
 
 	if (curr == NULL) {			// Node does not contain a body
 		node->sw = newNode(b);
-		curr = node->sw;
 	} else if (!curr->external) 	// node is internal
 		SWinsert(curr, b, center);
 	else {						// node is external

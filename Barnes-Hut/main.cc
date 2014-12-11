@@ -21,7 +21,7 @@
 
 using namespace std;
 
-#define NUM_BODIES 1000	// number of particles in simulation
+#define NUM_BODIES 10	// number of particles in simulation
 #define UNIVERSE 750 
 #define TIME_STEP 10 
 #define THETA 0.5
