@@ -9,12 +9,15 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
+#include "Universe.h"
 #include "Body.h"
 
 struct TreeNode {
 	Body body;			// body to be placed in tree
 	int external;		// 1 if it's external, 0 if it's an internal node
 	Point size;			// side lengths of the quad the node represents
+	Point center;		// center of mass
+	double mass;		// total mass of node and all child nodes
 	TreeNode *nw, *ne, *sw, *se;	// sub trees
 };
 
@@ -38,6 +41,14 @@ TreeNode* newNode(Body b);
 	1 = NE	|	2 = NW	|	3 = SW	|	4 = SE
 */
 int findQuadrant(Point center, Body b); 
+
+/*
+	Parameters: Old center of mass, Body node of root of tree, 
+			new body to be added to tree
+	Returns: Point to the new center of gravity
+	Adds a new star to a cluster and calculates the new center of mass
+*/
+Point findMassCenter(Point center, double mass, Body b); 
 
 /*
 	Parameters: Pointer to a treenode, body to be inserted, center of quadrant

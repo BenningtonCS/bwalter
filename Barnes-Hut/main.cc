@@ -69,7 +69,7 @@ int main(void) {
 
 	while(1) {
 
-		int i;
+		int i, count = 0;
 		for (i=0;i<NUM_BODIES;i++) 
 			insertNode(uni, &qt, b[i]);
 
@@ -91,5 +91,8 @@ int main(void) {
 		
 		XFlush(dis);	// send draw point requests to server
 		usleep(100);	// keep program from over loading computer	
+
+		count++;
+		cout << count <<endl;
 	}
 }
