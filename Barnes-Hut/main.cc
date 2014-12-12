@@ -21,9 +21,9 @@
 
 using namespace std;
 
-#define NUM_BODIES 1	// number of particles in simulation
+#define NUM_BODIES 100	// number of particles in simulation
 #define UNIVERSE 750 
-#define TIME_STEP 10 
+#define TIME_STEP 10000 
 #define THETA 0.5
 
 int main(void) {
@@ -42,7 +42,6 @@ int main(void) {
 		b[i].makeRandomBody(uni.getSize()* 3/8, uni.getSize() * 5/8); 
 
 	QuadTree qt;
-	qt.root = NULL;
 
 	// S E T U P   X
 	
@@ -69,7 +68,9 @@ int main(void) {
 
 	while(1) {
 
-		int i, count = 0;
+		qt.root = NULL;
+	
+		int i;
 		for (i=0;i<NUM_BODIES;i++) 
 			insertNode(uni, &qt, b[i]);
 
@@ -80,9 +81,12 @@ int main(void) {
 
 		XClearWindow(dis, win);		// clear the window
 
+
+		for (i=0;i<NUM_BODIES;i++) 
+			qt.calcForce(*(qt.root), b[i]);
+		
 		// update each particle and draw it to the screen
 		for (i=0;i<NUM_BODIES;i++)	{
-			qt.calcForce(*(qt.root), b[i]);
 			b[i].update(TIME_STEP);
 			XDrawPoint(dis, win, gc, b[i].pos.x, b[i].pos.y); 
 		}		
@@ -92,7 +96,5 @@ int main(void) {
 		XFlush(dis);	// send draw point requests to server
 		usleep(100);	// keep program from over loading computer	
 
-		count++;
-		cout << count <<endl;
 	}
 }

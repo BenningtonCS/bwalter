@@ -103,13 +103,11 @@ Point findMassCenter(Point center, double mass, Body b) {
 */
 
 TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
-	cout << "in ne insert" <<endl;
-	cout << node->ne <<endl;
 	TreeNode* curr = node->ne;
 
-	if (node->ne == NULL) {			// Node does not contain a body
+	if (node->ne == NULL) 		// Node does not contain a body
 		node->ne = newNode(b);
-	} else if (!curr->external) 	// node is internal
+	else if (!curr->external) 	// node is internal
 		NEinsert(curr, b, center);
 	else {						// node is external
 		// sub divide region
@@ -132,17 +130,14 @@ TreeNode* NEinsert(TreeNode* node, Body b, Point center) {
 	curr = node->ne;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
-	cout << "done with ne insert" <<endl;
 }
 
 TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
-	cout << "in nw insert" <<endl;
-	cout << node->nw <<endl;
 	TreeNode* curr = node->nw;
 
-	if (node->nw == NULL) {			// Node does not contain a body
+	if (node->nw == NULL) 		// Node does not contain a body
 		node->nw = newNode(b);
-	} else if (!curr->external) 	// node is internal
+	else if (!curr->external) 	// node is internal
 		NWinsert(curr, b, center);
 	else {						// node is external
 		// sub divide region
@@ -165,17 +160,14 @@ TreeNode* NWinsert(TreeNode* node, Body b, Point center) {
 	curr = node->nw;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
-	cout << "done with nw insert" <<endl;
 }
 
 TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
-	cout << "in se insert" <<endl;
-	cout << node->se <<endl;
 	TreeNode* curr = node->se;
 
-	if (node->se == NULL) {			// Node does not contain a body
+	if (node->se == NULL) 		// Node does not contain a body
 		node->se = newNode(b);
-	} else if (!curr->external) 	// node is internal
+	else if (!curr->external) 	// node is internal
 		SEinsert(curr, b, center);
 	else {						// node is external
 		// sub divide region
@@ -198,18 +190,14 @@ TreeNode* SEinsert(TreeNode* node, Body b, Point center) {
 	curr = node->se;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
-
-	cout << "done with se insert" <<endl;
 }
 
 TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
-	cout << "in sw insert" <<endl;
-	cout << node->sw <<endl;
 	TreeNode* curr = node->sw;
 
-	if (node->sw == NULL) {			// Node does not contain a body
+	if (node->sw == NULL) 		// Node does not contain a body
 		node->sw = newNode(b);
-	} else if (!curr->external) 	// node is internal
+	else if (!curr->external) 	// node is internal
 		SWinsert(curr, b, center);
 	else {						// node is external
 		// sub divide region
@@ -232,7 +220,6 @@ TreeNode* SWinsert(TreeNode* node, Body b, Point center) {
 	curr = node->sw;
 	curr->center = findMassCenter(curr->center, curr->mass, b);
 	curr->body.mass += b.mass;
-	cout << "done with sw insert" <<endl;
 }
 
 /*
@@ -267,5 +254,5 @@ void deleteTree(TreeNode* root) {
 	if (root->nw != NULL) deleteTree(root->nw);
 	if (root->se != NULL) deleteTree(root->se);
 	if (root->sw != NULL) deleteTree(root->sw);
-	else delete root;
+	delete root;
 }
