@@ -1,0 +1,2 @@
+gcc 04queue.c -o 04queue
+gcc 04stack.c ../refs/linkedListInt.c -o 04stack

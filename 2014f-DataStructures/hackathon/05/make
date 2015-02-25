@@ -1,0 +1,2 @@
+gcc 05queue.c -o 05queue
+gcc 05stack.c ../refs/linkedListInt.c -o 05stack

@@ -1,0 +1,13 @@
+Ah yes, nice code. Verry nice code... wait, your getMoney/cents 
+functions take a float instead of a pointer to a money struct, 
+why?
+
+In order to fix your getMoney problem (the float sometimes 'rounding'
+inappropriately) consider reading dollars and cents into two int 
+variables rather than one float: i.e. scanf("%d.%d",&dollars,&cents). 
+
+In makeChange you don't need to do modulus math, by the magic of int
+division 79/25 == 3.  
+
+
+

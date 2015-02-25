@@ -1,0 +1,15 @@
+From Kiri!
+9/22/2014
+
+Notes for Problem 2:
+
+Your comments are lovely and excellent and clear and I'm impressed with
+your use of float.  I now understand how do to that.
+
+I should really have more comments, but mostly I'm enjoying the really
+clean way you moved through all of this.  I might expand some of your
+lines to multiple lines for clarity (line 28 stands out to me), but nothing
+is really unclear, so.... Feel free to ask someone more advanced than I
+for notes, if you would like!
+
+Kiri

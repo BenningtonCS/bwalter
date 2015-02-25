@@ -1,0 +1,12 @@
+Problem 2.10: What is the difference between num[j] and *(num+j)?
+
+num[j] gives the jth element of an array called 'num'. *(num+j) points to a place in memory that is j places past the first part in memory.
+
+Same as num is the same as &num[0], num[j] is the same as *(num+j). This can be seen in the two following lines of code:
+
+    char num[] = "hello";
+    if (num[2] == *(num+2)) printf("True\n");
+
+This prints out True.
+
+
