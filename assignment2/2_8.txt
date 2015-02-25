@@ -1,3 +1,0 @@
-Problem 2.8: How is a pointer similar to an integer?
-
-A pointer (with the exception of a character pointer) must point to an address in memory, which is given as an integer. 

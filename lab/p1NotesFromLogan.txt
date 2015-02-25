@@ -1,8 +1,0 @@
-Your code is beautiful and the only thing that I have to say is that 
-the makeChange function is hard to follow for my weak mind, but that 
-is not to say that it is bad code because it is in fact beautiful.
-I have nothing else to comment about.
-
-
---Logan
-

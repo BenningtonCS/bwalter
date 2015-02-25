@@ -1,1 +1,0 @@
-gcc 06.c ../refs/stack.c ../refs/linkedListInt.c -o 06

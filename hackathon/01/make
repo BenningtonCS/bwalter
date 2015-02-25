@@ -1,1 +1,0 @@
-gcc 01.c ../refs/circularLinkedList.c -o 01

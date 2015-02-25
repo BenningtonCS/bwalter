@@ -1,5 +1,0 @@
-2014 November 19
-
-Given that the words in the dictionary are in alphabetical order, I expect the height of the BST will be the number of words (99171 words). I'm thinking that you're going to use this as a way to show that BSTs aren't necessarily ordered by nature.
-
-Sure enough, when task1.c is ran (which took a very long time), the height of the tree is 99171. 

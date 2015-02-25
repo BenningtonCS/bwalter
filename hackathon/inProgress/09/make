@@ -1,1 +1,0 @@
-gcc 09.c ../refs/dynamicArray.c ../refs/linkedListInt.c ../refs/stack.c -o 09
