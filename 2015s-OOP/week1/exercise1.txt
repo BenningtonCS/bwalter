@@ -1,0 +1,13 @@
+Brendon Walter
+2015 Feb 25
+OOP
+
+As I was thinking about how to structure my final project for Data Structures last term, I noticed that most people who implemented their own version of the Barnes-Hut model did so using object oriented programming languages and made heavy use of objects. It made most sense to me, then, to implement the bodies in the model as objects with methods for interacting with one another and so opted to write the program in C++ rather than C. 
+
+I made each body of the simulation its own instance of an object called Body. The Body class stored information about the position of the object in space (x,y coordinates), the object's velocity, and the force vector from every other body acting on it. Each of those attributes, in turn, were their own class called Point which merely held two integers, and x and a y which could then be used to represent a point in space or the vector components of velocity and force. Each body also had methods specific to itself, such as calcForce() which would calculate the force of each object on itself. The answer would then be used by other methods which would calculate how the object's velocity changed, and thus, its position.
+
+There were some oddities in the program. For example, I defined the bodies as a class and then made every method and attribute in them public. It would have been more efficient to have defined each body as a struct, which, if I recall correctly (in C++ at least), makes each method and attribute public by default.
+
+However, when it came time to implement that quadtree, I did not take full advantage of the object orientation that C++ offered. Instead, I implemented the quad tree in a similar structure to how we implemented binary trees in class: using structs and functions that interacted with the tree struct. It would have been possible, and perhaps would have made more sense in the C++ environment I was programming in, to add methods to the tree struct rather than relying on outside functions.
+
+I imagine that this could apply to most, if not all, of the data structures that we learned about last term - trees, linked lists, stacks, etc. Although it would be possible to implement them using objects, I do wonder if there would be any advantage, such as computation time / resources, to implementing them as such.
