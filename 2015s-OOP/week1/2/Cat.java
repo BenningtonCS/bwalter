@@ -53,10 +53,20 @@ public class Cat {
 		setCat(n, a, b);
 	}
 
+	/*
+		Parameters: none
+		Returns: none
+		Cause the cat to meow
+	*/
 	public void meow() {
 		System.out.printf("mrow!\n");
 	}
 
+	/*
+		Parameters: The dog the cat will encounter
+		Returns: None
+		The cat encounters a dog		
+	*/
 	public void encounterDog(Dog dog) {
 		String dogName = dog.getName();
 		System.out.printf("%s sees %s! %s runs away!\n", name, dogName, name);
