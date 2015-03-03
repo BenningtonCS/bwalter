@@ -1,0 +1,10 @@
+Brendon Walter
+2015 March 2
+Object Oriented Programming
+Exercise 3
+
+java -> util -> LinkedList
+
+In exercise 1, I wondered about the feasibility of making data structures, such as linked lists, as objects. As everything is an object in Java, it would follow that an implementation of a linked list must be an object as well, even if it's not more efficient (or "better" in general, whatever "better" means in this case) to do so this way.
+
+LinkedList is a class which seems to be inherited from AbstractSequentialList. This class has methods for every operation one would want to use with a linked list: it has functions to had a new node to the head of the list as well as to the end, before a selected node, and methods for removing (unlinking, as they call it) nodes from the list. There are additional functions to check the value of a node at a certain index, as well as finding the index of a certain value.
