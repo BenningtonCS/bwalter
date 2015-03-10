@@ -4,7 +4,7 @@ public class Student {
 	private int term;			// student's current term
 	private float GPA;			// student's GPA
 
-	private Student() { };
+	public Student() { };
 
 	/*
 	===========================================================================

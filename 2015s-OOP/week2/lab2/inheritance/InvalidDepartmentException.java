@@ -1,0 +1,1 @@
+class InvalidDepartmentException extends Exception { } 

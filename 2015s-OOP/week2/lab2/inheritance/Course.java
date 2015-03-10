@@ -27,20 +27,28 @@ public class Course {
 		S E T T E R S
 	===========================================================================
 	*/
-	public void setCourseNumber(int number) {
-		// course number can only be a 2000 or 4000 level course
-		if ((courseNumber >= 2000 && courseNumber < 3000) ||
-			(courseNumber >= 4000 && courseNumber < 5000))
+	public void setCourseNumber(int number) throws InvalidCourseNumberException {
+        // course number can only be a 2000 or 4000 level course
+		if ((number >= 2000 && number < 3000) ||
+			(number >= 4000 && number < 5000))
 			this.courseNumber = number;
-
-		else return;		// throw exception at some point
-
+        
+        else throw new InvalidCourseNumberException();
 	}
 
-	public void setDepartment(String d) {
-		/*
-			switch thing???
-		*/
+	public void setDepartment(String d) throws InvalidDepartmentException {
+        String dep = d.toUpperCase();
+        switch(dep) {
+            case "APA":
+            case "VA":
+            case "CS":
+            case "PHY":
+            case "CER":
+            case "ES":
+            case "MAT": this.department = dep;
+                        break;
+            default: throw new InvalidDepartmentException();
+        }
 	}
 
 	public void setCourseTitle(String title) {
@@ -52,11 +60,10 @@ public class Course {
 			this.students = number;
 	}
 
-	public void setBuilding(String name) {
+	public void setBuilding(String name) throws InvalidBuildingException {
 
 		// convert given string to uppercase for consistency
 		String n = name.toUpperCase();
-		this.building = n;
 
 		// check if building is a valid building
 		if (n == "DICKINSON" || n == "VAPA" || n == "CAPA" || n == "BARN" || 
@@ -64,7 +71,7 @@ public class Course {
 			n == "DEAN CARRIAGE BARN") 
 			this.building = n;
 		
-		else return;	// throw an exception
+		else throw new InvalidBuildingException();
 	}
 
 	public void setRoomNumber(int number) {

@@ -1,0 +1,1 @@
+class InvalidBuildingException extends Exception { } 
