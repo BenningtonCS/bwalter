@@ -1,0 +1,15 @@
+1.6. When the constructor is made private, the compiler throws an error saying that the class is private and cannot be created.
+
+2.2. It gives the methods and attributes associated with Student
+
+2.4. stu and bstu have the same methods associated with them. They do seem to refer to the same initial object, as bstu is a copy of stu, just type casted to become a BenningtonStudent (and stu is a BenningtonStudent type casted to be just a Student). What is also interesting to note is my compiler warns that type casting BenningtonStudent to Student is redundant.
+
+2.5. Yes, when calling methods associated with Student from BenningtonStudent, it doesn't know what to call as those methods are no longer a part of BenningtonStudent.
+
+2a.3. Yes, protected attributes and methods are inherited by child classes
+
+2a.4. No, trying to access protected methods and attributes from outside of inherited classes is akin to trying to access something that is set to private.
+
+2b. java.io.FileInputStream is derived from InputStream, which is an abstract class meaning that InputStream is a class which is meant only to be used as a common parent class for multiple other classes. FileInputStream seems to overwrite most of the read(...) functions.
+
+3.4. There are a lot of methods that you can call, including getCause(), getMessage(), getStackTrace(), etc. that allow the user to track down the error and can make troubleshooting easier.

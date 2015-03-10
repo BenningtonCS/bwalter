@@ -4,7 +4,7 @@ public class Student {
 	private int term;			// student's current term
 	private float GPA;			// student's GPA
 
-	public Student() { };
+	private Student() { };
 
 	/*
 	===========================================================================
@@ -38,8 +38,9 @@ public class Student {
 		else this.term = t;
 	}
 
+
 	public void setGPA(float gpa) {
-		if (gpa < 0 || gpa > 4) return; // throw exception
+		if (gpa < 0 || gpa > 4) return;	// throw exception
 		else this.GPA = gpa;
 	}
 }
