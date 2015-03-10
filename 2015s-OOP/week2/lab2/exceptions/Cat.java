@@ -36,7 +36,7 @@ public class Cat {
      */
     public void meow() throws MalformedURLException {
         try {
-            AudioClip clip = Applet.newAudioClip(new URL("./meow.wav"));
+            AudioClip clip = Applet.newAudioClip(new URL("file:meow.wav"));
             clip.play();
         } catch (MalformedURLException e) {
             throw e;
