@@ -12,4 +12,8 @@
 
 2b. java.io.FileInputStream is derived from InputStream, which is an abstract class meaning that InputStream is a class which is meant only to be used as a common parent class for multiple other classes. FileInputStream seems to overwrite most of the read(...) functions.
 
+In java.util, Vector extends from Abstract list, which extends from AbstractCollection, which extends from Collection, which extends from Iterable which I cannot find in IntelliJ. I imagine that this hierarchy exists because each iteration gets more and more specific to one certain thing. For example, there can be many things that are considered a 'collection', one of them being a list (AbstractList). There are then several things that can be considered lists, such as Vectors.
+
 3.4. There are a lot of methods that you can call, including getCause(), getMessage(), getStackTrace(), etc. that allow the user to track down the error and can make troubleshooting easier.
+
+3.5. MalformedURLException is extended from IOException, which is extended from Exception, which should be in java.io, but I can't find it in IntelliJ for some reason.
