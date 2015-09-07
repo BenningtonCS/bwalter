@@ -1,0 +1,35 @@
+Brendon Walter
+2015 September 7
+Game Programming
+
+1. How do you center your Scene View around an object?
+
+    Select the object with the mouse and hit 'f'
+
+
+2. Where is the camera positioned in (x,y,z) by default?
+
+    0,1,-10
+
+3. If we have a plane at (0,0,0), where should a sphere of scale (1,1,1) be so it just rests on top of the center of the plane? (Make it happen!)
+
+
+4. At what rotation (x,y,z values) does the Directional Light point straight down?
+    
+    90, 0, 0
+
+5. What happens when you scale the y value of the plane?
+
+    The plane is moved up in space.
+
+
+6. What happens to the scene when you change the position of the light?
+
+    When the directional light is moved, the lighting of the area stays the same. A point light would cause the illumination to differ based on its location.
+
+
+7. What happens when you change things while in Play Mode then exit Play Mode?
+
+    They go back to how they were before you entered play mode.
+
+8. What happens in the Game View when you change Clipping Planes on the Main Camera? What do you think Clipping Planes does?
