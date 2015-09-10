@@ -20,7 +20,7 @@ public class assignment : MonoBehaviour {
 	void FixedUpdate() {
 		x = Input.GetAxis ("Horizontal");
 		z = Input.GetAxis ("Vertical");
-		rbody.velocity = new Vector3(x*speed, 0, z*speed);
+		rbody.AddForce( new Vector3(x*speed, 0, z*speed));
 	}
 
 	
