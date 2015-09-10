@@ -7,7 +7,7 @@ public class assignment : MonoBehaviour {
 
 	public string playerName = "Brendon";	// changed to playerName from name to fix
 											// warning CS0108
-
+	public int speed = 2;
 	public float x = 0;
 	public float z = 0;
 
@@ -20,7 +20,7 @@ public class assignment : MonoBehaviour {
 	void FixedUpdate() {
 		x = Input.GetAxis ("Horizontal");
 		z = Input.GetAxis ("Vertical");
-		rbody.velocity = new Vector3(x, 0, z);
+		rbody.velocity = new Vector3(x*speed, 0, z*speed);
 	}
 
 	
