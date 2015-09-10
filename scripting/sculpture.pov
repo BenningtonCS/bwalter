@@ -28,11 +28,17 @@ plane {
     }
 }
 
-#declare i = 0;
-#while (i <= 15)
+/*
+    While loop to generate the central sphere structure
+*/
+#declare vertical = 0;      // control vertical rise of spheres
+//#declare horiz = 0;         // control motion in x, z axes
+#while (vertical <= 15)
+
+    // create vertical tower of red spheres
     sphere {
-        <0, i, 3>     // center
-        1               // radius
+        <0, vertical, 3>     // center
+        1                    // radius
 
         texture {
             pigment { 
@@ -44,7 +50,39 @@ plane {
             }
         }
     }
-    #declare i = i+2.5;
+
+/*
+    // create spiral
+    #if (mod(horiz, 2) = 0)
+        sphere {
+            <mod(horiz, 2), vertical, mod(horiz+1, 2)>
+            0.5
+            texture {
+                pigment {
+                    rgb<0,0,1>
+                }
+                finish {
+                    phong 1
+                }
+            }
+        }
+    #else
+        sphere {
+            <-mod(horiz, 2), vertical, -mod(horiz+1, 2)>
+            0.5
+            texture {
+                pigment {
+                    rgb<0,0,1>
+                }
+                finish {
+                    phong 1
+                }
+            }
+        }
+    #end
+*/
+    #declare vertical = vertical+2.5;
+//    #declare horiz = horiz+1;
 #end
 
 torus {
