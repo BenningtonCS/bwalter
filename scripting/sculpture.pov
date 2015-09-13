@@ -1,39 +1,59 @@
+/*
+    sculpture.pov
+    Brendon Walter
+    2015 September
+*/
+
+// basic colors
+#declare SolidRed = pigment { rgb<1,0,0> };
+#declare SolidGreen = pigment { rgb<0,1,0> };
+#declare SolidBlue = pigment { rgb<0,0,1> };
+#declare SolidWhite = pigment { rgb<1,1,1> };
+#declare SolidBlack = pigment { rgb<0,0,0> };
+
+// camera positions
+#declare InsideCameraView = <0,.1,-10>;
+#declare FarawayCameraView = <0, 1, -40>;
+
+// texture of the building
+#declare BuildingTexture = texture {
+    SolidWhite
+    normal { bumps 0.9 scale 0.2 }
+    finish { phong 1 }
+};
+    
+
+
 background {
     rgb<1,1,1>
 }
 
 light_source {
-    <1,8,0>        // location
+    <10,8,-5>        // location
     rgb<1,1,1>
 }
 
-light_source {
-    <-1,8,0>        // location
-    rgb<1,1,1>
-}
 
 camera {
-    location <0,1,-10>
-    look_at <0, 5, 0>
+    location InsideCameraView
+//    location FarawayCameraView
+    look_at <0, 4.5, 0>
 }
 
 plane {
     <0,1,0>         // normal vector
     0               // distance from origin
 
-    texture {
-        pigment {
-            rgb<1,1,1>
-        }
+    texture { 
+        SolidWhite 
+        normal { bumps 0.9 scale 0.2 }
+        finish { phong 1 }
     }
 }
 
-/*
-    While loop to generate the central sphere structure
-*/
+// While loop to make the column of spheres
 #declare vertical = 0;      // control vertical rise of spheres
-//#declare fourcount = 0;         // control motion in x, z axes
-#while (vertical <= 15)
+#while (vertical <= 20)
 
     // create vertical tower of red spheres
     sphere {
@@ -41,97 +61,44 @@ plane {
         1                    // radius
 
         texture {
-            pigment { 
-                rgb<1,0,0> 
-            }
-
+            SolidRed
             finish { 
                 phong 1 
             }
         }
     }
 
-/*
-    // create spiral
-    #if (mod(fourcount, 4) = 0)
-        sphere {
-            <0, vertical, 1>
-            0.5
-            texture {
-                pigment {
-                    rgb<0,0,1>
-                }
-                finish {
-                    phong 1
-                }
-            }
-        }
-    #end
-    #if (mod(fourcount, 4) = 1)
-        sphere {
-            <1, vertical, 0>
-            0.5
-            texture {
-                pigment {
-                    rgb<0,0,1>
-                }
-                finish {
-                    phong 1
-                }
-            }
-        }
-    #end
-    #if (mod(fourcount, 4) = 2)
-        sphere {
-            <0, vertical, -1>
-            0.5
-            texture {
-                pigment {
-                    rgb<0,0,1>
-                }
-                finish {
-                    phong 1
-                }
-            }
-        }
-    #end
-    #if (mod(fourcount, 4) = 3)
-        sphere {
-            <-1, vertical, 0>
-            0.5
-            texture {
-                pigment {
-                    rgb<0,0,1>
-                }
-                finish {
-                    phong 1
-                }
-            }
-        }
-
-    #end
-*/
     #declare vertical = vertical+2.5;
-//    #declare fourcount = fourcount+1;
 #end
 
 torus {
-    10             // major radius
-    5              // minor radius
+    12             // major radius
+    7.5              // minor radius
 
+    scale<1, .1, 1>
     translate<0,10,3>
 
     texture {
-        pigment { 
-            rgb<1,1,1> 
-        }
-
-        normal {
-            bumps 0.9 scale 0.2
-        }
-
-        finish {
-            phong 1
-        }
+        SolidWhite
+        normal { bumps 0.9 scale 0.2 }
+        finish { phong 1 }
     }
+    
+ //   BuildingTexture   // doesn't work for some reason?
 }
+
+cylinder {
+    <0, 0, 3>
+    <0, 10, 3>
+    15
+    open
+
+    texture {
+        SolidWhite
+        normal { bumps 0.9 scale 0.2 }
+        finish { phong 1 }
+    }
+    
+ //   BuildingTexture   // doesn't work for some reason?
+}
+
