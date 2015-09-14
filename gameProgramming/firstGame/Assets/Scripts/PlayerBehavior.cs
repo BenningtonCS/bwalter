@@ -14,12 +14,16 @@ public class PlayerBehavior : MonoBehaviour {
 	/* UI */
 	private int score = 0;	// score holder
 	public Text scoreText;	// score as shown in the UI
+	public Text winText;	// text displayed when you win
 
 	// Use this for initialization
 	void Start () {
 		rbody = GetComponent<Rigidbody> ();
 		
-		scoreText.text = "Score: " + score.ToString();	// start score at 0
+		// start score at 0
+		scoreText.text = "Score: " + score.ToString();
+		// make it so the win text does not display at the beginning
+		winText.gameObject.SetActive(false);
 	}
 
 	void FixedUpdate() {
@@ -38,7 +42,16 @@ public class PlayerBehavior : MonoBehaviour {
 	void OnTriggerEnter(Collider coll) {
 		coll.gameObject.SetActive (false);
 		score++;
+		updateScore(score);
+		
+	}
+	
+	void updateScore(int nscore) {
+		score = nscore;
 		scoreText.text = "Score: " + score.ToString();
-		Debug.Log("Player score: " + score);
+		
+		// TODO: somehow get the number of objects from the collectables script
+		// if the player collects all the objects, display the win text
+		if (score == 6) winText.gameObject.SetActive(true);
 	}
 }
