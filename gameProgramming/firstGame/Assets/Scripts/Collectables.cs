@@ -1,6 +1,4 @@
-﻿
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Collectables : MonoBehaviour {
@@ -18,9 +16,7 @@ public class Collectables : MonoBehaviour {
 		Generates a random number between min and max
 	*/
 	private int randNumber(int min, int max) {
-		System.Random random = new System.Random();
-		int num = random.Next(min, max);
-		Debug.Log("Random number is " + num); // the right number of objects don't generate unless this is here???
+		int num = Random.Range(min, max);
 		return num;
 	}
 

@@ -6,8 +6,10 @@ public class Movement : MonoBehaviour {
 	Rigidbody rbody;
 
 	public int speed = 2;
-	public float x = 0;
-	public float z = 0;
+	public float x = 0;		// movement in x
+	public float z = 0;		// movement in y
+	
+	private int score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +28,10 @@ public class Movement : MonoBehaviour {
 
 	}
 
+	// called when the player collides with the collectables
 	void OnTriggerEnter(Collider coll) {
 		coll.gameObject.SetActive (false);
+		score++;
+		Debug.Log("Player score: " + score);
 	}
 }
