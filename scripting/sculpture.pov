@@ -12,27 +12,22 @@
 #declare SolidBlack = pigment { rgb<0,0,0> };
 
 // camera positions
-#declare InsideCameraView = <0,.1,-10>;
+#declare InsideCameraView = <0,1,-10>;
 #declare FarawayCameraView = <0, 1, -40>;
 
-// texture of the building
-#declare BuildingTexture = texture {
-    SolidWhite
-    normal { bumps 0.9 scale 0.2 }
-    finish { phong 1 }
-};
-    
-
-
 background {
-    rgb<1,1,1>
+    rgb <1,1,1>
 }
 
 light_source {
-    <10,8,-5>        // location
-    rgb<1,1,1>
+    <5, 15,-5>        // location
+    rgb <1,1,1>
 }
 
+light_source {
+    InsideCameraView
+    rgb <0.2,0.2,0.2>
+}
 
 camera {
     location InsideCameraView
@@ -40,16 +35,6 @@ camera {
     look_at <0, 4.5, 0>
 }
 
-plane {
-    <0,1,0>         // normal vector
-    0               // distance from origin
-
-    texture { 
-        SolidWhite 
-        normal { bumps 0.9 scale 0.2 }
-        finish { phong 1 }
-    }
-}
 
 // While loop to make the column of spheres
 #declare vertical = 0;      // control vertical rise of spheres
@@ -64,41 +49,51 @@ plane {
             SolidRed
             finish { 
                 phong 1 
+                reflection 1
             }
         }
     }
 
-    #declare vertical = vertical+2.5;
+    #declare vertical = vertical+3;
 #end
 
-torus {
-    12             // major radius
-    7.5              // minor radius
+// texture of the building
+#declare BuildingTexture = texture {
+    SolidWhite
+    normal { bumps 0.1 scale 0.1 }
+    finish { phong 1 }
+};
+    
+plane {             // floor of room
+    <0,1,0>         // normal vector
+    0               // distance from origin
+
+    texture { 
+        BuildingTexture
+    }
+}
+
+torus {             // ceiling of room
+    12              // major radius
+    7.5             // minor radius
 
     scale<1, .1, 1>
     translate<0,10,3>
 
     texture {
-        SolidWhite
-        normal { bumps 0.9 scale 0.2 }
-        finish { phong 1 }
+        BuildingTexture
     }
     
- //   BuildingTexture   // doesn't work for some reason?
 }
 
-cylinder {
+cylinder {          // walls of room
     <0, 0, 3>
     <0, 10, 3>
     15
     open
 
     texture {
-        SolidWhite
-        normal { bumps 0.9 scale 0.2 }
-        finish { phong 1 }
-    }
-    
- //   BuildingTexture   // doesn't work for some reason?
+        BuildingTexture
+    } 
 }
 
