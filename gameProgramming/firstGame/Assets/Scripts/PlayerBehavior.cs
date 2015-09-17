@@ -53,7 +53,7 @@ public class PlayerBehavior : MonoBehaviour {
 		
 		// TODO: somehow get the number of objects from the collectables script
 		// if the player collects all the objects, display the win text
-		if (score == Collectables.numObjects) 
+		if (score == Collectables.numObjects+1) 
 			winText.gameObject.SetActive(true);
 	}
 }

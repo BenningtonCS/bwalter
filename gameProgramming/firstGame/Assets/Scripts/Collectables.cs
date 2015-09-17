@@ -4,7 +4,7 @@ using System.Collections;
 public class Collectables : MonoBehaviour {
 
 	public GameObject prefab;
-	public int numObjects = 5;
+	public static int numObjects = 5;
 	
 	// size of map in x and z
 	public int gridX = 9;	
