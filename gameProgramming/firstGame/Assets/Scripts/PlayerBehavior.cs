@@ -8,8 +8,8 @@ public class PlayerBehavior : MonoBehaviour {
 
 	/* MOVEMENT */
 	public int speed = 2;
-	public float x = 0;		// movement in x
-	public float z = 0;		// movement in y
+	private float x = 0;		// movement in x
+	private float z = 0;		// movement in y
 	
 	/* UI */
 	private int score = 0;	// score holder
@@ -50,8 +50,10 @@ public class PlayerBehavior : MonoBehaviour {
 		score = nscore;
 		scoreText.text = "Score: " + score.ToString();
 		
+		
 		// TODO: somehow get the number of objects from the collectables script
 		// if the player collects all the objects, display the win text
-		if (score == 6) winText.gameObject.SetActive(true);
+		if (score == Collectables.numObjects) 
+			winText.gameObject.SetActive(true);
 	}
 }
