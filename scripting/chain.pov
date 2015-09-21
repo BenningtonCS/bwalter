@@ -94,6 +94,7 @@ object {
 
 
     texture {
+
         pigment { rgb <0.1, 0.1, 0.1> }
 
         finish {
