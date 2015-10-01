@@ -73,19 +73,19 @@
         // place the four chair legs
         object {
             chairLeg
-            translate <chairWidth, 0, 0>
+            translate <chairWidth-.5, 0, .5>
         }
         object {
             chairLeg
-            translate <chairWidth, 0, chairDepth>
+            translate <chairWidth-.5, 0, chairDepth-.5>
         }
         object {
             chairLeg
-            translate <0, 0, 0>
+            translate <.5, 0, 0>
         }
         object {
             chairLeg
-            translate <0, 0, chairDepth>
+            translate <.5, 0, chairDepth-.5>
         }
     
         texture {
