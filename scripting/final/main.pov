@@ -31,23 +31,19 @@ background {
 
 camera {
     location centerRoomView
-//    location singleColumnView
-//    look_at <5, 5, 5>
+    location singleColumnView
+    look_at <5, 5, 5>
 }
 
-/*
+
 light_source {
-    <roomWidth/2, roomHeight/2, roomLength/2> 
-    rgb <1,1,1>
+    <20, 8, 7>
+    rgb <1,1,1> * .5
 }
-*/
 
-/*
+object { room }
 object { 
     column 
     translate <5, 0, 5>
 }
-*/
-
-object { room }
-object { columns}
+//object { columns}
