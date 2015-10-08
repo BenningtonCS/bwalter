@@ -19,6 +19,7 @@
     a wooden boardwalk going through the cistern which is not modeled either.
  */
 
+#include "textures.inc"
 #include "cistern.inc"
 
 #declare singleColumnView = <15,2,5>;
@@ -30,7 +31,7 @@ background {
 }
 
 camera {
-    location centerRoomView
+//    location centerRoomView
     location singleColumnView
     look_at <5, 5, 5>
 }
@@ -41,9 +42,12 @@ light_source {
     rgb <1,1,1> * .5
 }
 
+
 object { room }
+
 object { 
     column 
     translate <5, 0, 5>
 }
+
 //object { columns}

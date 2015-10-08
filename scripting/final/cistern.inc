@@ -21,12 +21,6 @@
 #declare colSpacing = 4.9; 
 
 
-#declare roomTexture =
-    texture {
-        pigment { rgb <1,1,1> }
-        normal { bumps .3 scale .03 }
-    };
-
 #declare columns =
     union {
         #declare i = 1;

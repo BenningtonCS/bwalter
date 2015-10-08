@@ -16,14 +16,8 @@
 #declare colRadius = .6;
 
 // variables for the column capital
-#declare colCapHeight = 1; 
+#declare colCapHeight = 1.5; 
 #declare colCapRadius = colRadius+.4;
-
-#declare colTexture =
-    texture {
-        pigment { rgb <1,1,1> }
-        normal { bumps .3 scale .03 }
-    }
 
 #declare colSpotLight =
      light_source {
