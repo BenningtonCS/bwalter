@@ -8,8 +8,18 @@ camera {
 } 
 
 light_source {
-    <0,8,-13>
+    <-3,10,-10>
     rgb <1,1,1>
+    spotlight
+    point_at <0,-1.3,0>
+    radius 25
+    falloff 35 
+}
+
+light_source {
+    <3,8,-13>
+    rgb <1,1,1> * .4
+    shadowless
 }
 
 object{
