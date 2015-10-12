@@ -228,8 +228,10 @@
 #declare Apple_MappedPigment = pigment { color rgb <0.94,0.05,0.20> }
 
 #declare Apple_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+    reflection .02
+    diffuse albedo .5
+	specular 0.8 //Max highlight intensity: 0 -> 1
+    roughness 0.05 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Apple_Material_ = material {
@@ -267,11 +269,11 @@
 	}
 }
 //==================================================
-#declare AppleLeaf_MappedPigment = pigment { color rgb <.1,.6,.2> }
+#declare AppleLeaf_MappedPigment = pigment { color rgb <.2,.6,.2> }
 
 #declare AppleLeaf_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+    roughness .5 //surface roughness: 0.0005 -> 1             
 };
 
 #declare AppleLeaf_Material_ = material {

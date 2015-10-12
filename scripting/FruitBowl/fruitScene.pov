@@ -7,6 +7,7 @@ camera {
         look_at <0,0,0>  
 } 
 
+// key light
 light_source {
     <-3,10,-10>
     rgb <1,1,1>
@@ -16,6 +17,7 @@ light_source {
     falloff 35 
 }
 
+// fill light
 light_source {
     <3,8,-13>
     rgb <1,1,1> * .4
