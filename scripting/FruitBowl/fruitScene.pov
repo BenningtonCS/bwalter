@@ -7,7 +7,10 @@ camera {
         look_at <0,0,0>  
 } 
 
-// Add Lights Here!
+light_source {
+    <0,8,-13>
+    rgb <1,1,1>
+}
 
 object{
       fruit_

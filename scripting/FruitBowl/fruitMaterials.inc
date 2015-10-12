@@ -1,10 +1,10 @@
 //==================================================
 //Material definitions
-#declare Cherries1_MappedPigment = pigment { color rgb <1,0,0> };
+#declare Cherries1_MappedPigment = pigment { color rgb <.9,.1,.1> };
 
 #declare Cherries1_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+    roughness 0.1 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Cherries1_Material_ = material {
@@ -14,7 +14,7 @@
 	}
 }
 //==================================================
-#declare Cherries2_MappedPigment = pigment { color rgb <0.59,0.44,0.58> };
+#declare Cherries2_MappedPigment = pigment { color rgb <.5,0,.1> };
 
 #declare Cherries2_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -28,11 +28,11 @@
 	}
 }
 //==================================================
-#declare Plate_MappedPigment = pigment { color rgb <0.21,0.91,0.28> }
+#declare Plate_MappedPigment = pigment { color rgb <.95,.95,1> }
 
 #declare Plate_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
-      roughness 0.1 //surface roughness: 0.0005 -> 1             
+    roughness .8 //surface roughness: 0.0005 -> 1             
 };
 
 #declare Plate_Material_ = material {
@@ -71,7 +71,7 @@
 }
 
 //==================================================
-#declare Plum1_MappedPigment = pigment { color rgb <0.12,0.00,0.69> }
+#declare Plum1_MappedPigment = pigment { color rgb <.62,.17,.42> }
 
 #declare Plum1_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -99,7 +99,7 @@
 	}
 }
 //==================================================
-#declare Plum3_MappedPigment = pigment { color rgb <0.24,0.96,0.86> }
+#declare Plum3_MappedPigment = pigment { color rgb <.62,.17,.42> }
 
 #declare Plum3_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -113,7 +113,7 @@
 	}
 }
 //==================================================
-#declare Plum4_MappedPigment = pigment { color rgb <0.20,0.64,0.04> }
+#declare Plum4_MappedPigment = pigment { color rgb <0.62,.17,.42> }
 
 #declare Plum4_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -127,7 +127,7 @@
 	}
 }
 //==================================================
-#declare Plum5_MappedPigment = pigment { color rgb <0.06,0.88,0.77> }
+#declare Plum5_MappedPigment = pigment { color rgb <.62,.17,.42> }
 
 #declare Plum5_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -141,10 +141,10 @@
 	}
 }
 //==================================================
-#declare Plum6_MappedPigment = pigment { color rgb <0.24,0.10,0.93> }
+#declare Plum6_MappedPigment = pigment { color rgb <0.62,.17,.42> }
 
 #declare Plum6_Finish = finish {
-	specular 0.5 //Max highlight intensity: 0 -> 1
+	specular 0.5 //Max highlight intensity: 0 -> >1
       roughness 0.1 //surface roughness: 0.0005 -> 1             
 };
 
@@ -155,7 +155,7 @@
 	}
 }
 //==================================================
-#declare Orange_MappedPigment = pigment { color rgb <0.14,0.62,0.82> }
+#declare Orange_MappedPigment = pigment { color rgb <1,.5,.1> }
 
 #declare Orange_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -183,7 +183,7 @@
 	}
 }
 //==================================================
-#declare Pear_MappedPigment = pigment { color rgb <0.24,0.07,0.80> }
+#declare Pear_MappedPigment = pigment { color rgb <0.62,.46,.15> }
 
 #declare Pear_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -211,7 +211,7 @@
 	}
 }
 //==================================================
-#declare LeftGrapes_MappedPigment = pigment { color rgb <0.63,0.98,0.66> }
+#declare LeftGrapes_MappedPigment = pigment { color rgb <.8,.3,.32> }
 
 #declare LeftGrapes_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -239,7 +239,7 @@
 	}
 }
 //==================================================
-#declare RightGrapes_MappedPigment = pigment { color rgb <0.98,0.77,0.37> }
+#declare RightGrapes_MappedPigment = pigment { color rgb <.69,.83,.22> }
 
 #declare RightGrapes_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -267,7 +267,7 @@
 	}
 }
 //==================================================
-#declare AppleLeaf_MappedPigment = pigment { color rgb <0.14,0.07,0.20> }
+#declare AppleLeaf_MappedPigment = pigment { color rgb <.1,.6,.2> }
 
 #declare AppleLeaf_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -295,7 +295,7 @@
 	}
 }
 //==================================================
-#declare Banana1_MappedPigment = pigment { color rgb <0.78,0.20,0.00> }
+#declare Banana1_MappedPigment = pigment { color rgb <.91,.89,.17> }
 
 #declare Banana1_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
@@ -309,7 +309,7 @@
 	}
 }
 //==================================================
-#declare Banana2_MappedPigment = pigment { color rgb <0.19,0.64,0.56> }
+#declare Banana2_MappedPigment = pigment { color rgb <.91,.89,.17> }
 
 #declare Banana2_Finish = finish {
 	specular 0.5 //Max highlight intensity: 0 -> 1
