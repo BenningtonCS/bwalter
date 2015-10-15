@@ -39,6 +39,10 @@ camera {
     up <1,0,0>
     right<1,0,0>
     look_at <0, 1, 0>
+    
+    focal_point <0,0,0>
+    aperture 0.2
+    blur_samples 40
 }
 
 // the sun
