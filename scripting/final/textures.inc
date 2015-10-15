@@ -10,8 +10,10 @@
 #declare roomTexture =
     texture {
         pigment {
-            rgb <1,.9,.8>
+//            rgb <1,.9,.8>
 //            image_map { jpeg "textureImages/rough-stone-wall.jpg" } 
+            image_map { jpeg "textureImages/uv-texture-map.jpg" }
+            scale 5
         }
         normal { bumps .3 scale .03 }
     };
@@ -20,7 +22,7 @@
     texture {
         pigment { 
             image_map { jpeg "textureImages/concrete-scarpa-bologna.jpg" }
-            scale 5
+            scale 6 
             warp { cylindrical }
         }
         normal { bumps .3 scale .03 }
