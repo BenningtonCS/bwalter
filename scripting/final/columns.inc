@@ -6,6 +6,8 @@
     Include file for the columns in the cistern.
 */
 
+#include "corinthianCapital.inc"
+
 // variables for the two spotlights on each column
 #declare lightIntensity = .8;
 #declare lightToColDistance = .3;
@@ -31,15 +33,10 @@
         fade_power 3
         };
 
-#declare colCapital =
-    cone {
-        <0, colHeight-colCapHeight, 0>, colRadius
-        <0, colHeight, 0>, colCapRadius
-    };
 
 #declare column =
     union {
-        object { colCapital }
+        object { corinthianCapital }
         cylinder {
             <0,0,0>
             <0,colHeight,0>
