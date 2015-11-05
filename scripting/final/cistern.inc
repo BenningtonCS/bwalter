@@ -13,14 +13,14 @@
 // room
 #declare roomWidth = 138;
 #declare roomLength = 64.6;
-#declare roomHeight = 9;
+#declare roomHeight = 15;
 
 //column spacing
 #declare colRows = 12;
 #declare colColumns = 28; 
 #declare colSpacing = 4.9; 
 
-
+// place columns in grid
 #declare columns =
     union {
         #declare i = 1;
@@ -45,4 +45,3 @@
         <roomWidth, roomHeight, roomLength>
         texture { roomTexture }
     };
-

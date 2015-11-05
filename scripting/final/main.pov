@@ -19,8 +19,16 @@
     a wooden boardwalk going through the cistern which is not modeled either.
  */
 
+#include "rad_def.inc"
+
 #include "textures.inc"
 #include "cistern.inc"
+
+global_settings {
+	radiosity {
+		Rad_Settings(Radiosity_Default, off, off)
+	}
+}
 
 #declare singleColumnView = <15,2,5>;
 #declare centerRoomView = <roomWidth/2, 5, roomHeight/2>;
@@ -31,23 +39,23 @@ background {
 }
 
 camera {
-//    location centerRoomView
-    location singleColumnView
+    location centerRoomView
+//    location singleColumnView
     look_at <5, 5, 5>
 }
-
 
 light_source {
     <20, 8, 7>
     rgb <1,1,1> * .5
 }
 
-
 object { room }
 
+/*
 object { 
     column 
     translate <5, 0, 5>
 }
+*/
 
-//object { columns}
+object { columns}

@@ -4,8 +4,9 @@
 
 //--Patterns Definitions--
 
+#include "textures.inc"
 
- #declare PAT_Tex = 
+#declare PAT_Tex = 
 pigment {
 }
 
@@ -14,7 +15,10 @@ function{pigment{PAT_Tex}}
 
 //--Material Definitions--
 
-#default{ pigment{ color rgb 0.8 }}
+#default{ texture { 
+//	colTexture 
+	}
+}
 #declare shader_ = finish {  //translation of spec and mir levels for when no map influences them
     diffuse 0.8
     phong 70.0
@@ -56,53 +60,39 @@ mesh2 {
         <-0.000000, -0.995037, 0.099504>
     }
 
-
- #declare MAT_Material = 
-texture{
-    pigment {rgbft<0.8, 0.8, 0.8, 0, 0>}
-    finish {shader_Material}
-}
-texture_list {
-        1
- texture{MAT_Material}
-}
-face_indices {
-    12,
-    <0,1,2>, 0,0,0,
-    <0,2,3>, 0,0,0,
-    <4,7,6>, 0,0,0,
-    <4,6,5>, 0,0,0,
-    <0,4,5>, 0,0,0,
-    <0,5,1>, 0,0,0,
-    <1,5,6>, 0,0,0,
-    <1,6,2>, 0,0,0,
-    <2,6,7>, 0,0,0,
-    <2,7,3>, 0,0,0,
-    <4,0,3>, 0,0,0,
-    <4,3,7>, 0,0,0
-}
-normal_indices {
-    12,
-    <0,0,0>,
-    <0,0,0>,
-    <2,2,2>,
-    <2,2,2>,
-    <4,4,4>,
-    <4,4,4>,
-    <5,5,5>,
-    <5,5,5>,
-    <1,1,1>,
-    <1,1,1>,
-    <3,3,3>,
-    <3,3,3>
-}
-interior {
-    ior 1.000000
-    caustics 0.5
-}
-radiosity { 
-    importance 0.5 
-}
+	face_indices {
+		12,
+	    <0,1,2>, 
+		<0,2,3>,
+	    <4,7,6>,
+		<4,6,5>,
+	    <0,4,5>,
+		<0,5,1>,
+	    <1,5,6>,
+		<1,6,2>,
+	    <2,6,7>,
+		<2,7,3>,
+	    <4,0,3>,
+		<4,3,7>
+	}
+	normal_indices {
+		12,
+	    <0,0,0>,
+		<0,0,0>,
+	    <2,2,2>,
+		<2,2,2>,
+	    <4,4,4>,
+		<4,4,4>,
+	    <5,5,5>,
+		<5,5,5>,
+	    <1,1,1>,
+		<1,1,1>,
+	    <3,3,3>,
+		<3,3,3>
+	}
+	radiosity { 
+		importance 0.5 
+	}
 }
 
 #declare DATACube_001 =
@@ -126,10 +116,6 @@ mesh2 {
         <-1.000000, 0.000000, -0.000000>,
         <0.000000, 1.000000, -0.000000>,
         <-0.000000, 0.000000, 1.000000>
-    }
-    texture_list {
-        1
- texture{MAT_Material}
     }
     face_indices {
         12,
@@ -188,10 +174,6 @@ mesh2 {
         <0.000000, 1.000000, -0.000000>,
         <-0.000000, 0.000000, 1.000000>
     }
-    texture_list {
-        1
- texture{MAT_Material}
-    }
     face_indices {
         12,
         <2,0,1>,
@@ -248,10 +230,6 @@ mesh2 {
         <-1.000000, 0.000000, -0.000000>,
         <0.000000, 1.000000, -0.000000>,
         <-0.000000, 0.000000, 1.000000>
-    }
-    texture_list {
-        1
- texture{MAT_Material}
     }
     face_indices {
         12,

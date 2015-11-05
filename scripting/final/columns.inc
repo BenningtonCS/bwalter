@@ -16,10 +16,36 @@
 // variables for the column
 #declare colHeight = 9;
 #declare colRadius = .6;
+#declare colSpacing = 4.9;	// spacing between columns. Also in cistern.inc
 
 // variables for the column capital
 #declare colCapHeight = 1.5; 
 #declare colCapRadius = colRadius+.4;
+
+#declare colCeiling =
+	difference {
+		box {
+			<-colSpacing/2, colHeight, -colSpacing/2>
+			<colSpacing, colHeight+5, colSpacing>
+		}
+		union {
+			cylinder {
+				<-colSpacing, colHeight, colSpacing>
+				<colSpacing, colHeight, colSpacing>
+				colSpacing/2
+			}
+			cylinder {
+				<colSpacing, colHeight, colSpacing>
+				<colSpacing, colHeight, -colSpacing>
+				colSpacing/2
+			}
+			cylinder {
+				<-colSpacing, colHeight, colSpacing>
+				<-colSpacing, colHeight, -colSpacing>
+				colSpacing/2
+			}
+		}
+	};
 
 #declare colSpotLight =
      light_source {
@@ -33,15 +59,22 @@
         fade_power 3
         };
 
-
-#declare column =
+// column with spotlights and capital, but not connected to ceiling
+#declare colBase =
     union {
-        object { corinthianCapital }
+		// captial
+        object { 
+			corinthianCapital 
+			scale <.8, .6, .8>
+			translate <0, colHeight-.8, 0>
+		}
+		// column body
         cylinder {
             <0,0,0>
             <0,colHeight,0>
             colRadius
         }
+		// spotlights
         light_source {
             colSpotLight
             translate <colRadius+lightToColDistance, 0, 0>
@@ -50,5 +83,18 @@
             colSpotLight
             translate <-colRadius-lightToColDistance, 0, 0>
         }
+		// set texture for column
         texture { colTexture }
     };
+
+// full column, connected to ceiling
+#declare column =
+	union {
+		object { 
+			colCeiling 
+			// center over column
+			translate <-colRadius*2, 0, -colRadius*2>
+			texture { ceilingTexture }
+		}
+		object { colBase }
+	};	
