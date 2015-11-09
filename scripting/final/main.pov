@@ -20,7 +20,6 @@
  */
 
 #include "rad_def.inc"
-
 #include "textures.inc"
 #include "cistern.inc"
 
@@ -31,31 +30,39 @@ global_settings {
 }
 
 #declare singleColumnView = <15,2,5>;
-#declare centerRoomView = <roomWidth/2, 5, roomHeight/2>;
-#declare endRoomView = <0, 5, roomLength/2>;
+#declare centerRoomView = <roomWidth/2, 5, roomLength/2>;
+#declare endRoomView = <1, 5, roomLength/2>;
 
 background {
     rgb<1,1,1>
 }
 
 camera {
-    location centerRoomView
+	location endRoomView
+//    location centerRoomView
 //    location singleColumnView
-    look_at <5, 5, 5>
+    look_at <roomWidth, 5, 0>
 }
 
+/*
 light_source {
     <20, 8, 7>
     rgb <1,1,1> * .5
 }
+*/
 
 object { room }
+object { roomLights } 
+object { columns }
+object { water }
 
 /*
 object { 
     column 
     translate <5, 0, 5>
 }
+object {
+	column
+	translate <5, 0, 5+colSpacing>	
+}
 */
-
-object { columns}

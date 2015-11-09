@@ -26,23 +26,28 @@
 	difference {
 		box {
 			<-colSpacing/2, colHeight, -colSpacing/2>
-			<colSpacing, colHeight+5, colSpacing>
+			<colSpacing/2, colHeight+2, colSpacing/2>
 		}
 		union {
 			cylinder {
-				<-colSpacing, colHeight, colSpacing>
-				<colSpacing, colHeight, colSpacing>
-				colSpacing/2
+				<-colSpacing/2, colHeight, colSpacing/2>
+				<colSpacing/2, colHeight, colSpacing/2>
+				colSpacing/3
 			}
 			cylinder {
-				<colSpacing, colHeight, colSpacing>
-				<colSpacing, colHeight, -colSpacing>
-				colSpacing/2
+				<colSpacing/2, colHeight, colSpacing/2>
+				<colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/3
 			}
 			cylinder {
-				<-colSpacing, colHeight, colSpacing>
-				<-colSpacing, colHeight, -colSpacing>
-				colSpacing/2
+				<-colSpacing/2, colHeight, -colSpacing/2>
+				<colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/3
+			}
+			cylinder {
+				<-colSpacing/2, colHeight, colSpacing/2>
+				<-colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/3
 			}
 		}
 	};
@@ -92,8 +97,6 @@
 	union {
 		object { 
 			colCeiling 
-			// center over column
-			translate <-colRadius*2, 0, -colRadius*2>
 			texture { ceilingTexture }
 		}
 		object { colBase }
