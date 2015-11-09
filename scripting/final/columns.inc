@@ -60,8 +60,8 @@
         point_at <0, lightAngledHeight, 0>
         radius 15 
         falloff 20
-        fade_distance 2 
-        fade_power 3
+        fade_distance 4 
+        fade_power 4
         };
 
 // column with spotlights and capital, but not connected to ceiling
