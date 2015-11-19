@@ -9,13 +9,13 @@
 
 #declare roomTexture =
     texture {
+		uv_mapping
+
         pigment {
-            rgb <1,.9,.8>
-//            image_map { jpeg "textureImages/rough-stone-wall.jpg" } 
-//            image_map { jpeg "textureImages/uv-texture-map.jpg" }
-            scale 5
+            image_map { jpeg "textureImages/Seamless_Texture_18_by_AGF81.jpg" }
+			scale 0.1
         }
-//        normal { bumps .3 scale .03 }
+
     };
 
 #declare colTexture =

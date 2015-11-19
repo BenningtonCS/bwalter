@@ -16,42 +16,67 @@
 // variables for the column
 #declare colHeight = 9;
 #declare colRadius = .6;
-#declare colSpacing = 4.9;	// spacing between columns. Also in cistern.inc
+#declare colSpacing = 4.9 + colRadius;	// also in cistern.inc
 
 // variables for the column capital
 #declare colCapHeight = 1.5; 
-#declare colCapRadius = colRadius+.4;
+#declare colCapRadius = colRadius+.3;
 
+// where the column meets the ceiling
 #declare colCeiling =
-	difference {
-		box {
-			<-colSpacing/2, colHeight, -colSpacing/2>
-			<colSpacing/2, colHeight+2, colSpacing/2>
-		}
-		union {
-			cylinder {
+	union {
+		// create arches
+		difference {
+			box {
 				<-colSpacing/2, colHeight, colSpacing/2>
+				<colSpacing/2, colHeight+3, -colSpacing/2>
+			}
+			sphere {
 				<colSpacing/2, colHeight, colSpacing/2>
-				colSpacing/3
+				colSpacing/2.2
 			}
-			cylinder {
-				<colSpacing/2, colHeight, colSpacing/2>
-				<colSpacing/2, colHeight, -colSpacing/2>
-				colSpacing/3
-			}
-			cylinder {
-				<-colSpacing/2, colHeight, -colSpacing/2>
-				<colSpacing/2, colHeight, -colSpacing/2>
-				colSpacing/3
-			}
-			cylinder {
+			sphere {
 				<-colSpacing/2, colHeight, colSpacing/2>
+				colSpacing/2.2
+			}
+			sphere {
 				<-colSpacing/2, colHeight, -colSpacing/2>
-				colSpacing/3
+				colSpacing/2.2
+			}
+			sphere {
+				<colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/2.2
+			}
+			union {		// cut out cylinders to create arch
+				cylinder {
+					<-colSpacing/2, colHeight, colSpacing/2>
+					<colSpacing/2, colHeight, colSpacing/2>
+					colSpacing/3
+					open
+				}
+				cylinder {
+					<colSpacing/2, colHeight, colSpacing/2>
+					<colSpacing/2, colHeight, -colSpacing/2>
+					colSpacing/3
+					open
+				}
+				cylinder {
+					<-colSpacing/2, colHeight, -colSpacing/2>
+					<colSpacing/2, colHeight, -colSpacing/2>
+					colSpacing/3
+					open
+				}
+				cylinder {
+					<-colSpacing/2, colHeight, colSpacing/2>
+					<-colSpacing/2, colHeight, -colSpacing/2>
+					colSpacing/3
+				}
 			}
 		}
+		texture { ceilingTexture }
 	};
 
+// spot lights illuminating each column
 #declare colSpotLight =
      light_source {
         <0, 0, 0>
@@ -71,7 +96,7 @@
         object { 
 			corinthianCapital 
 			scale <.8, .6, .8>
-			translate <0, colHeight-.8, 0>
+			translate <0, colHeight-.7, 0>
 		}
 		// column body
         cylinder {
@@ -95,9 +120,6 @@
 // full column, connected to ceiling
 #declare column =
 	union {
-		object { 
-			colCeiling 
-			texture { ceilingTexture }
-		}
+		object { colCeiling }
 		object { colBase }
 	};	

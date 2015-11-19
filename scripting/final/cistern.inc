@@ -18,7 +18,7 @@
 //column spacing
 #declare colRows = 12;
 #declare colColumns = 28; 
-#declare colSpacing = 4.9; 
+#declare colSpacing = 4.9 + colRadius; // also in columns.inc 
 
 // place columns in grid
 #declare columns =
@@ -52,27 +52,27 @@
 #declare roomLights = 
 	union {
 		#declare i = 1;
-	    #while (i < colRows)
+	    #while (i < colRows-1)
 			object { 
 				wallSconce
-				translate <0, roomHeight/4, colSpacing/2 + colSpacing*i>
+				translate <0.1, roomHeight/4, colSpacing/2 + colSpacing*i>
 			}
-			object {
+			object {			
 				wallSconce
-				translate <roomWidth, roomHeight/4, colSpacing/2 + colSpacing*i>
+				translate <roomWidth-0.1, roomHeight/4, colSpacing/2 + colSpacing*i>
 			}
 			#declare i = i+1;
 		#end
 		
 		#declare i = 1;
-		#while (i < colColumns)
-			object {
+		#while (i < colColumns-1)
+			object {		
 				wallSconce
-				translate<colSpacing/2 + colSpacing*i, roomHeight/4, 0>
+				translate<colSpacing/2 + colSpacing*i, roomHeight/4, 0.1>
 			}		
-			object {
+			object {		
 				wallSconce
-				translate<colSpacing/2 + colSpacing*i, roomHeight/4, roomLength>
+				translate<colSpacing/2 + colSpacing*i, roomHeight/4, roomLength-0.1>
 			}
 			#declare i = i+1;
 		#end

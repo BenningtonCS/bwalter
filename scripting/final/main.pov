@@ -29,19 +29,22 @@ global_settings {
 	}
 }
 
-#declare singleColumnView = <15,2,5>;
+#declare singleColumnView = <15,colHeight,5>;
 #declare centerRoomView = <roomWidth/2, 5, roomLength/2>;
-#declare endRoomView = <1, 5, roomLength/2>;
+#declare endRoomView = <1, 5, roomLength/2 - 1>;
 
 background {
     rgb<1,1,1>
 }
 
 camera {
-	location endRoomView
-//    location centerRoomView
+//	location endRoomView
+    location centerRoomView
 //    location singleColumnView
-    look_at <roomWidth, 5, 0>
+//	location <15, 5, 5>
+//    look_at <roomWidth, 5, 0>
+	look_at <0, 8, 5>
+//	look_at <0, colHeight, 5>
 }
 
 /*
@@ -56,7 +59,6 @@ object { roomLights }
 object { columns }
 object { water }
 
-/*
 object { 
     column 
     translate <5, 0, 5>
@@ -65,4 +67,3 @@ object {
 	column
 	translate <5, 0, 5+colSpacing>	
 }
-*/
