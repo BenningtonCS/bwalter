@@ -32,7 +32,7 @@ global_settings {
 }
 
 #declare singleColumnView = <15,5,5>;
-#declare centerRoomView = <roomWidth/2, 1, roomLength/2>;
+#declare centerRoomView = <roomWidth/2, colHeight, roomLength/2>;
 #declare endRoomView = <1, 5, roomLength/2 - 1>;
 
 background {
@@ -40,21 +40,22 @@ background {
 }
 
 camera {
-	location endRoomView
-//    location centerRoomView
+//	location endRoomView
+    location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
-    look_at <roomWidth, 5, 0>
+    look_at <roomWidth, 0, 0>
 //	look_at <0, 8, 5>
 //	look_at <0, 0, 5>
 
 //	look_at <roomWidth, 10, roomLength/2>
 
 	angle 60
-
+/*
 	focal_point <10, 5, roomLength/2>  
 	aperture .2
 	blur_samples 10 
+*/
 }
 
 /*
