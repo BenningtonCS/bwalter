@@ -40,19 +40,21 @@ background {
 }
 
 camera {
-//	location endRoomView
-    location centerRoomView
+	location endRoomView
+//    location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
-    look_at <roomWidth, 30, 0>
+    look_at <roomWidth, 5, 0>
 //	look_at <0, 8, 5>
 //	look_at <0, 0, 5>
 
-/*
-	focal_point <roomWidth/3, 1, roomLength/3>  
-	aperture .4
-	blur_samples 20
-*/
+//	look_at <roomWidth, 10, roomLength/2>
+
+	angle 60
+
+	focal_point <10, 5, roomLength/2>  
+	aperture .2
+	blur_samples 10 
 }
 
 /*
