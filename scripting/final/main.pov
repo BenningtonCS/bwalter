@@ -19,6 +19,8 @@
     a wooden boardwalk going through the cistern which is not modeled either.
  */
 
+#version 3.7;
+
 #include "rad_def.inc"
 #include "textures.inc"
 #include "cistern.inc"
@@ -29,7 +31,7 @@ global_settings {
 	}
 }
 
-#declare singleColumnView = <15,colHeight,5>;
+#declare singleColumnView = <15,5,5>;
 #declare centerRoomView = <roomWidth/2, 5, roomLength/2>;
 #declare endRoomView = <1, 5, roomLength/2 - 1>;
 
@@ -38,13 +40,14 @@ background {
 }
 
 camera {
-//	location endRoomView
-    location centerRoomView
+	location endRoomView
+//    location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
 //    look_at <roomWidth, 5, 0>
-	look_at <0, 8, 5>
-//	look_at <0, colHeight, 5>
+//	look_at <0, 8, 5>
+//	look_at <0, 0, 5>
+	look_at <roomWidth, 1, 0>
 }
 
 /*
@@ -59,6 +62,7 @@ object { roomLights }
 object { columns }
 object { water }
 
+/*
 object { 
     column 
     translate <5, 0, 5>
@@ -67,3 +71,4 @@ object {
 	column
 	translate <5, 0, 5+colSpacing>	
 }
+*/

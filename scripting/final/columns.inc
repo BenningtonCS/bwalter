@@ -7,11 +7,7 @@
 */
 
 #include "corinthianCapital.inc"
-
-// variables for the two spotlights on each column
-#declare lightIntensity = .8;
-#declare lightToColDistance = .3;
-#declare lightAngledHeight = 2;     // how high up the column it looks
+#include "lights.inc"
 
 // variables for the column
 #declare colHeight = 9;
@@ -76,19 +72,6 @@
 		texture { ceilingTexture }
 	};
 
-// spot lights illuminating each column
-#declare colSpotLight =
-     light_source {
-        <0, 0, 0>
-        rgb <1,.85,.6> * lightIntensity 
-        spotlight
-        point_at <0, lightAngledHeight, 0>
-        radius 15 
-        falloff 20
-        fade_distance 4 
-        fade_power 4
-        };
-
 // column with spotlights and capital, but not connected to ceiling
 #declare colBase =
     union {
@@ -104,14 +87,19 @@
             <0,colHeight,0>
             colRadius
         }
+		// column bottom
+		box {
+			<-colRadius, 0, -colRadius>
+			<colRadius, .5, colRadius>
+		}
 		// spotlights
         light_source {
             colSpotLight
-            translate <colRadius+lightToColDistance, 0, 0>
+            translate <colRadius+lightToColDistance, .5, 0>
         }
         light_source {
             colSpotLight
-            translate <-colRadius-lightToColDistance, 0, 0>
+            translate <-colRadius-lightToColDistance, .5, 0>
         }
 		// set texture for column
         texture { colTexture }

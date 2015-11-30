@@ -8,6 +8,7 @@
 
 #include "columns.inc"
 
+
 // all measurements are in meters
 
 // room
@@ -36,18 +37,6 @@
             #declare i = i+1; 
         #end
     };
-
-#declare wallSconce =
-	light_source {
-        <0, 0, 0>
-        rgb <1,.85,.6> 
-        spotlight
-        point_at y
-        radius 15 
-        falloff 20
-//        fade_distance 2 
-//        fade_power 3
-	};
 
 #declare roomLights = 
 	union {
@@ -83,6 +72,7 @@
         <0,0,0>
         <roomWidth, roomHeight, roomLength>
         texture { roomTexture }
+		hollow
     };
 
 #declare water =
