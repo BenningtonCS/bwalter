@@ -40,14 +40,14 @@ background {
 }
 
 camera {
-	location endRoomView
-//    location centerRoomView
+//	location endRoomView
+    location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
 //    look_at <roomWidth, 5, 0>
 //	look_at <0, 8, 5>
 //	look_at <0, 0, 5>
-	look_at <roomWidth, 1, 0>
+	look_at <0, 1, 0>
 }
 
 /*
