@@ -32,7 +32,7 @@ global_settings {
 }
 
 #declare singleColumnView = <15,5,5>;
-#declare centerRoomView = <roomWidth/2, 5, roomLength/2>;
+#declare centerRoomView = <roomWidth/2, 1, roomLength/2>;
 #declare endRoomView = <1, 5, roomLength/2 - 1>;
 
 background {
@@ -44,10 +44,9 @@ camera {
     location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
-//    look_at <roomWidth, 5, 0>
+    look_at <roomWidth, 10, 0>
 //	look_at <0, 8, 5>
 //	look_at <0, 0, 5>
-	look_at <0, 1, 0>
 }
 
 /*
