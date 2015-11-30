@@ -44,9 +44,15 @@ camera {
     location centerRoomView
 //    location singleColumnView
 //	location <15, 5, 5>
-    look_at <roomWidth, 10, 0>
+    look_at <roomWidth, 30, 0>
 //	look_at <0, 8, 5>
 //	look_at <0, 0, 5>
+
+/*
+	focal_point <roomWidth/3, 1, roomLength/3>  
+	aperture .4
+	blur_samples 20
+*/
 }
 
 /*
@@ -55,7 +61,12 @@ light_source {
     rgb <1,1,1> * .5
 }
 */
-
+/*
+light_source {
+	centerRoomView
+	rgb <1,1,1> *.5
+}
+*/
 object { room }
 object { roomLights } 
 object { columns }
