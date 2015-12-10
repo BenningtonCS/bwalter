@@ -32,7 +32,7 @@ global_settings {
 }
 
 #declare singleColumnView = <15,5,5>;
-#declare centerRoomView = <roomWidth/2, colHeight, roomLength/2>;
+#declare centerRoomView = <roomWidth/2, 1, roomLength/2>;
 #declare endRoomView = <1, 5, roomLength/2 - 1>;
 
 background {
@@ -40,30 +40,42 @@ background {
 }
 
 camera {
-//	location endRoomView
-    location centerRoomView
-//    location singleColumnView
-//	location <15, 5, 5>
-    look_at <roomWidth, 0, 0>
-//	look_at <0, 8, 5>
-//	look_at <0, 0, 5>
+// camera position 1
 
-//	look_at <roomWidth, 10, roomLength/2>
+	location endRoomView
+	look_at <roomWidth, 1, 0>
+
+
+// camera position 2
+/*
+	location centerRoomView
+	look_at <0, 1, 0>
+*/
+
+// camera position 3
+/*
+	location centerRoomView
+	look_at <roomWidth, 30, 0>
+*/
+
+// camera position 4
+/*
+	location endRoomView
+	look_at <roomWidth, 5, 0>
 
 	angle 60
-/*
 	focal_point <10, 5, roomLength/2>  
 	aperture .2
 	blur_samples 10 
 */
+
+// camera position 5
+/*
+	location <2, colHeight+1, roomLength/2-1>
+	look_at <roomWidth, 0, 0>	
+*/
 }
 
-/*
-light_source {
-    <20, 8, 7>
-    rgb <1,1,1> * .5
-}
-*/
 /*
 light_source {
 	centerRoomView
@@ -74,14 +86,3 @@ object { room }
 object { roomLights } 
 object { columns }
 object { water }
-
-/*
-object { 
-    column 
-    translate <5, 0, 5>
-}
-object {
-	column
-	translate <5, 0, 5+colSpacing>	
-}
-*/

@@ -15,72 +15,102 @@
 #declare colSpacing = 4.9 + colRadius;	// also in cistern.inc
 
 // variables for the column capital
-#declare colCapHeight = 1.5; 
+#declare colCapHeight = 1; 
 #declare colCapRadius = colRadius+.3;
 
 // where the column meets the ceiling
-#declare colCeiling =
-	union {
-		// create arches
-		difference {
-			box {
+#declare colArches =
+	// create arches
+	difference {
+		box {
+			<-colSpacing/2, colHeight, colSpacing/2>
+			<colSpacing/2, colHeight+3, -colSpacing/2>
+		}
+		sphere {
+			<colSpacing/2, colHeight, colSpacing/2>
+			colSpacing/2.2
+		}
+		sphere {
+			<-colSpacing/2, colHeight, colSpacing/2>
+			colSpacing/2.2
+		}
+		sphere {
+			<-colSpacing/2, colHeight, -colSpacing/2>
+			colSpacing/2.2
+		}
+		sphere {
+			<colSpacing/2, colHeight, -colSpacing/2>
+			colSpacing/2.2
+		}
+		union {		// cut out cylinders to create arch
+			cylinder {
 				<-colSpacing/2, colHeight, colSpacing/2>
-				<colSpacing/2, colHeight+3, -colSpacing/2>
-			}
-			sphere {
 				<colSpacing/2, colHeight, colSpacing/2>
-				colSpacing/2.2
+				colSpacing/3
+				open
 			}
-			sphere {
-				<-colSpacing/2, colHeight, colSpacing/2>
-				colSpacing/2.2
-			}
-			sphere {
-				<-colSpacing/2, colHeight, -colSpacing/2>
-				colSpacing/2.2
-			}
-			sphere {
+			cylinder {
+				<colSpacing/2, colHeight, colSpacing/2>
 				<colSpacing/2, colHeight, -colSpacing/2>
-				colSpacing/2.2
+				colSpacing/3
+				open
 			}
-			union {		// cut out cylinders to create arch
-				cylinder {
-					<-colSpacing/2, colHeight, colSpacing/2>
-					<colSpacing/2, colHeight, colSpacing/2>
-					colSpacing/3
-					open
-				}
-				cylinder {
-					<colSpacing/2, colHeight, colSpacing/2>
-					<colSpacing/2, colHeight, -colSpacing/2>
-					colSpacing/3
-					open
-				}
-				cylinder {
-					<-colSpacing/2, colHeight, -colSpacing/2>
-					<colSpacing/2, colHeight, -colSpacing/2>
-					colSpacing/3
-					open
-				}
-				cylinder {
-					<-colSpacing/2, colHeight, colSpacing/2>
-					<-colSpacing/2, colHeight, -colSpacing/2>
-					colSpacing/3
-				}
+			cylinder {
+				<-colSpacing/2, colHeight, -colSpacing/2>
+				<colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/3
+				open
+			}
+			cylinder {
+				<-colSpacing/2, colHeight, colSpacing/2>
+				<-colSpacing/2, colHeight, -colSpacing/2>
+				colSpacing/3
 			}
 		}
-		texture { ceilingTexture }
+	texture { ceilingTexture }
+	};
+
+
+// create metal beams connecting each column to each other
+#declare colSupportBeams =
+	union {
+		cylinder {
+			<0, colHeight+.1, 0>
+			<colSpacing/2, colHeight+.1, 0>
+			0.05
+		}
+		cylinder {
+			<0, colHeight+.1, 0>
+			<-colSpacing/2, colHeight+.1, 0>
+			0.05
+		}
+
+		texture { metalTexture }	
+	};
+
+// combine arches with the metal support beams
+#declare colCeiling =
+	union {
+		object { colArches }
+		object { colSupportBeams }
+		object { 
+			colSupportBeams 
+			rotate <0, 90, 0>
+		}
+	};
+
+#declare colCapital =
+	object { 
+		corinthianCapital 
+		scale <.7, .6, .7>
+		translate <0, colHeight-2.2, 0>
 	};
 
 // column with spotlights and capital, but not connected to ceiling
 #declare colBase =
     union {
 		// captial
-        object { 
-			corinthianCapital 
-			scale <.8, .6, .8>
-			translate <0, colHeight-.7, 0>
-		}
+		object { colCapital }
 		// column body
         cylinder {
             <0,0,0>
