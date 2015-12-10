@@ -47,14 +47,14 @@ camera {
 */
 
 // camera position 2
-	location centerRoomView
-	look_at <0, 1, 0>
-
-// camera position 3
 /*
 	location centerRoomView
-	look_at <roomWidth, 30, 0>
+	look_at <0, 1, 0>
 */
+
+// camera position 3
+	location centerRoomView
+	look_at <roomWidth, 30, 0>
 
 // camera position 4
 /*
