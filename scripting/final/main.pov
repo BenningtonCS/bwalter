@@ -59,7 +59,6 @@ camera {
 */
 
 // camera position 4
-/*
 	location endRoomView
 	look_at <roomWidth, 5, 0>
 
@@ -67,11 +66,12 @@ camera {
 	focal_point <10, 5, roomLength/2>  
 	aperture .2
 	blur_samples 10 
-*/
 
 // camera position 5
+/*
 	location <2, colHeight+1, roomLength/2-1>
 	look_at <roomWidth, 0, 0>	
+*/
 }
 
 /*
