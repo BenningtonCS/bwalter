@@ -53,8 +53,10 @@ camera {
 */
 
 // camera position 3
+/*
 	location centerRoomView
 	look_at <roomWidth, 30, 0>
+*/
 
 // camera position 4
 /*
@@ -68,10 +70,8 @@ camera {
 */
 
 // camera position 5
-/*
 	location <2, colHeight+1, roomLength/2-1>
 	look_at <roomWidth, 0, 0>	
-*/
 }
 
 /*

@@ -103,7 +103,7 @@
 	object { 
 		corinthianCapital 
 		scale <.7, .6, .7>
-		translate <0, colHeight-2.2, 0>
+		translate <0, colHeight-1.8, 0>
 	};
 
 // column with spotlights and capital, but not connected to ceiling
