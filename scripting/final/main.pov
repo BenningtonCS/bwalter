@@ -53,12 +53,17 @@ camera {
 */
 
 // camera position 3
-/*
 	location centerRoomView
 	look_at <roomWidth, 30, 0>
-*/
+
+	#declare height = sqrt(pow(colSpacing, 2) + pow(colHeight-1, 2));
+
+	focal_point <roomWidth/2 + 5, height, roomLength/2 + 5>
+	aperture .2
+	blur_samples 5
 
 // camera position 4
+/*
 	location endRoomView
 	look_at <roomWidth, 5, 0>
 
@@ -66,6 +71,7 @@ camera {
 	focal_point <10, 5, roomLength/2>  
 	aperture .2
 	blur_samples 10 
+*/
 
 // camera position 5
 /*
