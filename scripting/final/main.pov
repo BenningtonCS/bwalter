@@ -41,14 +41,14 @@ background {
 
 camera {
 // camera position 1
+/*
 	location endRoomView
 	look_at <roomWidth, 1, 0>
+*/
 
 // camera position 2
-/*
 	location centerRoomView
 	look_at <0, 1, 0>
-*/
 
 // camera position 3
 /*
