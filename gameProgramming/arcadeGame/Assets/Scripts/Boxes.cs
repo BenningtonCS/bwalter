@@ -6,40 +6,44 @@ public class Boxes : MonoBehaviour {
 
 	public bool isBomb;					// is it a bomb?
 	public bool isFlagged = false;		// has the player set a flag?
-	public bool isCleared = false;		// has the box been cleared
 
 	public int adjacentBombs = 0;
 	public GameObject numBombsPrefab;	// text to display adjacentBombs
+	public GameObject board;
 
 	private Collider boxCollider;
 
-	// Use this for initialization
-	void Start () {
-		boxCollider = GetComponent<Collider>();
-	}
 
 	// set a flag
-	void setFlag() {
+	public void setFlag() {
 		isFlagged = true;
 		GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
+		
+		board.GetComponent<Board>().numBombs--;
+		if (isBomb) board.GetComponent<Board>().numBombsFlagged++;
 	}
 
 	// remove a flag
-	void removeFlag() {
+	public void removeFlag() {
 		isFlagged = false;
 		GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+
+		board.GetComponent<Board>().numBombs++;
+	if (isBomb) board.GetComponent<Board>().numBombsFlagged--;
 	}
 
 	// blow up the box and end the game
-	void blowUp() {
+	public void blowUp() {
 		GetComponent<Renderer>().material.SetColor("_Color", Color.red);
+		board.GetComponent<Board>().gameLost = true;
 	}
 
 	// clear the box from the game
-	void clear() {
+	public void clear() {
 		boxCollider.gameObject.SetActive(false);
 		numBombsPrefab = (GameObject)Instantiate(numBombsPrefab, this.transform.position, Quaternion.identity);
 		numBombsPrefab.GetComponent<TextMesh>().text = adjacentBombs.ToString();
+		board.GetComponent<Board>().numBoxesCleared++;
 	}
 
 	// called when the player left clicks on a box to remove it
@@ -69,7 +73,14 @@ public class Boxes : MonoBehaviour {
 			}
 		}
 	}
+
 	
+	// Use this for initialization
+	void Start () {
+		boxCollider = GetComponent<Collider>();
+		board = GameObject.FindWithTag("Board");
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown(0)) onLeftClick();
