@@ -21,7 +21,7 @@ bool Canvas::setSize(int w, int h) {
 
         // create 2D array of pixels
         pixels = new Color*[width];
-        for (int i=0; i<height; i++)
+        for (int i=0; i<width; i++)
             pixels[i] = new Color[height];
 
         return true;

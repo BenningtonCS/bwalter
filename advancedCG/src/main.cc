@@ -1,11 +1,8 @@
 #include <Canvas.h>
 
 int main(void) {
-		int width = 600;			// works
-		int height = 800;
-
-		//int width = 800;		// doesn't work
-		//int height = 600;
+		int width = 800;
+		int height = 600;
 
 		Canvas c(width, height);
 		Color red(1, 0, 0, 1);
