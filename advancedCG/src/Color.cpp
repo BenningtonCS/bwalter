@@ -1,36 +1,53 @@
-class Color {
+Color() { r=0; g=0; b=0; a=0; }
+Color(float red, float green, float blue, float alpha) {
+    setColor(red, green, blue, alpha);
+}
 
-  protected:
-    float r, g, b, a; // rgba values are between 0 and 1
-
-  public:
-
-    Color() { r=0; g=0; b=0; a=0; }
-    Color(float red, float green, float blue, float alpha) {
-        r = red; g = green; b = blue; a = alpha;
+/*
+    Setters
+*/
+bool setr(float red) {
+    if (0 <= red && red <= 1) {
+        r = red;
+        return true;
     }
-
-    /*
-        Setters
-    */
-
-    void setr(float red)   { r = red; }
-    void setg(float green) { g = green; }
-    void setb(float blue)  { b = blue; }
-    void seta(float alpha) { a = alpha; }
-    void setColor(float red, float green, float blue, float alpha) {
-        r = red; g = green; b = blue; a = alpha;
+    return false;
+}
+bool setg(float green) {
+    if (0 <= green && green <= 1) {
+        g = green;
+        return true;
     }
-
-     /*
-        Getters
-    */
-
-    float getr() { return r; }
-    float getg() { return g; }
-    float getb() { return b; }
-    float geta() { return a; }
-    void getColor(float *red, float *green, float *blue, float *alpha) {
-        *red = r; *green = g; *blue = b; *alpha = a;
+    return false;
+}
+bool setb(float blue) {
+    if (0 <= blue && blue <= 1) {
+        b = blue;
+        return true;
     }
-};
+    return false;
+}
+bool seta(float alpha) {
+    if (0 <= alpha && alpha <= 1) {
+        a = alpha;
+        return true;
+    }
+    return false;
+}
+bool setColor(float red, float green, float blue, float alpha) {
+    if (setr(red) && setg(green) && setb(blue) && seta(alpha))
+        return true;
+
+    return false;
+}
+
+ /*
+    Getters
+*/
+float getr() { return r; }
+float getg() { return g; }
+float getb() { return b; }
+float geta() { return a; }
+void getColor(float *red, float *green, float *blue, float *alpha) {
+    *red = r; *green = g; *blue = b; *alpha = a;
+}
