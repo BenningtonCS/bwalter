@@ -20,10 +20,10 @@ class Vector3 {
     /*
         Setters
     */
-	void setx(float);
-	void sety(float);
-	void setz(float);
-    void setVector(float, float, float);
+	bool setx(float);
+	bool sety(float);
+	bool setz(float);
+    bool setVector(float, float, float);
 
 	// operator overloads
 	Vector3 operator+(Vector3);

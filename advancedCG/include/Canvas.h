@@ -32,9 +32,9 @@ class Canvas {
     /*
         Setters
     */
-    void setWidth(int);
-    void setHeight(int);
-    void setSize(int, int); // width, height
+    bool setWidth(int);
+    bool setHeight(int);
+    bool setSize(int, int); // width, height
 
     /*
         Class methods

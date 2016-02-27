@@ -14,11 +14,25 @@ Canvas::Canvas(int w, int h) { setSize(w, h); }
 int Canvas::getWidth() { return width; }
 int Canvas::getHeight() { return height; }
 
-void Canvas::setWidth(int w) { width = w; }
-void Canvas::setHeight(int h) { height = h; }
+bool Canvas::setWidth(int w) {
+    if (w > 0) {
+        width = w;
+        return true;
+    }
+    return false;
+}
+bool Canvas::setHeight(int h) {
+    if (h > 0) {
+        height = h;
+        return true;
+    }
+    return false;
+}
+bool Canvas::setSize(int w, int h) {
+    if (setWidth(w) && setHeight(h))
+        return true;
 
-void Canvas::setSize(int w, int h) {
-    setWidth(w); setHeight(h);
+    return false;
 }
 
 void Canvas::writeToFile(char* fileName) {
