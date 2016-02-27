@@ -16,12 +16,12 @@
 class Canvas {
 
   protected:
-    unsigned int width;
-    unsigned int height;
+    int width;
+    int height;
 
   public:
     Canvas();
-    Canvas(unsigned int, unsigned int);
+    Canvas(int, int);
 
     /*
         Getters
@@ -32,9 +32,9 @@ class Canvas {
     /*
         Setters
     */
-    void setWidth(unsigned int);
-    void setHeight(unsigned int);
-    void setSize(unsigned int, unsigned int); // width, height
+    void setWidth(int);
+    void setHeight(int);
+    void setSize(int, int); // width, height
 
     /*
         Class methods

@@ -9,15 +9,15 @@
 #include <Canvas.h>
 
 Canvas::Canvas() { setSize(800, 600); }
-Canvas::Canvas(unsigned int w, unsigned int h) { setSize(w, h); }
+Canvas::Canvas(int w, int h) { setSize(w, h); }
 
 int Canvas::getWidth() { return width; }
 int Canvas::getHeight() { return height; }
 
-void Canvas::setWidth(unsigned int w) { width = w; }
-void Canvas::setHeight(unsigned int h) { height = h; }
+void Canvas::setWidth(int w) { width = w; }
+void Canvas::setHeight(int h) { height = h; }
 
-void Canvas::setSize(unsigned int w, unsigned int h) {
+void Canvas::setSize(int w, int h) {
     setWidth(w); setHeight(h);
 }
 
