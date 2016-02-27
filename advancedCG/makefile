@@ -1,6 +1,6 @@
 IDIR=include
 CC=g++
-CFLAGS=-Wall -I$(IDIR)
+CFLAGS=-Wall -I$(IDIR) -g
 SDIR=src
 OUT=main
 
