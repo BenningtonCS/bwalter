@@ -1,24 +1,22 @@
+/*
+    Sphere.cpp
+    2016 March 2
+    Brendon Walter
+
+    Methods for the Sphere class
+*/
+
 #include <Sphere.h>
 
 
 /* constructors */
 
-Sphere::Sphere() {
-    setSphere(0, 0, 0, 1);
-}
-
-Sphere::Sphere(Vector3 cent, double r) {
-    setSphere(cent, r);
-}
-
-Sphere::Sphere(Vector3 cent, double r, Color col) {
-    setSphere(cent, r, col);
-}
-
+Sphere::Sphere() { setSphere(0, 0, 0, 1); }
+Sphere::Sphere(Vector3 cent, double r) { setSphere(cent, r); }
+Sphere::Sphere(Vector3 cent, double r, Color col) { setSphere(cent, r, col); }
 Sphere::Sphere(double X, double Y, double Z, double r) {
     setSphere(X, Y, Z, r);
 }
-
 Sphere::Sphere(double X, double Y, double Z, double r, Color col) {
     setSphere(X, Y, Z, r, col);
 }
@@ -43,10 +41,7 @@ void Sphere::getSphere(double* X, double* Y, double* Z, double* r, Color* col) {
 
 /* setters */
 
-bool Sphere::setCenter(Vector3 cent) {
-    center = cent;
-    return true;
-}
+bool Sphere::setCenter(Vector3 cent) { center = cent; return true; }
 
 bool Sphere::setCenter(double X, double Y, double Z) {
     Vector3 cent(X, Y, Z);
@@ -65,10 +60,7 @@ bool Sphere::setRadius(double r) {
     return false;
 }
 
-bool Sphere::setColor(Color col) {
-    color = col;
-    return true;
-}
+bool Sphere::setColor(Color col) { color = col; return true; }
 
 bool Sphere::setSphere(Vector3 cent, double r) {
     Color col;

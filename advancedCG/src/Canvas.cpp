@@ -8,12 +8,20 @@
 
 #include <Canvas.h>
 
+/* constructors */
+
 Canvas::Canvas() { setSize(800, 600); setGamma(2.2); }
 Canvas::Canvas(int w, int h) { setSize(w, h); setGamma(2.2); }
+
+
+/* getters */
 
 int Canvas::getWidth() { return width; }
 int Canvas::getHeight() { return height; }
 float Canvas::getGamma() { return gamma; }
+
+
+/* setters */
 
 bool Canvas::setSize(int w, int h) {
     if (0 < w && 0 < h) {
@@ -34,6 +42,9 @@ bool Canvas::setGamma(float g) { gamma = g; return true;}
 void Canvas::setPixel(int x, int y, Color color) {
     pixels[x][y] = color;
 }
+
+
+/* class methods */
 
 int Canvas::convertToUInt8(float color, float gamma) {
     return 255 * pow(color, 1/gamma);

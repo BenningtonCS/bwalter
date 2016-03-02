@@ -22,7 +22,7 @@ class Ray3 {
 
   public:
     Ray3();                         // origin: (0, 0, 0), direction: (1, 0, 0)
-    Ray3(Vector3, Vector3);
+    Ray3(Vector3, Vector3);         // origin, direction
     Ray3(double, double, double,    // x, y, z of origin
          double, double, double);   // x, y, z of direction
 

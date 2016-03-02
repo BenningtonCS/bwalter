@@ -17,21 +17,28 @@
 class Canvas {
 
   protected:
-    int width;          // width of canvas
-    int height;         // height of canvas
+    int width;          // width of canvas. 800 by default
+    int height;         // height of canvas. 600 by default
     Color** pixels;     // 2D array of pixels
-    float gamma;        // gamma of the monitor
+    float gamma;        // gamma of the monitor. This is 2.2 by default.
 
   public:
+
+    /* constructors */
+
     Canvas();
     Canvas(int, int);
 
-    // Getters
+
+    /* getters */
+
     int getWidth();
     int getHeight();
     float getGamma();
 
-    // Setters
+
+    /* setters */
+
     bool setSize(int, int); // width, height
     bool setGamma(float);
 
@@ -43,6 +50,9 @@ class Canvas {
     Set a pixel at (x, y) to a Color
     */
     void setPixel(int, int, Color);
+
+
+    /* class methods */
 
     /*
     Parameters: Color channel specified as a float between 0 and 1, gamma of

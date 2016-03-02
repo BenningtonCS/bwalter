@@ -23,8 +23,8 @@ class Vector3 {
 
      /* constructors */
 
-    Vector3();
-    Vector3(double, double, double);
+    Vector3();                          // (0, 0, 0) by default
+    Vector3(double, double, double);    // x, y, z
 
 
     /* getters */
