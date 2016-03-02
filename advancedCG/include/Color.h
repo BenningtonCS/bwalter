@@ -1,3 +1,6 @@
+#ifndef COLOR_H
+#define COLOR_H
+
 class Color {
 
   protected:
@@ -31,3 +34,5 @@ class Color {
     Color white();
     Color black();
 };
+
+#endif
