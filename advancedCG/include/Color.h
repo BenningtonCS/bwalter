@@ -8,21 +8,26 @@ class Color {
     Color();
     Color(float, float, float, float); // red, green, blue, alpha
 
-    /*
-        Setters
-    */
+    /* Setters */
+
     bool setr(float);
     bool setg(float);
     bool setb(float);
     bool seta(float);
     bool setColor(float, float, float, float);
 
-     /*
-        Getters
-    */
+     /* getters */
+
     float getr();
     float getg();
     float getb();
     float geta();
     void getColor(float*, float*, float*, float*);
+
+    /* basic colors */
+    Color red();
+    Color green();
+    Color blue();
+    Color white();
+    Color black();
 };
