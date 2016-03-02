@@ -4,7 +4,7 @@ CFLAGS=-Wall -I$(IDIR) -g
 SDIR=src
 OUT=main
 
-_SRC=main.cc Color.cpp Vector3.cpp Canvas.cpp EasyBMP.cpp
+_SRC=main.cc Vector3.cpp Ray3.cpp Color.cpp Canvas.cpp EasyBMP.cpp
 SRC=$(patsubst %,$(SDIR)/%,$(_SRC))
 
 all: 

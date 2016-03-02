@@ -1,6 +1,9 @@
 #include <Canvas.h>
+#include <Vector3.h>
+#include <Ray3.h>
 
 int main(void) {
+    // testing for image writing
 		int width = 800;
 		int height = 600;
 
@@ -11,8 +14,15 @@ int main(void) {
 
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
-				c.setPixel(x, y, blue);
+				//if (x == y) c.setPixel(x, y, red);
+        //else c.setPixel(x, y, blue);
+        Color gradient(1-(float)x/width, 0, 0+(float)x/width, 1);
+        c.setPixel(x, y, gradient);
 			}
 		}
 		c.writeToFile("output.bmp");
+
+    // testing vectors and rays
+		Ray3 ray(0, 0, 0, 10, 5, 2);
+    ray.printRay();
 }
