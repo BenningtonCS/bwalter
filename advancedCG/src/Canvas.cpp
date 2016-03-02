@@ -8,8 +8,8 @@
 
 #include <Canvas.h>
 
-Canvas::Canvas() { setSize(800, 600); setGamma(1); }
-Canvas::Canvas(int w, int h) { setSize(w, h); setGamma(1); }
+Canvas::Canvas() { setSize(800, 600); setGamma(2.2); }
+Canvas::Canvas(int w, int h) { setSize(w, h); setGamma(2.2); }
 
 int Canvas::getWidth() { return width; }
 int Canvas::getHeight() { return height; }
