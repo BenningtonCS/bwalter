@@ -1,28 +1,57 @@
+/*
+    Vector3.cpp
+    2016 February 29
+    Brendon Walter
+
+    Methods for the Vector3 class
+*/
+
 #include <Vector3.h>
 
-Vector3::Vector3() { x=0; y=0; z=0; }
-Vector3::Vector3(float x, float y, float z) { setVector(x, y, z); }
+// class constructors
 
-bool Vector3::setx(float x) { this->x = x; return true; }
-bool Vector3::sety(float y) { this->y = y; return true; }
-bool Vector3::setz(float z) { this->z = z; return true; }
-bool Vector3::setVector(float x, float y, float z) {
-	if (setx(x) && sety(y) && setz(z))
-		return true;
+Vector3::Vector3() { setVector(0, 0, 0); }
+Vector3::Vector3(double X, double Y, double Z) { setVector(X, Y, Z); }
 
-	return false;
+// getters
+
+double Vector3::getx() { return x; }
+double Vector3::gety() { return y; }
+double Vector3::getz() { return z; }
+void Vector3::getVector(double* X, double* Y, double* Z) {
+    *X = x; *Y = y; *Z = z;
 }
 
-float Vector3::getx() { return x; }
-float Vector3::gety() { return y; }
-float Vector3::getz() { return z; }
-void Vector3::getVector(float* x, float* y, float* z) {
-	*x = this->x;
-	*y = this->y;
-	*z = this->z;
+// setters
+
+bool Vector3::setx(double X) { x = X; return true; }
+bool Vector3::sety(double Y) { y = Y; return true; }
+bool Vector3::setz(double Z) { z = Z; return true; }
+bool Vector3::setVector(double X, double Y, double Z) {
+    if (setx(X) && sety(Y) && setz(Z)) return true;
+    return false;
+}
+
+// class methods
+
+Vector3 Vector3::makeUnitVector() {
+    double magnitude;
+    magnitude = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+
+    Vector3 vector;
+    vector.setx(getx()/magnitude);
+    vector.sety(gety()/magnitude);
+    vector.setz(getz()/magnitude);
+
+    return vector;
+}
+
+void Vector3::printVector() {
+    printf("(%.5f, %.5f, %.5f)\n", x, y, z);
 }
 
 // operator overloads
+
 Vector3 Vector3::operator+(Vector3 v) {
 	Vector3 vector;
 	vector.setx(getx() + v.getx());
@@ -36,21 +65,5 @@ Vector3 Vector3::operator-(Vector3 v) {
 	vector.setx(getx() - v.getx());
 	vector.sety(gety() - v.gety());
 	vector.setz(getz() - v.getz());
-	return vector;
-}
-
-Vector3 Vector3::operator*(Vector3 v) {
-	Vector3 vector;
-	vector.setx(getx() * v.getx());
-	vector.sety(gety() * v.gety());
-	vector.setz(getz() * v.getz());
-	return vector;
-}
-
-Vector3 Vector3::operator/(Vector3 v) {
-	Vector3 vector;
-	vector.setx(getx() / v.getx());
-	vector.sety(gety() / v.gety());
-	vector.setz(getz() / v.getz());
 	return vector;
 }
