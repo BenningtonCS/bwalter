@@ -1,6 +1,6 @@
 #include <Color.h>
 
-Color::Color() { r=0; g=0; b=0; a=0; }
+Color::Color() { r=1; g=1; b=1; a=1; }
 Color::Color(float red, float green, float blue, float alpha) {
     setColor(red, green, blue, alpha);
 }
