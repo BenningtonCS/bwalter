@@ -1,6 +1,7 @@
 #include <Canvas.h>
 #include <Vector3.h>
 #include <Ray3.h>
+#include <Sphere.h>
 
 int main(void) {
     // testing for image writing
@@ -16,7 +17,7 @@ int main(void) {
 			for (int y=0; y<height; y++) {
 				//if (x == y) c.setPixel(x, y, red);
         //else c.setPixel(x, y, blue);
-        Color gradient(1-(float)x/width, 0, 0+(float)x/width, 1);
+        Color gradient(0, 1-(float)x/width, 0+(float)x/width, 1);
         c.setPixel(x, y, gradient);
 			}
 		}
@@ -25,4 +26,7 @@ int main(void) {
     // testing vectors and rays
 		Ray3 ray(0, 0, 0, 10, 5, 2);
     ray.printRay();
+
+    Sphere sphere(1, 1, 1, 1);
+    sphere.getCenter().printVector();
 }
