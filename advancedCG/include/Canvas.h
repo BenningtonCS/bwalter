@@ -20,7 +20,7 @@ class Canvas {
     int width;          // width of canvas
     int height;         // height of canvas
     Color** pixels;     // 2D array of pixels
-    float gamma;    // gamma of the monitor
+    float gamma;        // gamma of the monitor
 
   public:
     Canvas();
