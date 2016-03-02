@@ -34,9 +34,18 @@ bool Vector3::setVector(double X, double Y, double Z) {
 
 // class methods
 
+double Vector3::getMagnitude() {
+    double magnitude = sqrt(getMagnitudeSquared());
+    return magnitude;
+}
+
+double Vector3::getMagnitudeSquared() {
+    double magnitude = pow(x, 2) + pow(y, 2) + pow(z, 2);
+    return magnitude;
+}
+
 Vector3 Vector3::makeUnitVector() {
-    double magnitude;
-    magnitude = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+    double magnitude = getMagnitude();
 
     Vector3 vector;
     vector.setx(getx()/magnitude);

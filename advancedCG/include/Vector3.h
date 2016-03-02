@@ -20,8 +20,14 @@ class Vector3 {
     double x, y, z;
 
   public:
+
+     /* constructors */
+
     Vector3();
     Vector3(double, double, double);
+
+
+    /* getters */
 
     /*
     Parameters: None
@@ -39,6 +45,8 @@ class Vector3 {
     void getVector(double*, double*, double*);
 
 
+    /* setters */
+
     /*
     Parameters: x, y, or z coordinate componant as a double
     Returns: true if set correctly, false if not
@@ -53,6 +61,24 @@ class Vector3 {
     */
     bool setVector(double, double, double);
 
+
+    /* method functions */
+
+    /*
+    Parameters: None
+    Returns: Magnitude of the ray as a double
+
+    Get the magnitude of the vector
+    */
+    double getMagnitude();
+
+    /*
+    Parameters: None
+    Returns: The square of the magnitude of the ray as a double
+
+    Get the square of the magnitude of the vector
+    */
+    double getMagnitudeSquared();
 
     /*
     Parameters: None
@@ -70,7 +96,9 @@ class Vector3 {
     */
     void printVector();
 
-    // operator over loads
+
+    /* operator over loads */
+
     Vector3 operator+(Vector3);
     Vector3 operator-(Vector3);
 };
