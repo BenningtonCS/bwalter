@@ -96,7 +96,7 @@ bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
 bool Sphere::isHit(Ray3 ray) {
 
     // sent a vector from the origin of the ray to the center of the sphere
-    Vector3 originToCenter = getCenter() - ray.getDirection();
+    Vector3 originToCenter = getCenter() - ray.getOrigin();
     // project the new vector onto the direction of the ray
     float projectionOntoRay = originToCenter * ray.getDirection();
 
