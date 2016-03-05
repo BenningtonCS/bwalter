@@ -11,8 +11,11 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
+#include <algorithm>
+
 #include <Vector3.h>
 #include <Color.h>
+#include <Ray3.h>
 
 class Sphere {
   protected:
@@ -89,6 +92,8 @@ class Sphere {
     bool setSphere(Vector3, double, Color);
     bool setSphere(double, double, double, double);
     bool setSphere(double, double, double, double, Color);
+
+    bool isHit(Ray3);
 };
 
 #endif

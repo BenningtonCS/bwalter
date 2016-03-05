@@ -76,3 +76,10 @@ Vector3 Vector3::operator-(Vector3 v) {
 	vector.setz(getz() - v.getz());
 	return vector;
 }
+
+double Vector3::operator*(Vector3 v) {
+    double totalx = getx() * v.getx();
+    double totaly = gety() * v.gety();
+    double totalz = getz() * v.getz();
+    return totalx + totaly + totalz;
+}

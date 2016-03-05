@@ -92,3 +92,41 @@ bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
 
     return false;
 }
+
+bool Sphere::isHit(Ray3 ray) {
+
+    // sent a vector from the origin of the ray to the center of the sphere
+    Vector3 originToCenter = getCenter() - ray.getDirection();
+    // project the new vector onto the direction of the ray
+    float projectionOntoRay = originToCenter * ray.getDirection();
+
+    // if the projection is negative, the sphere is behind the camera and
+    // so not relevant
+    if (projectionOntoRay < 0)
+        return false;
+
+    // distance between the center of the sphere and the projected vector
+    float centerToProjection2 = originToCenter * originToCenter -
+                                pow(projectionOntoRay, 2);
+
+    // check if the ray misses the sphere
+    if (centerToProjection2 > pow(getRadius(), 2))
+        return false;
+
+    float lengthInsideSphere2 = pow(getRadius(), 2) - centerToProjection2;
+
+    float t0, t1;
+    t0 = projectionOntoRay - sqrt(lengthInsideSphere2);
+    t1 = projectionOntoRay + sqrt(lengthInsideSphere2);
+
+    if (t0 > t1)
+        std::swap(t0, t1);
+
+    if (t0 < 0) {
+        t0 = t1;
+        if (t0 < 0)
+            return false;
+    }
+
+    return true;
+}

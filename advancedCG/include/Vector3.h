@@ -99,8 +99,9 @@ class Vector3 {
 
     /* operator over loads */
 
-    Vector3 operator+(Vector3);
-    Vector3 operator-(Vector3);
+    Vector3 operator+(Vector3); // addition
+    Vector3 operator-(Vector3); // subtraction
+    double operator*(Vector3);  // dot product
 };
 
 #endif

@@ -1,18 +1,28 @@
+#include <Camera.h>
 #include <Canvas.h>
+#include <Color.h>
 #include <Vector3.h>
 #include <Ray3.h>
 #include <Sphere.h>
+#include <Scene.h>
 
 int main(void) {
-    // testing for image writing
+
+    Sphere sphere;
+    Color color(1, 0, 0, 1);
+    sphere.setColor(color);
+
+    Camera cam;
+
+    Scene scene(cam);
+    scene.setSphere(sphere);
+
+    cam.render(scene);
+/*
 		int width = 800;
 		int height = 600;
 
 		Canvas c(width, height);
-		Color red(1, 0, 0, 1);
-		Color green(0, 1, 0, 1);
-		Color blue(0, 0, 1, 1);
-
 		for (int x=0; x<width; x++) {
 			for (int y=0; y<height; y++) {
 				//if (x == y) c.setPixel(x, y, red);
@@ -22,11 +32,5 @@ int main(void) {
 			}
 		}
 		c.writeToFile("output.bmp");
-
-    // testing vectors and rays
-		Ray3 ray(0, 0, 0, 10, 5, 2);
-    ray.printRay();
-
-    Sphere sphere(1, 1, 1, 1);
-    sphere.getCenter().printVector();
+*/
 }
