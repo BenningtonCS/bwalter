@@ -58,7 +58,7 @@ bool Camera::setPixelSize(float size) {
     return false;
 }
 
-void Camera::render(Scene scene) {
+void Camera::render(Scene scene, char* fileName) {
 
     int width = canvas.getWidth();
     int height = canvas.getHeight();
@@ -83,6 +83,6 @@ void Camera::render(Scene scene) {
         }
     }
 
-    canvas.writeToFile("test.bmp");
+    canvas.writeToFile(fileName);
 
 }

@@ -1,22 +1,24 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include <Sphere.h>
+#include <vector>
+
+#include <Objects.h>
 #include <Camera.h>
 #include <Ray3.h>
 
 class Scene {
   protected:
-    Sphere sphere;
+    std::vector<Object> objs;
     Camera camera;
 
   public:
     Scene(Camera);
 
     Camera getCamera();
-
-    void setSphere(Sphere);
     bool setCamera(Camera);
+
+    void addObject(Object);
 
     bool sendRay(Ray3);
 };

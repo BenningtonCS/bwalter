@@ -42,7 +42,7 @@ class Camera {
 
     /* class methods */
 
-    void render(Scene);
+    void render(Scene, char*);
 
 };
 
