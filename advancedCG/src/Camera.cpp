@@ -75,14 +75,11 @@ void Camera::render(Scene scene, char* fileName) {
             origin.setVector(x + pixelSize/2, y + pixelSize/2, 0);
             ray.setOrigin(origin);
 
-            if (scene.sendRay(ray)) {
-                canvas.setPixel(x, y, red);
-            } else {
-                canvas.setPixel(x, y, black);
-            }
+            Color color = scene.sendRay(ray);
+
+            canvas.setPixel(x, y, color);
         }
     }
 
     canvas.writeToFile(fileName);
-
 }

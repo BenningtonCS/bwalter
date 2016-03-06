@@ -9,7 +9,7 @@
 
 class Scene {
   protected:
-    std::vector<Object> objs;
+    std::vector<Object*> objs;
     Camera camera;
 
   public:
@@ -18,9 +18,9 @@ class Scene {
     Camera getCamera();
     bool setCamera(Camera);
 
-    void addObject(Object);
+    void addObject(Object*);
 
-    bool sendRay(Ray3);
+    Color sendRay(Ray3);
 };
 
 #endif

@@ -15,7 +15,7 @@ class Object {
       Color getColor();
       bool setColor(Color);
 
-      bool isHit(Ray3);
+      virtual bool isHit(Ray3);
 };
 
 

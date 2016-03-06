@@ -50,7 +50,7 @@ int Canvas::convertToUInt8(float color, float gamma) {
     return 255 * pow(color, 1/gamma);
 }
 
-void Canvas::writeToFile(char* fileName) {
+void Canvas::writeToFile(const char* fileName) {
     // create a new BMP image
     BMP image;
     image.SetSize(width, height);

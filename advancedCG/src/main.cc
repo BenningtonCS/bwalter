@@ -8,14 +8,17 @@
 
 int main(void) {
 
-    Sphere sphere(200, 300, 10, 100);
-    Color color(1, 0, 0, 1);
-    sphere.setColor(color);
+    Color color1(1, 0, 0, 1);
+    Sphere sphere1(200, 300, 10, 100, color1);
+
+    Color color2(0, 0, 1, 1);
+    Sphere sphere2(700, 100, 10, 50, color2);
 
     Camera cam;
 
     Scene scene(cam);
-    scene.addObject(sphere);
+    scene.addObject(&sphere1);
+    scene.addObject(&sphere2);
 
-    cam.render(scene, "sphere.bmp");
+    cam.render(scene, (char*)"sphere.bmp");
 }

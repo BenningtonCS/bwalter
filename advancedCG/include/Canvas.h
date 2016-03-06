@@ -70,7 +70,7 @@ class Canvas {
 
     Convert scalar RGBA values to UInt8 and writes them to a file
     */
-    void writeToFile(char*);
+    void writeToFile(const char*);
 };
 
 #endif
