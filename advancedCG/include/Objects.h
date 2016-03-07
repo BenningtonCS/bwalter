@@ -1,3 +1,13 @@
+/*
+    Objects.h
+    2016 March 6
+    Brendon Walter
+
+    Abstract object class and various shapes inherited from that class.
+
+    Shapes include: Spheres, and more to come
+*/
+
 #ifndef OBJECTS_H
 #define OBJECTS_H
 
@@ -12,8 +22,22 @@ class Object {
       Color color;      // white by default
 
   public:
+
+      /* getters */
+
+      /*
+      Parameters: None
+      Returns: The color of the object
+      */
       Color getColor();
+
+
+      /* setters */
+
       bool setColor(Color);
+
+
+      /* class methods */
 
       virtual bool isHit(Ray3);
 };
@@ -82,12 +106,22 @@ class Sphere: public Object {
         center - as either a Vector3 or 3 doubles
         radius - as a double
         color - as a Color (optional. This will be white be default)
+    Returns: true if set correctly, false if not
     */
     bool setSphere(Vector3, double);
     bool setSphere(Vector3, double, Color);
     bool setSphere(double, double, double, double);
     bool setSphere(double, double, double, double, Color);
 
+
+    /* class methods */
+
+    /*
+    Paramters: Ray to being sent into the Scene
+    Returns: true if the ray hits, false if not
+
+    Check if a ray intersects with the sphere
+    */
     bool isHit(Ray3);
 };
 

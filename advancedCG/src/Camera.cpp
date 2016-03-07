@@ -13,6 +13,13 @@ Camera::Camera(Vector3 loc, Vector3 look) {
     setPixelSize(0.01);
 }
 
+Camera::Camera(double x1, double y1, double z1,     // location
+               double x2, double y2, double z2) {   // lookat
+    setLocation(x1, y1, z1);
+    setLookAt(x2, y2, z2);
+    setPixelSize(0.01);
+}
+
 Vector3 Camera::getLocation() { return location; }
 Vector3 Camera::getLookAt() { return lookAt; }
 Canvas Camera::getCanvas() { return canvas; }
@@ -67,16 +74,12 @@ void Camera::render(Scene scene, char* fileName) {
     Vector3 direction(0, 0, 1);
     Ray3 ray(origin, direction);
 
-    Color red(1, 0, 0, 1);
-    Color black(0, 0, 0, 1);
-
     for (float x = 0; x < width; x++) {
         for (float y = 0; y < height; y++) {
             origin.setVector(x + pixelSize/2, y + pixelSize/2, 0);
             ray.setOrigin(origin);
 
             Color color = scene.sendRay(ray);
-
             canvas.setPixel(x, y, color);
         }
     }

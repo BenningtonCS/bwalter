@@ -1,14 +1,6 @@
-/*
-    Ray3.cpp
-    2016 March 1
-    Brendon Walter
-
-    Methods for the Ray3 class
-*/
-
 #include <Ray3.h>
 
-// constructors
+/* constructors */
 
 Ray3::Ray3() {
     setRay(0, 0, 0, 1, 0, 0);
@@ -22,7 +14,8 @@ Ray3::Ray3(double ox, double oy, double oz, double dx, double dy, double dz) {
     setRay(ox, oy, oz, dx, dy, dz);
 }
 
-// getters
+
+/* getters */
 
 Vector3 Ray3::getOrigin() { return origin; }
 Vector3 Ray3::getDirection() { return direction; }
@@ -45,7 +38,8 @@ void Ray3::getRay(double* ox, double* oy, double* oz,
     getDirection(dx, dy, dz);
 }
 
-// setters
+
+/* setters */
 
 bool Ray3::setOrigin(Vector3 orig) {
     origin = orig;
@@ -82,7 +76,8 @@ bool Ray3::setRay(double ox, double oy, double oz,
     return false;
 }
 
-// class methods
+
+/* class methods */
 
 void Ray3::printRay() {
     printf("(%.5f, %.5f, %.5f), (%.5f, %.5f, %.5f)\n",

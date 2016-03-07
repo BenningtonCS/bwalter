@@ -1,11 +1,3 @@
-/*
-    Canvas.cpp
-    2016 Feb 25
-    Brendon Walter
-
-    Methods for the Canvas class, which can be found in Canvas.h in src/
-*/
-
 #include <Canvas.h>
 
 /* constructors */

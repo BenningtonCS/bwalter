@@ -51,11 +51,3 @@ float Color::geta() { return a; }
 void Color::getColor(float* red, float* green, float* blue, float* alpha) {
     *red = r; *green = g; *blue = b; *alpha = a;
 }
-
-/* basic colors */
-
-Color Color::red() { Color red(1, 0, 0, 1); return red; }
-Color Color::green() { Color green(0, 1, 0, 1); return green; }
-Color Color::blue() { Color blue(0, 0, 1, 1); return blue; }
-Color Color::white() { Color white(1, 1, 1, 1); return white; }
-Color Color::black() { Color black(0, 0, 0, 1); return black; }

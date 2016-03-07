@@ -54,15 +54,6 @@ class Color {
     Get the RGBA values using output paramters
     */
     void getColor(float*, float*, float*, float*);
-
-
-    /* basic colors */
-    
-    Color red();
-    Color green();
-    Color blue();
-    Color white();
-    Color black();
 };
 
 #endif

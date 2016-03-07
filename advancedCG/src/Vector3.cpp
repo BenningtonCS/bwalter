@@ -1,19 +1,12 @@
-/*
-    Vector3.cpp
-    2016 February 29
-    Brendon Walter
-
-    Methods for the Vector3 class
-*/
-
 #include <Vector3.h>
 
-// class constructors
+/* constructors */
 
 Vector3::Vector3() { setVector(0, 0, 0); }
 Vector3::Vector3(double X, double Y, double Z) { setVector(X, Y, Z); }
 
-// getters
+
+/* getters */
 
 double Vector3::getx() { return x; }
 double Vector3::gety() { return y; }
@@ -22,7 +15,8 @@ void Vector3::getVector(double* X, double* Y, double* Z) {
     *X = x; *Y = y; *Z = z;
 }
 
-// setters
+
+/* setters */
 
 bool Vector3::setx(double X) { x = X; return true; }
 bool Vector3::sety(double Y) { y = Y; return true; }
@@ -32,7 +26,8 @@ bool Vector3::setVector(double X, double Y, double Z) {
     return false;
 }
 
-// class methods
+
+/* class methods */
 
 double Vector3::getMagnitude() {
     double magnitude = sqrt(getMagnitudeSquared());
@@ -59,7 +54,8 @@ void Vector3::printVector() {
     printf("(%.5f, %.5f, %.5f)\n", x, y, z);
 }
 
-// operator overloads
+
+/* operator overloads */
 
 Vector3 Vector3::operator+(Vector3 v) {
 	Vector3 vector;
