@@ -102,6 +102,10 @@ bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
 
 bool Sphere::isHit(Ray3 ray) {
 
+    // thanks to http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal
+    // -ray-tracer-rendering-simple-shapes/ray-sphere-intersection for the
+    // detailed explanation
+
     // send a vector from the origin of the ray to the center of the sphere
     Vector3 originToCenter = getCenter() - ray.getOrigin();
     // project the new vector onto the direction of the ray
