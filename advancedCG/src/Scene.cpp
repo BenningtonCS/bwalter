@@ -2,19 +2,36 @@
 
 /* constructors */
 
-Scene::Scene(Camera cam) { addCamera(cam); }
+Scene::Scene(Camera cam) {
+    addCamera(cam);
+    setBackground(1, 1, 1, 1);
+}
 
 
 /* getters */
 
 Camera Scene::getCamera() { return camera; }
+Color Scene::getBackground() { return background; }
+std::vector<Object*> Scene::getObjects() { return objs; }
 
 
 /* setters */
 
+bool Scene::setBackground(Color col) {
+    background = col;
+    return true;
+}
+
+bool Scene::setBackground(float r, float g, float b, float a) {
+    Color col(r, g, b, a);
+    background = col;
+    return true;
+}
+
 bool Scene::addCamera(Camera cam) { camera = cam; return true; }
-void Scene::addObject(Object* obj) {
+bool Scene::addObject(Object* obj) {
     objs.push_back(obj);
+    return true;
 }
 
 
@@ -27,6 +44,6 @@ Color Scene::sendRay(Ray3 ray) {
         if (objs[i]->isHit(ray))
             return objs[i]->getColor();
     }
-    Color color(1,1,1,1);   //TODO: Change this to a preset background color
-    return color;
+
+    return background;
 }

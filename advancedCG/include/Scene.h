@@ -10,7 +10,6 @@
     TODO: Make getter function to return the objects in the scene
     TODO: Make the scene take a vector of camera so you can render from multiple
             angles?
-    TODO: Add background color
 */
 
 #ifndef SCENE_H
@@ -24,8 +23,9 @@
 
 class Scene {
   protected:
+    Camera camera;                  // camera to render the scene
     std::vector<Object*> objs;      // objects in the scene (empty by default)
-    Camera camera;
+    Color background;               // background color. (white by default)
 
   public:
 
@@ -38,18 +38,27 @@ class Scene {
 
     /*
     Paramters: None
-    Returns: Camera and objects in the scene
+    Returns: Camera or objects in the scene, or the background color
     */
     Camera getCamera();
+    Color getBackground();
+    std::vector<Object*> getObjects();
 
     /* setters */
+
+    /*
+    Paramters: Color of the background as either a Color or as RGBA values
+    Returns: true if set correctly, false if not
+    */
+    bool setBackground(Color);
+    bool setBackground(float, float, float, float);
 
     /*
     Parameters: Camera or objects to add to the scene
     Returns: true if set correctly, false if not
     */
     bool addCamera(Camera);
-    void addObject(Object*);
+    bool addObject(Object*);
 
     /*
     Parameters: Ray3 to shoot into the scene
