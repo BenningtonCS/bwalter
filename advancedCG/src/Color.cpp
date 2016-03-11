@@ -51,3 +51,11 @@ float Color::geta() { return a; }
 void Color::getColor(float* red, float* green, float* blue, float* alpha) {
     *red = r; *green = g; *blue = b; *alpha = a;
 }
+
+
+/* class methods */
+
+Color Color::scaleColor(float s) {
+    Color col(getr()*s, getg()*s, getb()*s, geta()*a);
+    return col;
+}

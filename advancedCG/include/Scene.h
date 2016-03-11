@@ -20,12 +20,15 @@
 #include <Objects.h>
 #include <Camera.h>
 #include <Ray3.h>
+#include <Lights.h>
 
 class Scene {
   protected:
     Camera camera;                  // camera to render the scene
     std::vector<Object*> objs;      // objects in the scene (empty by default)
-    Color background;               // background color. (white by default)
+//    std::vector<Light*> lights;     // lights in the scene (empty by default)
+    DirectionalLight light;
+    Color background;               // background color. (black by default)
 
   public:
 
@@ -59,6 +62,7 @@ class Scene {
     */
     bool addCamera(Camera);
     bool addObject(Object*);
+    bool addLight(DirectionalLight);
 
     /*
     Parameters: Ray3 to shoot into the scene

@@ -74,13 +74,20 @@ void Camera::render(Scene scene, char* fileName) {
     Vector3 direction(0, 0, 1);
     Ray3 ray(origin, direction);
 
-    for (float x = 0; x < width; x++) {
-        for (float y = 0; y < height; y++) {
-            origin.setVector(x + pixelSize/2, y + pixelSize/2, 0);
+    // move through the scene starting from the upper left to the lower right
+    // left of the center of the image has -x coordinates and right has +x
+    // below the center of the image has -y coordinates, above has +y
+    for (float x = -width/2; x < width/2; x++) {
+        for (float y = -height/2; y < height/2; y++) {
+
+            origin.setVector(x + pixelSize/2, -y - pixelSize/2, 0);
             ray.setOrigin(origin);
 
             Color color = scene.sendRay(ray);
-            canvas.setPixel(x, y, color);
+
+            // set pixel colors, changing the upper left corner to have (x, y)
+            // coordinates of (0, 0) rather than the center
+            canvas.setPixel(x + width/2, y + height/2, color);
         }
     }
 

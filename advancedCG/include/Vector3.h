@@ -101,7 +101,11 @@ class Vector3 {
 
     Vector3 operator+(Vector3); // addition
     Vector3 operator-(Vector3); // subtraction
+    Vector3 operator/(double);  // division by a scalar
+    Vector3 operator*(double);  // multiplcation by a scalar
     double operator*(Vector3);  // dot product
+    bool operator==(Vector3);   // equals
+    bool operator!=(Vector3);   // not equals
 };
 
 #endif

@@ -39,7 +39,8 @@ class Object {
 
       /* class methods */
 
-      virtual bool isHit(Ray3);
+      virtual Vector3 rayHitPosition(Ray3);
+      virtual Vector3 getNormal(Vector3);
 };
 
 
@@ -118,11 +119,14 @@ class Sphere: public Object {
 
     /*
     Paramters: Ray to being sent into the Scene
-    Returns: true if the ray hits, false if not
+    Returns: Position of where the ray intersects with the sphere. If it doens't
+        hit, (-1, -1, -1) is returned instead.
 
     Check if a ray intersects with the sphere
     */
-    bool isHit(Ray3);
+    Vector3 rayHitPosition(Ray3);
+
+    Vector3 getNormal(Vector3);
 };
 
 #endif

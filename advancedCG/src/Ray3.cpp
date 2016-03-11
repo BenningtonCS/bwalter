@@ -84,3 +84,8 @@ void Ray3::printRay() {
            origin.getx(), origin.gety(), origin.getz(),
            direction.getx(), direction.gety(), direction.getz());
 }
+
+Vector3 Ray3::rayAtT(float t) {
+    Vector3 result(getOrigin() + getDirection()*t);
+    return result;
+}

@@ -54,6 +54,11 @@ class Color {
     Get the RGBA values using output paramters
     */
     void getColor(float*, float*, float*, float*);
+
+
+    /* class methods */
+
+    Color scaleColor(float);
 };
 
 #endif

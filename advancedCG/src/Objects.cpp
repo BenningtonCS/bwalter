@@ -14,7 +14,14 @@ bool Object::setColor(Color col) { color = col; return true; }
 
 /* class methods */
 
-bool Object::isHit(Ray3 ray) { return false; }
+Vector3 Object::rayHitPosition(Ray3 ray) {
+    Vector3 empty(0, 0, 0);
+    return empty;
+}
+Vector3 Object::getNormal(Vector3 hitPos) {
+    Vector3 empty(0, 0, 0);
+    return empty;
+}
 
 
 /* S P H E R E */
@@ -100,11 +107,14 @@ bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
     return false;
 }
 
-bool Sphere::isHit(Ray3 ray) {
+Vector3 Sphere::rayHitPosition(Ray3 ray) {
 
-    // thanks to http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal
-    // -ray-tracer-rendering-simple-shapes/ray-sphere-intersection for the
-    // detailed explanation
+    Vector3 nullVector(-1, -1, -1); // vector to be returned if the ray never
+                                    // intersects with the sphere
+
+    // thanks to
+    // http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
+    // for the detailed explanation
 
     // send a vector from the origin of the ray to the center of the sphere
     Vector3 originToCenter = getCenter() - ray.getOrigin();
@@ -114,7 +124,7 @@ bool Sphere::isHit(Ray3 ray) {
     // if the projection is negative, the sphere is behind the camera and
     // so not relevant
     if (projectionOntoRay < 0)
-        return false;
+        return nullVector;
 
     // distance between the center of the sphere and the projected vector
     float centerToProjection2 = originToCenter * originToCenter -
@@ -122,7 +132,7 @@ bool Sphere::isHit(Ray3 ray) {
 
     // check if the ray misses the sphere
     if (centerToProjection2 > pow(getRadius(), 2))
-        return false;
+        return nullVector;
 
     float lengthInsideSphere2 = pow(getRadius(), 2) - centerToProjection2;
 
@@ -136,8 +146,14 @@ bool Sphere::isHit(Ray3 ray) {
     if (t0 < 0) {
         t0 = t1;
         if (t0 < 0)
-            return false;
+            return nullVector;
     }
 
-    return true;
+    return ray.getOrigin() + ray.getDirection()*t0;
+}
+
+Vector3 Sphere::getNormal(Vector3 hitPos) {
+    Vector3 normal = hitPos - getCenter()  /
+                     (hitPos - getCenter()).getMagnitude();
+    return normal;
 }

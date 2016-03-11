@@ -77,6 +77,8 @@ class Ray3 {
     Print the origin and the direction as (x, y, z), (x, y, z) respectively
     */
     void printRay();
+
+    Vector3 rayAtT(float);
 };
 
 #endif

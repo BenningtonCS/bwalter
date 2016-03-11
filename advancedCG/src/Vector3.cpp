@@ -54,7 +54,6 @@ void Vector3::printVector() {
     printf("(%.5f, %.5f, %.5f)\n", x, y, z);
 }
 
-
 /* operator overloads */
 
 Vector3 Vector3::operator+(Vector3 v) {
@@ -73,9 +72,37 @@ Vector3 Vector3::operator-(Vector3 v) {
 	return vector;
 }
 
+Vector3 Vector3::operator/(double value) {
+    Vector3 result(getx()/value, gety()/value, getz()/value);
+    return result;
+}
+
+Vector3 Vector3::operator*(double value) {
+    Vector3 result(getx()*value, gety()*value, getz()*value);
+    return result;
+}
+
 double Vector3::operator*(Vector3 v) {
     double totalx = getx() * v.getx();
     double totaly = gety() * v.gety();
     double totalz = getz() * v.getz();
     return totalx + totaly + totalz;
+}
+
+bool Vector3::operator==(Vector3 v) {
+    if (getx() == v.getx() &&
+        gety() == v.gety() &&
+        getz() == v.getz())
+        return true;
+
+    return false;
+}
+
+bool Vector3::operator!=(Vector3 v) {
+    if (getx() != v.getx() &&
+        gety() != v.gety() &&
+        getz() != v.getz())
+        return true;
+
+    return false;
 }
