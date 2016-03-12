@@ -149,6 +149,7 @@ Vector3 Sphere::rayHitPosition(Ray3 ray) {
             return nullVector;
     }
 
+    // ray equation: o + dt
     return ray.getOrigin() + ray.getDirection()*t0;
 }
 

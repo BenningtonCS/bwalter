@@ -8,17 +8,23 @@
 
 int main(void) {
 
-    Color color1(1, 0, 0, 1);
-    Sphere sphere1(0, 0, 100, 100, color1);
 
-    Color color2(0, 0, 1, 1);
-    Sphere sphere2(-150, -50, 100, 50, color2);
+    Color red(1, 0, 0, 1);
+    Color blue(0, 0, 1, 1);
+    Color white(1, 1, 1, 1);
+
+    Sphere sphere1(0, 0, 100, 100, red);
+    Sphere sphere2(-150, -50, 10, 50, blue);
+
+    Vector3 dir(1, -1, -1);
+    DirectionalLight light(dir);
 
     Camera cam;
 
     Scene scene(cam);
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
+    scene.addLight(&light);
 
     cam.render(scene, (char*)"sphere.bmp");
 }

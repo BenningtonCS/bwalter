@@ -7,9 +7,6 @@
 Scene::Scene(Camera cam) {
     addCamera(cam);
     setBackground(0, 0, 0, 1);
-
-    DirectionalLight l;
-    addLight(l);
 }
 
 
@@ -38,7 +35,10 @@ bool Scene::addObject(Object* obj) {
     objs.push_back(obj);
     return true;
 }
-bool Scene::addLight(DirectionalLight l) { light = l; return true; }
+bool Scene::addLight(Light* l) {
+    lights.push_back(l);
+    return true;
+}
 
 
 /* class methods */
@@ -49,20 +49,26 @@ Color Scene::sendRay(Ray3 ray) {
     Vector3 nullVector(-1, -1, -1);
     Color color;
 
+    // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
         Vector3 hitPos = objs[i]->rayHitPosition(ray);
 
+        // if it does, move through every light in the scene and check the
+        // intensity of the light
         if (hitPos != nullVector) {
 
-            float intensity = light.getIntensity(hitPos);
-            if (intensity < 0)
-                intensity = 0;
+            for (unsigned int j=0; j<lights.size(); j++) {
 
-            color.setColor(objs[i]->getColor().getr()*intensity,
-                           objs[i]->getColor().getg()*intensity,
-                           objs[i]->getColor().getb()*intensity,
-                           objs[i]->getColor().geta());
-            return color;
+                float intensity = lights[j]->getIntensity(hitPos);
+                if (intensity < 0) intensity = 0;
+
+                // get the color of the object at that point with lights
+                color.setColor(objs[i]->getColor().getr()*intensity,
+                               objs[i]->getColor().getg()*intensity,
+                               objs[i]->getColor().getb()*intensity,
+                               objs[i]->getColor().geta());
+                return color;
+            }
         }
     }
 

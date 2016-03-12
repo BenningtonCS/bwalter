@@ -26,8 +26,7 @@ class Scene {
   protected:
     Camera camera;                  // camera to render the scene
     std::vector<Object*> objs;      // objects in the scene (empty by default)
-//    std::vector<Light*> lights;     // lights in the scene (empty by default)
-    DirectionalLight light;
+    std::vector<Light*> lights;     // lights in the scene (empty by default)
     Color background;               // background color. (black by default)
 
   public:
@@ -62,7 +61,7 @@ class Scene {
     */
     bool addCamera(Camera);
     bool addObject(Object*);
-    bool addLight(DirectionalLight);
+    bool addLight(Light*);
 
     /*
     Parameters: Ray3 to shoot into the scene

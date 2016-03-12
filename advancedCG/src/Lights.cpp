@@ -15,7 +15,7 @@ bool Light::setColor(float r, float g, float b, float a) {
     return true;
 }
 
-float Light::getIntensity(Vector3 hitPos) { return 0; }
+float Light::getIntensity(Vector3 hitPos) { return 1; }
 
 
 /* D I R E C T I O N A L   L I G H T */
@@ -46,7 +46,7 @@ Vector3 DirectionalLight::getDirection() {return direction; }
 /* setters */
 
 bool DirectionalLight::setDirection(Vector3 dir) {
-    direction = dir;
+    direction = dir.makeUnitVector();
     return true;
 }
 bool DirectionalLight::setDirection(double X, double Y, double Z) {
@@ -62,7 +62,6 @@ bool DirectionalLight::setDirection(double X, double Y, double Z) {
 float DirectionalLight::getIntensity(Vector3 hitPos) {
     return -(direction * hitPos)/100;
 }
-
 
 /* P O I N T   L I G H T */
 
@@ -92,7 +91,7 @@ Vector3 PointLight::getLocation() { return location; }
 /* setters */
 
 bool PointLight::setLocation(Vector3 loc) {
-    location = loc;
+    location = loc.makeUnitVector();
     return true;
 }
 
