@@ -23,7 +23,7 @@ class Light {
 
     /* class methods */
 
-    virtual float getIntensity(Vector3);
+    virtual float getIntensity(Vector3, Object);
 };
 
 class DirectionalLight: public Light {
@@ -48,7 +48,7 @@ class DirectionalLight: public Light {
     bool setDirection(Vector3);
     bool setDirection(double, double, double);
 
-    float getIntensity(Vector3);
+    float getIntensity(Vector3, Object);
 };
 
 class PointLight: public Light {

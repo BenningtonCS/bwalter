@@ -46,20 +46,21 @@ bool Scene::addLight(Light* l) {
 Color Scene::sendRay(Ray3 ray) {
     // check if the ray hits an object in the scene
     // TODO: find a way to check if there's objects infront/behind eachother
-    Vector3 nullVector(-1, -1, -1);
     Color color;
 
     // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
-        Vector3 hitPos = objs[i]->rayHitPosition(ray);
+        float t = objs[i]->rayHitPosition(ray);
 
         // if it does, move through every light in the scene and check the
         // intensity of the light
-        if (hitPos != nullVector) {
+        if (t != -1) {
+
+            Vector3 hitPos = ray.getOrigin() + ray.getDirection()*t;
 
             for (unsigned int j=0; j<lights.size(); j++) {
 
-                float intensity = lights[j]->getIntensity(hitPos);
+                float intensity = lights[j]->getIntensity(hitPos, *objs[i]);
                 if (intensity < 0) intensity = 0;
 
                 // get the color of the object at that point with lights
@@ -67,8 +68,9 @@ Color Scene::sendRay(Ray3 ray) {
                                objs[i]->getColor().getg()*intensity,
                                objs[i]->getColor().getb()*intensity,
                                objs[i]->getColor().geta());
-                return color;
             }
+
+            return color;
         }
     }
 

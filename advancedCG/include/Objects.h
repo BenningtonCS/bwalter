@@ -39,7 +39,8 @@ class Object {
 
       /* class methods */
 
-      virtual Vector3 rayHitPosition(Ray3);
+      /* methods overloaded in child classes */
+      virtual float rayHitPosition(Ray3);
       virtual Vector3 getNormal(Vector3);
 };
 
@@ -124,8 +125,12 @@ class Sphere: public Object {
 
     Check if a ray intersects with the sphere
     */
-    Vector3 rayHitPosition(Ray3);
+    float rayHitPosition(Ray3);
 
+    /*
+    Paramters: Position on the sphere as a Vector3
+    Returns: The normal vector at that position
+    */
     Vector3 getNormal(Vector3);
 };
 

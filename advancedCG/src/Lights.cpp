@@ -15,7 +15,7 @@ bool Light::setColor(float r, float g, float b, float a) {
     return true;
 }
 
-float Light::getIntensity(Vector3 hitPos) { return 1; }
+float Light::getIntensity(Vector3 hitPos, Object obj) { return 1; }
 
 
 /* D I R E C T I O N A L   L I G H T */
@@ -59,8 +59,9 @@ bool DirectionalLight::setDirection(double X, double Y, double Z) {
 
 /* class methods */
 
-float DirectionalLight::getIntensity(Vector3 hitPos) {
-    return -(direction * hitPos)/100;
+float DirectionalLight::getIntensity(Vector3 hitPos, Object obj) {
+    float intensity =  -(direction * obj.getNormal(hitPos));
+    return intensity;
 }
 
 /* P O I N T   L I G H T */
