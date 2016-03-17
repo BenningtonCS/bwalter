@@ -85,8 +85,9 @@ bool DirectionalLight::setDirection(const double X, const double Y,
 
 /* class methods */
 
-float DirectionalLight::getIntensity(Vector3 hitPos, Object* obj) const {
-    float intensity =  -(direction * obj->getNormal(hitPos));
+float DirectionalLight::getIntensity(const Vector3& hitPos,
+                                     const Object& obj) const {
+    float intensity =  -(direction * obj.getNormal(hitPos));
     return intensity;
 }
 

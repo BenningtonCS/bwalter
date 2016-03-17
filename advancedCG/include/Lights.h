@@ -54,7 +54,7 @@ class DirectionalLight: public Light {
     bool setDirection(const Vector3&);
     bool setDirection(const double, const double, const double);
 
-    float getIntensity(Vector3, Object*) const;
+    float getIntensity(const Vector3&, const Object&) const;
 };
 
 class PointLight: public Light {

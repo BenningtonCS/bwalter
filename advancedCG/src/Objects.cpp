@@ -151,8 +151,6 @@ float Sphere::rayHitPosition(const Ray3& ray) const {
 }
 
 Vector3 Sphere::getNormal(const Vector3& hitPos) const {
-    Vector3 normal = hitPos - getCenter()  /
-                     (hitPos - getCenter()).getMagnitude();
-    normal.printVector();
+    Vector3 normal = (hitPos - getCenter())  / getRadius();
     return normal;
 }

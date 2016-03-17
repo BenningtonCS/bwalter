@@ -14,9 +14,9 @@ int main(void) {
     Color white(1, 1, 1, 1);
 
     Sphere sphere1(0, 0, 100, 100, red);
-    Sphere sphere2(-150, -50, 10, 50, blue);
+    Sphere sphere2(-150, -50, 100, 50, blue);
 
-    Vector3 dir(1, -1, -1);
+    Vector3 dir(1, -1, 1);
     DirectionalLight light(dir);
 
     Camera cam;
