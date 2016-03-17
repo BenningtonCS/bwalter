@@ -54,6 +54,14 @@ void Vector3::printVector() const {
     printf("(%.5f, %.5f, %.5f)\n", x, y, z);
 }
 
+Vector3 Vector3::cross(Vector3 v) const {
+    Vector3 newVect;
+    newVect.setx(gety()*v.getz() - getz()*v.gety());
+    newVect.sety(-(getx()*v.getz() - getz()*v.getx()));
+    newVect.setz(getx()*v.gety() - gety()*v.getx());
+    return newVect;
+}
+
 /* operator overloads */
 
 Vector3 Vector3::operator+(Vector3 v) const {

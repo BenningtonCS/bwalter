@@ -96,13 +96,20 @@ class Vector3 {
     */
     void printVector() const;
 
+    /*
+    Parameters: Vector3 to cross the vector with
+    Returns: the cross product as a Vector3
+
+    Get the cross product of two vectors
+    */
+    Vector3 cross(Vector3) const;
 
     /* operator over loads */
 
     Vector3 operator+(Vector3) const;  // addition
     Vector3 operator-(Vector3) const;  // subtraction
-    Vector3 operator/(double) const;   // division by a scalar
     Vector3 operator*(double) const;   // multiplcation by a scalar
+    Vector3 operator/(double) const;   // division by a scalar
     double operator*(Vector3) const;   // dot product
     bool operator==(Vector3) const;    // equals
     bool operator!=(Vector3) const;    // not equals
