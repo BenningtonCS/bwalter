@@ -19,7 +19,8 @@ class Color {
     /* constructors */
 
     Color();
-    Color(float, float, float, float); // red, green, blue, alpha
+    Color(const float, const float, const float);               // r, g, b
+    Color(const float, const float, const float, const float);  // r, g, b, a
 
 
     /* Setters */
@@ -28,11 +29,12 @@ class Color {
     Parameters: float value for each color
     Returns: true if set correctly, false if not
     */
-    bool setr(float);
-    bool setg(float);
-    bool setb(float);
-    bool seta(float);
-    bool setColor(float, float, float, float);
+    bool setr(const float);
+    bool setg(const float);
+    bool setb(const float);
+    bool seta(const float);
+    bool setColor(const float, const float, const float);              // rgb
+    bool setColor(const float, const float, const float, const float); // rgba
 
 
     /* getters */
@@ -41,24 +43,22 @@ class Color {
     Parameters: None
     Returns: Float value for each color componant
     */
-    float getr();
-    float getg();
-    float getb();
-    float geta();
-
-    /*
-    Paramters:
-       output: RGBA values as floats
-    Returns: None
-
-    Get the RGBA values using output paramters
-    */
-    void getColor(float*, float*, float*, float*);
-
+    float getr() const;
+    float getg() const;
+    float getb() const;
+    float geta() const;
 
     /* class methods */
 
-    Color scaleColor(float);
+    /*
+    Parameters: scale value as a float
+    Returns: The scaled color
+
+    Scale a color by a certain amount. For example, if you have a pure white
+    (1, 1, 1, 1) and you want to turn it down to (.5, .5, .5,. 1),
+    call white.scale(0.5)
+    */
+    Color scale(const float) const;
 };
 
 #endif

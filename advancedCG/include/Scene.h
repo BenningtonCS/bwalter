@@ -33,7 +33,7 @@ class Scene {
 
     /* constructors */
 
-    Scene(Camera);                  // scene must have a camera set
+    Scene(const Camera&);           // scene must have a camera set
 
 
     /* getters */
@@ -42,9 +42,9 @@ class Scene {
     Paramters: None
     Returns: Camera or objects in the scene, or the background color
     */
-    Camera getCamera();
-    Color getBackground();
-    std::vector<Object*> getObjects();
+    Camera getCamera() const;
+    Color getBackground() const;
+    std::vector<Object*> getObjects() const;
 
     /* setters */
 
@@ -52,14 +52,14 @@ class Scene {
     Paramters: Color of the background as either a Color or as RGBA values
     Returns: true if set correctly, false if not
     */
-    bool setBackground(Color);
-    bool setBackground(float, float, float, float);
+    bool setBackground(const Color&);
+    bool setBackground(const float, const float, const float, const float);
 
     /*
     Parameters: Camera or objects to add to the scene
     Returns: true if set correctly, false if not
     */
-    bool addCamera(Camera);
+    bool addCamera(const Camera&);
     bool addObject(Object*);
     bool addLight(Light*);
 
@@ -68,7 +68,7 @@ class Scene {
     Returns: The color of the object it hits. If nothing is hit, this color
         is the color of the background of the scene
     */
-    Color sendRay(Ray3);
+    Color sendRay(const Ray3&) const;
 };
 
 #endif

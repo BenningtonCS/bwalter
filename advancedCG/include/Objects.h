@@ -29,19 +29,19 @@ class Object {
       Parameters: None
       Returns: The color of the object
       */
-      Color getColor();
+      Color getColor() const;
 
 
       /* setters */
 
-      bool setColor(Color);
+      bool setColor(const Color&);
 
 
       /* class methods */
 
       /* methods overloaded in child classes */
-      virtual float rayHitPosition(Ray3);
-      virtual Vector3 getNormal(Vector3);
+      virtual float rayHitPosition(const Ray3&) const;
+      virtual Vector3 getNormal(const Vector3&) const;
 };
 
 
@@ -57,10 +57,16 @@ class Sphere: public Object {
     /* constructors */
 
     Sphere();
-    Sphere(Vector3, double);                    // center, radius
-    Sphere(Vector3, double, Color);             // center, radius, color
-    Sphere(double, double, double, double);     // (x, y, z), radius
-    Sphere(double, double, double, double, Color); // (x, y, z), radius, color
+
+    Sphere(const Vector3&, const double);               // center, radius
+
+    Sphere(const Vector3&, const double, const Color&); // center, radius, color
+
+    Sphere(const double, const double, const double,    // center as (x, y, z)
+           const double);                               // radius
+
+    Sphere(const double, const double, const double,    // center as (x, y, z)
+           const double, const Color&);                 // radius, color
 
 
     /* getters */
@@ -69,23 +75,8 @@ class Sphere: public Object {
     Paramters: None
     Returns: The center of the sphere as a Vector3 or the radius as a double
     */
-    Vector3 getCenter();
-    double getRadius();
-
-    /*
-    Paramters:
-       output: Vector3, double, and Color to hold the center, radius, and color
-            of the sphere
-    Returns: None
-    */
-    void getSphere(Vector3*, double*, Color*);
-
-    /*
-    Paramters:
-       output: doubles for the center and radius and color of the sphere
-    Returns: None
-    */
-    void getSphere(double*, double*, double*, double*, Color*);
+    Vector3 getCenter() const;
+    double getRadius() const;
 
 
     /* setters */
@@ -94,14 +85,14 @@ class Sphere: public Object {
     Parameters: Center as either a Vector3 or doubles
     Returns: true if set correctly, false if not
     */
-    bool setCenter(Vector3);
-    bool setCenter(double, double, double);
+    bool setCenter(const Vector3&);
+    bool setCenter(const double, const double, const double);
 
     /*
     Paramters: Radius as a doubles
     Returns: true if set correctly, false if not
     */
-    bool setRadius(double);
+    bool setRadius(const double);
 
     /*
     Paramters:
@@ -110,10 +101,12 @@ class Sphere: public Object {
         color - as a Color (optional. This will be white be default)
     Returns: true if set correctly, false if not
     */
-    bool setSphere(Vector3, double);
-    bool setSphere(Vector3, double, Color);
-    bool setSphere(double, double, double, double);
-    bool setSphere(double, double, double, double, Color);
+    bool setSphere(const Vector3&, const double);
+    bool setSphere(const Vector3&, const double, const Color&);
+    bool setSphere(const double, const double, const double,
+                   const double);
+    bool setSphere(const double, const double, const double,
+                   const double, const Color&);
 
 
     /* class methods */
@@ -125,13 +118,13 @@ class Sphere: public Object {
 
     Check if a ray intersects with the sphere
     */
-    float rayHitPosition(Ray3);
+    float rayHitPosition(const Ray3&) const;
 
     /*
     Paramters: Position on the sphere as a Vector3
     Returns: The normal vector at that position
     */
-    Vector3 getNormal(Vector3);
+    Vector3 getNormal(const Vector3 &) const;
 };
 
 #endif

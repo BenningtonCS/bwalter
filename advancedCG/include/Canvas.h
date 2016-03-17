@@ -27,20 +27,20 @@ class Canvas {
     /* constructors */
 
     Canvas();
-    Canvas(int, int);
+    Canvas(const int, const int);
 
 
     /* getters */
 
-    int getWidth();
-    int getHeight();
-    float getGamma();
+    int getWidth() const;
+    int getHeight() const;
+    float getGamma() const;
 
 
     /* setters */
 
-    bool setSize(int, int); // width, height
-    bool setGamma(float);
+    bool setSize(const int, const int); // width, height
+    bool setGamma(const float);
 
     /*
     Parameters: x, y coordinates of pixel on canvas as ints, color to set the
@@ -49,7 +49,7 @@ class Canvas {
 
     Set a pixel at (x, y) to a Color
     */
-    void setPixel(int, int, Color);
+    void setPixel(const int, const int, const Color&);
 
 
     /* class methods */
@@ -62,7 +62,7 @@ class Canvas {
     Convert RGBA values from being a float between 0 and 1 to an integer
     between 0 and 255
     */
-    int convertToUInt8(float, float);
+    int convertToUInt8(const float, const float) const;
 
     /*
     Parameters: Name of file to write to
@@ -70,7 +70,7 @@ class Canvas {
 
     Convert scalar RGBA values to UInt8 and writes them to a file
     */
-    void writeToFile(const char*);
+    void writeToFile(const char*) const;
 };
 
 #endif

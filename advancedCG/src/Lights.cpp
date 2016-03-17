@@ -2,20 +2,38 @@
 
 /* L I G H T */
 
+/* protected */
+
+bool Light::setColor() {
+    setColor(1, 1, 1, 1); return true;
+}
+
+
 /* getters */
 
-Color Light::getColor() { return color; }
+Color Light::getColor() const { return color; }
+
 
 /* setters */
 
-bool Light::setColor(Color col) { color = col; return true; }
-bool Light::setColor(float r, float g, float b, float a) {
+bool Light::setColor(const Color& col) { color = col; return true; }
+
+bool Light::setColor(const float r, const float g, const float b) {
+    Color col(r, g, b);
+    color = col;
+    return true;
+}
+
+bool Light::setColor(const float r, const float g, const float b,
+                     const float a) {
     Color col(r, g, b, a);
     color = col;
     return true;
 }
 
-float Light::getIntensity(Vector3 hitPos, Object obj) { return 1; }
+float Light::getIntensity(const Vector3& hitPos, const Object& obj) const {
+    return 1;
+}
 
 
 /* D I R E C T I O N A L   L I G H T */
@@ -23,33 +41,41 @@ float Light::getIntensity(Vector3 hitPos, Object obj) { return 1; }
 /* constructors */
 
 DirectionalLight::DirectionalLight() {
-    setColor(1, 1, 1, 1);
-    setDirection(1, -1, 1);
+    setColor(); setDirection();
 }
-DirectionalLight::DirectionalLight(Color col) {
-    setColor(col);
-    setDirection(1, -1, 1);
+
+DirectionalLight::DirectionalLight(const Color& col) {
+    setColor(col); setDirection();
 }
-DirectionalLight::DirectionalLight(Vector3 dir) {
-    setColor(1, 1, 1, 1);
-    setDirection(dir);
+
+DirectionalLight::DirectionalLight(const Vector3& dir) {
+    setColor(); setDirection(dir);
 }
-DirectionalLight::DirectionalLight(Vector3 dir, Color col) {
-    setColor(col);
-    setDirection(dir);
+
+DirectionalLight::DirectionalLight(const Vector3& dir, const Color& col) {
+    setColor(col); setDirection(dir);
 }
+
+
+/* private */
+
+bool DirectionalLight::setDirection() {
+    setDirection(1, -1, 1); return true;
+}
+
 
 /* getters */
 
-Vector3 DirectionalLight::getDirection() {return direction; }
+Vector3 DirectionalLight::getDirection() const {return direction; }
 
 /* setters */
 
-bool DirectionalLight::setDirection(Vector3 dir) {
+bool DirectionalLight::setDirection(const Vector3& dir) {
     direction = dir.makeUnitVector();
     return true;
 }
-bool DirectionalLight::setDirection(double X, double Y, double Z) {
+bool DirectionalLight::setDirection(const double X, const double Y,
+                                    const double Z) {
     Vector3 dir(X, Y, Z);
     if (setDirection(dir))
         return true;
@@ -59,44 +85,46 @@ bool DirectionalLight::setDirection(double X, double Y, double Z) {
 
 /* class methods */
 
-float DirectionalLight::getIntensity(Vector3 hitPos, Object obj) {
-    float intensity =  -(direction * obj.getNormal(hitPos));
+float DirectionalLight::getIntensity(Vector3 hitPos, Object* obj) const {
+    float intensity =  -(direction * obj->getNormal(hitPos));
     return intensity;
 }
 
 /* P O I N T   L I G H T */
 
+/* protected */
+
+bool PointLight::setLocation() {
+    setLocation(0, 0, 0); return true;
+}
+
 /* constructors */
 
 PointLight::PointLight() {
-    setColor(1, 1, 1, 1);
-    setLocation(0, 0, 0);
+    setColor(); setLocation();
 }
-PointLight::PointLight(Color col) {
-    setColor(col);
-    setLocation(0, 0, 0);
+PointLight::PointLight(const Color& col) {
+    setColor(col); setLocation();
 }
-PointLight::PointLight(Vector3 loc) {
-    setColor(1, 1, 1, 1);
-    setLocation(loc);
+PointLight::PointLight(const Vector3& loc) {
+    setColor(); setLocation(loc);
 }
-PointLight::PointLight(Vector3 loc, Color col) {
-    setColor(col);
-    setLocation(loc);
+PointLight::PointLight(const Vector3& loc, const Color& col) {
+    setColor(col); setLocation(loc);
 }
 
 /* getters */
 
-Vector3 PointLight::getLocation() { return location; }
+Vector3 PointLight::getLocation() const { return location; }
 
 /* setters */
 
-bool PointLight::setLocation(Vector3 loc) {
+bool PointLight::setLocation(const Vector3& loc) {
     location = loc.makeUnitVector();
     return true;
 }
 
-bool PointLight::setLocation(double X, double Y, double Z) {
+bool PointLight::setLocation(const double X, const double Y, const double Z) {
     Vector3 loc(X, Y, Z);
     if (setLocation(loc))
         return true;

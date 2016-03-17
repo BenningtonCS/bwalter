@@ -26,5 +26,5 @@ int main(void) {
     scene.addObject(&sphere2);
     scene.addLight(&light);
 
-    cam.render(scene, (char*)"sphere.bmp");
+    cam.render(scene, "sphere.bmp");
 }

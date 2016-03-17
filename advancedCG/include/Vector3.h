@@ -33,16 +33,16 @@ class Vector3 {
     Parameters: None
     Returns: value of x, y, or z coordinate
     */
-    double getx();
-    double gety();
-    double getz();
+    double getx() const;
+    double gety() const;
+    double getz() const;
 
     /*
     Parameters:
         output: doubles to store x, y, and z coordinates
     Returns: None
     */
-    void getVector(double*, double*, double*);
+    void getVector(double*, double*, double*) const;
 
 
     /* setters */
@@ -70,7 +70,7 @@ class Vector3 {
 
     Get the magnitude of the vector
     */
-    double getMagnitude();
+    double getMagnitude() const;
 
     /*
     Parameters: None
@@ -78,7 +78,7 @@ class Vector3 {
 
     Get the square of the magnitude of the vector
     */
-    double getMagnitudeSquared();
+    double getMagnitudeSquared() const;
 
     /*
     Parameters: None
@@ -86,7 +86,7 @@ class Vector3 {
 
     Convert a Vector3 into a unit vector
     */
-    Vector3 makeUnitVector();
+    Vector3 makeUnitVector() const;
 
     /*
     Parameters: None
@@ -94,18 +94,18 @@ class Vector3 {
 
     Print the vector to the screen as (x, y, z)
     */
-    void printVector();
+    void printVector() const;
 
 
     /* operator over loads */
 
-    Vector3 operator+(Vector3); // addition
-    Vector3 operator-(Vector3); // subtraction
-    Vector3 operator/(double);  // division by a scalar
-    Vector3 operator*(double);  // multiplcation by a scalar
-    double operator*(Vector3);  // dot product
-    bool operator==(Vector3);   // equals
-    bool operator!=(Vector3);   // not equals
+    Vector3 operator+(Vector3) const;  // addition
+    Vector3 operator-(Vector3) const;  // subtraction
+    Vector3 operator/(double) const;   // division by a scalar
+    Vector3 operator*(double) const;   // multiplcation by a scalar
+    double operator*(Vector3) const;   // dot product
+    bool operator==(Vector3) const;    // equals
+    bool operator!=(Vector3) const;    // not equals
 };
 
 #endif

@@ -4,7 +4,7 @@
 
 /* constructors */
 
-Scene::Scene(Camera cam) {
+Scene::Scene(const Camera& cam) {
     addCamera(cam);
     setBackground(0, 0, 0, 1);
 }
@@ -12,25 +12,26 @@ Scene::Scene(Camera cam) {
 
 /* getters */
 
-Camera Scene::getCamera() { return camera; }
-Color Scene::getBackground() { return background; }
-std::vector<Object*> Scene::getObjects() { return objs; }
+Camera Scene::getCamera() const { return camera; }
+Color Scene::getBackground() const { return background; }
+std::vector<Object*> Scene::getObjects() const { return objs; }
 
 
 /* setters */
 
-bool Scene::setBackground(Color col) {
+bool Scene::setBackground(const Color& col) {
     background = col;
     return true;
 }
 
-bool Scene::setBackground(float r, float g, float b, float a) {
+bool Scene::setBackground(const float r, const float g, const float b,
+                          const float a) {
     Color col(r, g, b, a);
     background = col;
     return true;
 }
 
-bool Scene::addCamera(Camera cam) { camera = cam; return true; }
+bool Scene::addCamera(const Camera& cam) { camera = cam; return true; }
 bool Scene::addObject(Object* obj) {
     objs.push_back(obj);
     return true;
@@ -43,9 +44,7 @@ bool Scene::addLight(Light* l) {
 
 /* class methods */
 
-Color Scene::sendRay(Ray3 ray) {
-    // check if the ray hits an object in the scene
-    // TODO: find a way to check if there's objects infront/behind eachother
+Color Scene::sendRay(const Ray3& ray) const {
     Color color;
 
     // move through every object in the scene and check if the ray hits it
@@ -56,9 +55,11 @@ Color Scene::sendRay(Ray3 ray) {
         // intensity of the light
         if (t != -1) {
 
-            Vector3 hitPos = ray.getOrigin() + ray.getDirection()*t;
+            Vector3 hitPos = ray.rayAtT(t);
 
             for (unsigned int j=0; j<lights.size(); j++) {
+
+                // TODO: actually add the lights
 
                 float intensity = lights[j]->getIntensity(hitPos, *objs[i]);
                 if (intensity < 0) intensity = 0;

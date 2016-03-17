@@ -9,69 +9,77 @@ class Light {
   protected:
     Color color;        // Color of the light. White by default
 
+    bool setColor();
+
   public:
 
     /* getters */
 
-    Color getColor();
+    Color getColor() const;
 
     /* setters */
 
-    bool setColor(Color);
-    bool setColor(float, float, float, float);
+    bool setColor(const Color&);
+    bool setColor(const float, const float, const float);               // rgb
+    bool setColor(const float, const float, const float, const float);  // rgba
 
 
     /* class methods */
 
-    virtual float getIntensity(Vector3, Object);
+    virtual float getIntensity(const Vector3&, const Object&) const;
 };
 
 class DirectionalLight: public Light {
   protected:
     Vector3 direction;  // direction of the light. (0, 0, 0) by default
 
+  private:
+    bool setDirection();
+
   public:
 
     /* constructors */
 
     DirectionalLight();
-    DirectionalLight(Color);
-    DirectionalLight(Vector3);
-    DirectionalLight(Vector3, Color);
+    DirectionalLight(const Color&);
+    DirectionalLight(const Vector3&);
+    DirectionalLight(const Vector3&, const Color&);
 
     /* getters */
 
-    Vector3 getDirection();
+    Vector3 getDirection() const;
 
     /* setters */
 
-    bool setDirection(Vector3);
-    bool setDirection(double, double, double);
+    bool setDirection(const Vector3&);
+    bool setDirection(const double, const double, const double);
 
-    float getIntensity(Vector3, Object);
+    float getIntensity(Vector3, Object*) const;
 };
 
 class PointLight: public Light {
   protected:
     Vector3 location;   // location of the point light (0, 0, 0) by default
 
+    bool setLocation();
+
   public:
 
     /* constructors */
 
     PointLight();
-    PointLight(Color);
-    PointLight(Vector3);
-    PointLight(Vector3, Color);
+    PointLight(const Color&);
+    PointLight(const Vector3&);
+    PointLight(const Vector3&, const Color&);
 
     /* getters */
 
-    Vector3 getLocation();
+    Vector3 getLocation() const;
 
     /* setters */
 
-    bool setLocation(Vector3);
-    bool setLocation(double, double, double);
+    bool setLocation(const Vector3&);
+    bool setLocation(const double, const double, const double);
 
 };
 

@@ -27,9 +27,9 @@ class Camera {
     /* constructors */
 
     Camera();
-    Camera(Vector3, Vector3);           // location, lookAt
-    Camera(double, double, double,      // location as (x, y, z) coords
-           double, double, double);     // lookAt as (x, y, z) coords
+    Camera(const Vector3&, const Vector3&);           // location, lookAt
+    Camera(const double, const double, const double,  // location as (x, y, z)
+           const double, const double, const double); // lookAt as (x, y, z)
 
 
     /* getters */
@@ -39,10 +39,10 @@ class Camera {
     Returns: The location or lookAt as a Vector3, the canvas, or the size of
         each pixel as a float.
     */
-    Vector3 getLocation();
-    Vector3 getLookAt();
-    Canvas getCanvas();
-    float getPixelSize();
+    Vector3 getLocation() const;
+    Vector3 getLookAt() const;
+    Canvas getCanvas() const;
+    float getPixelSize() const;
 
 
     /* setters */
@@ -51,27 +51,27 @@ class Camera {
     Paramters: Location of the camera as either a Vector3 or in (x, y, z) format
     Returns: true if set correctly, false if not
     */
-    bool setLocation(Vector3);
-    bool setLocation(double, double, double);
+    bool setLocation(const Vector3&);
+    bool setLocation(const double, const double, const double);
 
     /*
     Parameters: LookAt of the camera as either a Vector3 or in (x, y, z) format
     Returns: true if set correctly, false if not
     */
-    bool setLookAt(Vector3);
-    bool setLookAt(double, double, double);
+    bool setLookAt(const Vector3&);
+    bool setLookAt(const double, const double, const double);
 
     /*
     Paramters: Width and height of the canvas as integers
     Returns: true if set correctly, false if not
     */
-    bool setCanvas(int, int);
+    bool setCanvas(const int, const int);
 
     /*
     Parameters: Set the size of each pixel in the rendered world
     Returns: true if set correctly, false if not
     */
-    bool setPixelSize(float);
+    bool setPixelSize(const float);
 
 
     /* class methods */
@@ -82,7 +82,7 @@ class Camera {
 
     Renders a scene and writes it to a .bmp file
     */
-    void render(Scene, char*);
+    void render(const Scene&, const char*);
 
 };
 

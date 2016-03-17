@@ -4,18 +4,18 @@
 
 /* getters */
 
-Color Object::getColor() { return color; }
+Color Object::getColor() const { return color; }
 
 
 /* setters */
 
-bool Object::setColor(Color col) { color = col; return true; }
+bool Object::setColor(const Color& col) { color = col; return true; }
 
 
 /* class methods */
 
-float Object::rayHitPosition(Ray3 ray) { return -1; }
-Vector3 Object::getNormal(Vector3 hitPos) {
+float Object::rayHitPosition(const Ray3& ray) const { return -1; }
+Vector3 Object::getNormal(const Vector3& hitPos) const {
     Vector3 empty(0, 0, 0);
     return empty;
 }
@@ -26,37 +26,36 @@ Vector3 Object::getNormal(Vector3 hitPos) {
 /* constructors */
 
 Sphere::Sphere() { setSphere(0, 0, 0, 1); }
-Sphere::Sphere(Vector3 cent, double r) { setSphere(cent, r); }
-Sphere::Sphere(Vector3 cent, double r, Color col) { setSphere(cent, r, col); }
-Sphere::Sphere(double X, double Y, double Z, double r) {
+Sphere::Sphere(const Vector3& cent, const double r) {
+    setSphere(cent, r);
+}
+
+Sphere::Sphere(const Vector3& cent, const double r, const Color& col) {
+    setSphere(cent, r, col);
+}
+
+Sphere::Sphere(const double X, const double Y, const double Z,
+               const double r) {
     setSphere(X, Y, Z, r);
 }
-Sphere::Sphere(double X, double Y, double Z, double r, Color col) {
+
+Sphere::Sphere(const double X, const double Y, const double Z,
+               const double r, const Color& col) {
     setSphere(X, Y, Z, r, col);
 }
 
 
 /* getters */
 
-Vector3 Sphere::getCenter() { return center; }
-double Sphere::getRadius() { return radius; }
-void Sphere::getSphere(Vector3* cent, double* r, Color* col) {
-    *cent = center;
-    *r = radius;
-    *col = color;
-}
-void Sphere::getSphere(double* X, double* Y, double* Z, double* r, Color* col) {
-    *X = center.getx(); *Y = center.gety(); *Z = center.getz();
-    *r = radius;
-    *col = color;
-}
+Vector3 Sphere::getCenter() const { return center; }
+double Sphere::getRadius() const { return radius; }
 
 
 /* setters */
 
-bool Sphere::setCenter(Vector3 cent) { center = cent; return true; }
+bool Sphere::setCenter(const Vector3& cent) { center = cent; return true; }
 
-bool Sphere::setCenter(double X, double Y, double Z) {
+bool Sphere::setCenter(const double X, const double Y, const double Z) {
     Vector3 cent(X, Y, Z);
     if (setCenter(cent))
         return true;
@@ -64,7 +63,7 @@ bool Sphere::setCenter(double X, double Y, double Z) {
     return false;
 }
 
-bool Sphere::setRadius(double r) {
+bool Sphere::setRadius(const double r) {
     if (r > 0) {
         radius = r;
         return true;
@@ -73,7 +72,7 @@ bool Sphere::setRadius(double r) {
     return false;
 }
 
-bool Sphere::setSphere(Vector3 cent, double r) {
+bool Sphere::setSphere(const Vector3& cent, const double r) {
     Color col;
     if (setSphere(cent, r, color))
         return true;
@@ -81,14 +80,16 @@ bool Sphere::setSphere(Vector3 cent, double r) {
     return false;
 }
 
-bool Sphere::setSphere(Vector3 cent, double r, Color col) {
+bool Sphere::setSphere(const Vector3& cent, const double r, const Color& col) {
     if (setCenter(cent) && setRadius(r) && setColor(col))
         return true;
 
     return false;
 }
 
-bool Sphere::setSphere(double X, double Y, double Z, double r) {
+bool Sphere::setSphere(const double X, const double Y, const double Z,
+                       const double r) {
+
     Color col(1, 1, 1, 1);
     if (setSphere(X, Y, Z, r, col))
         return true;
@@ -96,7 +97,9 @@ bool Sphere::setSphere(double X, double Y, double Z, double r) {
     return false;
 }
 
-bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
+bool Sphere::setSphere(const double X, const double Y, const double Z,
+                       const double r, const Color& col) {
+
     if (center.setx(X) && center.sety(Y) && center.setz(Z) &&
         setRadius(r) && setColor(col))
         return true;
@@ -104,7 +107,7 @@ bool Sphere::setSphere(double X, double Y, double Z, double r, Color col) {
     return false;
 }
 
-float Sphere::rayHitPosition(Ray3 ray) {
+float Sphere::rayHitPosition(const Ray3& ray) const {
 
     // thanks to
     // http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-
@@ -147,7 +150,7 @@ float Sphere::rayHitPosition(Ray3 ray) {
     return t0;
 }
 
-Vector3 Sphere::getNormal(Vector3 hitPos) {
+Vector3 Sphere::getNormal(const Vector3& hitPos) const {
     Vector3 normal = hitPos - getCenter()  /
                      (hitPos - getCenter()).getMagnitude();
     normal.printVector();

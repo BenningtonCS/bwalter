@@ -3,19 +3,19 @@
 /* constructors */
 
 Canvas::Canvas() { setSize(800, 600); setGamma(2.2); }
-Canvas::Canvas(int w, int h) { setSize(w, h); setGamma(2.2); }
+Canvas::Canvas(const int w, const int h) { setSize(w, h); setGamma(2.2); }
 
 
 /* getters */
 
-int Canvas::getWidth() { return width; }
-int Canvas::getHeight() { return height; }
-float Canvas::getGamma() { return gamma; }
+int Canvas::getWidth() const { return width; }
+int Canvas::getHeight() const { return height; }
+float Canvas::getGamma() const { return gamma; }
 
 
 /* setters */
 
-bool Canvas::setSize(int w, int h) {
+bool Canvas::setSize(const int w, const int h) {
     if (0 < w && 0 < h) {
         width = w; height = h;
 
@@ -29,20 +29,20 @@ bool Canvas::setSize(int w, int h) {
     return false;
 }
 
-bool Canvas::setGamma(float g) { gamma = g; return true;}
+bool Canvas::setGamma(const float g) { gamma = g; return true;}
 
-void Canvas::setPixel(int x, int y, Color color) {
+void Canvas::setPixel(const int x, const int y, const Color& color) {
     pixels[x][y] = color;
 }
 
 
 /* class methods */
 
-int Canvas::convertToUInt8(float color, float gamma) {
+int Canvas::convertToUInt8(const float color, const float gamma) const {
     return 255 * pow(color, 1/gamma);
 }
 
-void Canvas::writeToFile(const char* fileName) {
+void Canvas::writeToFile(const char* fileName) const {
     // create a new BMP image
     BMP image;
     image.SetSize(width, height);

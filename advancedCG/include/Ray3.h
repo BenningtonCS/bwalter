@@ -17,58 +17,43 @@
 
 class Ray3 {
   protected:
-    Vector3 origin;
-    Vector3 direction;
+    Vector3 origin;         // (0, 0, 0)
+    Vector3 direction;      // (1, 1, 1)
 
   public:
-    Ray3();                         // origin: (0, 0, 0), direction: (1, 0, 0)
-    Ray3(Vector3, Vector3);         // origin, direction
-    Ray3(double, double, double,    // x, y, z of origin
-         double, double, double);   // x, y, z of direction
+    Ray3();
+    Ray3(const Vector3&, const Vector3&);             // origin, direction
+    Ray3(const double, const double, const double,    // x, y, z of origin
+         const double, const double, const double);   // x, y, z of direction
 
     /*
     Parameters: None
     Returns: Origin or direction of ray as a Vector3
     */
-    Vector3 getOrigin();
-    Vector3 getDirection();
-
-    /*
-    Parameters:
-        output: doubles to store the componants of the origin or direction
-    Returns: None
-    */
-    void getOrigin(double*, double*, double*);
-    void getDirection(double*, double*, double*);
-
-    /*
-    Parameters:
-        output: doubles to store the componants of the origin and direction
-    Returns: None
-    */
-    void getRay(double*, double*, double*, double*, double*, double*);
-
+    Vector3 getOrigin() const;
+    Vector3 getDirection() const;
 
     /*
     Parameters: Origin or direction of the ray as a Vector3
     Return: true if set correctly, false if not
     */
-    bool setOrigin(Vector3);
-    bool setDirection(Vector3);
+    bool setOrigin(const Vector3&);
+    bool setDirection(const Vector3&);
 
     /*
     Parameters: componants of origin or direction of the ray as doubles
     Returns: true if set correctly, false if not
     */
-    bool setOrigin(double, double, double);
-    bool setDirection(double, double, double);
+    bool setOrigin(const double, const double, const double);
+    bool setDirection(const double, const double, const double);
 
     /*
     Parameters: origin and direction of the ray as either Vector3s or doubles
     Returns: true if set correctly, false if not
     */
-    bool setRay(Vector3, Vector3);
-    bool setRay(double, double, double, double, double, double);
+    bool setRay(const Vector3&, const Vector3&);
+    bool setRay(const double, const double, const double,
+                const double, const double, const double);
 
     /*
     Parameters: None
@@ -76,9 +61,9 @@ class Ray3 {
 
     Print the origin and the direction as (x, y, z), (x, y, z) respectively
     */
-    void printRay();
+    void printRay() const;
 
-    Vector3 rayAtT(float);
+    Vector3 rayAtT(const float) const;
 };
 
 #endif

@@ -8,10 +8,10 @@ Vector3::Vector3(double X, double Y, double Z) { setVector(X, Y, Z); }
 
 /* getters */
 
-double Vector3::getx() { return x; }
-double Vector3::gety() { return y; }
-double Vector3::getz() { return z; }
-void Vector3::getVector(double* X, double* Y, double* Z) {
+double Vector3::getx() const { return x; }
+double Vector3::gety() const { return y; }
+double Vector3::getz() const { return z; }
+void Vector3::getVector(double* X, double* Y, double* Z) const {
     *X = x; *Y = y; *Z = z;
 }
 
@@ -29,17 +29,17 @@ bool Vector3::setVector(double X, double Y, double Z) {
 
 /* class methods */
 
-double Vector3::getMagnitude() {
+double Vector3::getMagnitude() const {
     double magnitude = sqrt(getMagnitudeSquared());
     return magnitude;
 }
 
-double Vector3::getMagnitudeSquared() {
+double Vector3::getMagnitudeSquared() const {
     double magnitude = pow(x, 2) + pow(y, 2) + pow(z, 2);
     return magnitude;
 }
 
-Vector3 Vector3::makeUnitVector() {
+Vector3 Vector3::makeUnitVector() const {
     double magnitude = getMagnitude();
 
     Vector3 vector;
@@ -50,13 +50,13 @@ Vector3 Vector3::makeUnitVector() {
     return vector;
 }
 
-void Vector3::printVector() {
+void Vector3::printVector() const {
     printf("(%.5f, %.5f, %.5f)\n", x, y, z);
 }
 
 /* operator overloads */
 
-Vector3 Vector3::operator+(Vector3 v) {
+Vector3 Vector3::operator+(Vector3 v) const {
 	Vector3 vector;
 	vector.setx(getx() + v.getx());
 	vector.sety(gety() + v.gety());
@@ -64,7 +64,7 @@ Vector3 Vector3::operator+(Vector3 v) {
 	return vector;
 }
 
-Vector3 Vector3::operator-(Vector3 v) {
+Vector3 Vector3::operator-(Vector3 v) const {
 	Vector3 vector;
 	vector.setx(getx() - v.getx());
 	vector.sety(gety() - v.gety());
@@ -72,24 +72,24 @@ Vector3 Vector3::operator-(Vector3 v) {
 	return vector;
 }
 
-Vector3 Vector3::operator/(double value) {
+Vector3 Vector3::operator/(double value) const {
     Vector3 result(getx()/value, gety()/value, getz()/value);
     return result;
 }
 
-Vector3 Vector3::operator*(double value) {
+Vector3 Vector3::operator*(double value) const {
     Vector3 result(getx()*value, gety()*value, getz()*value);
     return result;
 }
 
-double Vector3::operator*(Vector3 v) {
+double Vector3::operator*(Vector3 v) const {
     double totalx = getx() * v.getx();
     double totaly = gety() * v.gety();
     double totalz = getz() * v.getz();
     return totalx + totaly + totalz;
 }
 
-bool Vector3::operator==(Vector3 v) {
+bool Vector3::operator==(Vector3 v) const {
     if (getx() == v.getx() &&
         gety() == v.gety() &&
         getz() == v.getz())
@@ -98,7 +98,7 @@ bool Vector3::operator==(Vector3 v) {
     return false;
 }
 
-bool Vector3::operator!=(Vector3 v) {
+bool Vector3::operator!=(Vector3 v) const {
     if (getx() != v.getx() &&
         gety() != v.gety() &&
         getz() != v.getz())

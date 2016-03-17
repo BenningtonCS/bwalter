@@ -7,56 +7,56 @@ Camera::Camera() {
     setPixelSize(0.01);
 }
 
-Camera::Camera(Vector3 loc, Vector3 look) {
+Camera::Camera(const Vector3& loc, const Vector3& look) {
     setLocation(loc);
     setLookAt(look);
     setPixelSize(0.01);
 }
 
-Camera::Camera(double x1, double y1, double z1,     // location
-               double x2, double y2, double z2) {   // lookat
+Camera::Camera(const double x1, const double y1, const double z1,   // location
+               const double x2, const double y2, const double z2) { // lookat
     setLocation(x1, y1, z1);
     setLookAt(x2, y2, z2);
     setPixelSize(0.01);
 }
 
-Vector3 Camera::getLocation() { return location; }
-Vector3 Camera::getLookAt() { return lookAt; }
-Canvas Camera::getCanvas() { return canvas; }
-float Camera::getPixelSize() { return pixelSize; }
+Vector3 Camera::getLocation() const { return location; }
+Vector3 Camera::getLookAt() const { return lookAt; }
+Canvas Camera::getCanvas() const { return canvas; }
+float Camera::getPixelSize() const { return pixelSize; }
 
-bool Camera::setLocation(Vector3 loc) {
+bool Camera::setLocation(const Vector3& loc) {
     location = loc;
     return true;
 }
 
-bool Camera::setLocation(double X, double Y, double Z) {
+bool Camera::setLocation(const double X, const double Y, const double Z) {
     if (location.setx(X) && location.sety(Y) && location.setz(Z))
         return true;
 
     return false;
 }
 
-bool Camera::setLookAt(Vector3 look) {
+bool Camera::setLookAt(const Vector3& look) {
     lookAt = look;
     return true;
 }
 
-bool Camera::setLookAt(double X, double Y, double Z) {
+bool Camera::setLookAt(const double X, const double Y, const double Z) {
     if (lookAt.setx(X) && lookAt.sety(Y) && lookAt.setz(Z))
         return true;
 
     return false;
 }
 
-bool Camera::setCanvas(int width, int height) {
+bool Camera::setCanvas(const int width, const int height) {
     if (canvas.setSize(width, height))
         return true;
 
     return false;
 }
 
-bool Camera::setPixelSize(float size) {
+bool Camera::setPixelSize(const float size) {
     if (size > 0) {
         pixelSize = size;
         return true;
@@ -65,7 +65,7 @@ bool Camera::setPixelSize(float size) {
     return false;
 }
 
-void Camera::render(Scene scene, char* fileName) {
+void Camera::render(const Scene& scene, const char* fileName) {
 
     int width = canvas.getWidth();
     int height = canvas.getHeight();
