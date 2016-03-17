@@ -32,13 +32,17 @@ bool Canvas::setSize(const int w, const int h) {
 bool Canvas::setGamma(const float g) { gamma = g; return true;}
 
 void Canvas::setPixel(const int x, const int y, const Color& color) {
-    pixels[x][y] = color;
+    if (x >= 0 && x <= width) {
+        if (y >= 0 && y <= height) {
+            pixels[x][y] = color;
+        }
+    }
 }
 
 
 /* class methods */
 
-int Canvas::convertToUInt8(const float color, const float gamma) const {
+int Canvas::convertToUInt8(const float color) const {
     return 255 * pow(color, 1/gamma);
 }
 
@@ -51,10 +55,10 @@ void Canvas::writeToFile(const char* fileName) const {
     // set the color of each pixel in the image
     for (int x=0; x<width; x++) {
         for (int y=0; y<height; y++) {
-            image(x, y)->Red = convertToUInt8(pixels[x][y].getr(), gamma);
-            image(x, y)->Green = convertToUInt8(pixels[x][y].getg(), gamma);
-            image(x, y)->Blue = convertToUInt8(pixels[x][y].getb(), gamma);
-            image(x, y)->Alpha = convertToUInt8(pixels[x][y].geta(), gamma);
+            image(x, y)->Red = convertToUInt8(pixels[x][y].getr());
+            image(x, y)->Green = convertToUInt8(pixels[x][y].getg());
+            image(x, y)->Blue = convertToUInt8(pixels[x][y].getb());
+            image(x, y)->Alpha = convertToUInt8(pixels[x][y].geta());
         }
     }
     image.WriteToFile(fileName);

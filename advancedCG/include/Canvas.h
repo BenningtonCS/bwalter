@@ -55,14 +55,13 @@ class Canvas {
     /* class methods */
 
     /*
-    Parameters: Color channel specified as a float between 0 and 1, gamma of
-        the monitor as a float
+    Parameters: Color channel specified as a float between 0 and 1
     Returns: integer between 0 and 255
 
     Convert RGBA values from being a float between 0 and 1 to an integer
     between 0 and 255
     */
-    int convertToUInt8(const float, const float) const;
+    int convertToUInt8(const float) const;
 
     /*
     Parameters: Name of file to write to
