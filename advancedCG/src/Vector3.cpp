@@ -80,13 +80,13 @@ Vector3 Vector3::operator-(Vector3 v) const {
 	return vector;
 }
 
-Vector3 Vector3::operator/(double value) const {
-    Vector3 result(getx()/value, gety()/value, getz()/value);
+Vector3 Vector3::operator*(double value) const {
+    Vector3 result(getx()*value, gety()*value, getz()*value);
     return result;
 }
 
-Vector3 Vector3::operator*(double value) const {
-    Vector3 result(getx()*value, gety()*value, getz()*value);
+Vector3 Vector3::operator/(double value) const {
+    Vector3 result(getx()/value, gety()/value, getz()/value);
     return result;
 }
 

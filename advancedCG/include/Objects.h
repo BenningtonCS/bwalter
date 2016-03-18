@@ -119,10 +119,68 @@ class Sphere: public Object {
 
     /*
     Paramters: Ray to being sent into the Scene
-    Returns: Position of where the ray intersects with the sphere. If it doens't
-        hit, (-1, -1, -1) is returned instead.
+    Returns: t of where the ray intersects with the sphere. If it doesn't hit,
+        -1 is returned instead
 
-    Check if a ray intersects with the sphere
+    Check if a ray intersects with the sphere.
+    */
+    float rayHitPosition(const Ray3&) const;
+};
+
+
+/* P L A N E */
+
+class Plane: public Object {
+  protected:
+    Vector3 normal;
+    Vector3 point;
+
+  public:
+
+    /* constructors */
+
+    Plane();
+    Plane(const Vector3&, const Vector3&);              // normal, point
+    Plane(const double, const double, const double,     // x, y, z of normal
+          const double, const double, const double);    // x, y, z of point
+
+
+    /* getters */
+
+    /*
+    Paramters: None
+    Returns: The normal or the point of the plane
+    */
+    Vector3 getNormal() const;
+    Vector3 getPoint() const;
+
+
+    /* setters */
+
+    /*
+    Paramters: The normal and/or point of the plane as either a Vector3 or in
+        (x, y, z) componants
+    Returns: true if set correctly, false if not
+    */
+    bool setNormal(const Vector3&);
+    bool setNormal(const double, const double, const double);
+
+    bool setPoint(const Vector3&);
+    bool setPoint(const double, const double, const double);
+
+    bool setPlane(const Vector3&, const Vector3&);
+    bool setPlane(const double, const double, const double,
+                  const double, const double, const double);
+
+
+    /* class methods */
+
+    /*
+    Parameters: Ray to be sent into the scene
+    Returns: t of where the ray intersects with the plane. If it doesn't hit,
+        -1 is returned instead
+
+    Check if a ray intersects with the plane
     */
     float rayHitPosition(const Ray3&) const;
 };

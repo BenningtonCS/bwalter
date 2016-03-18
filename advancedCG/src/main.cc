@@ -16,14 +16,18 @@ int main(void) {
     Sphere sphere1(0, 0, 100, 100, red);
     Sphere sphere2(-150, -50, 10, 50, blue);
 
+    Plane plane(-1, 0, 0, 0, 0, 0);
+    plane.setColor(white);
+
     Vector3 dir(1, -1, 1);
     DirectionalLight light(dir);
 
     Camera cam;
 
     Scene scene(cam);
-    scene.addObject(&sphere1);
-    scene.addObject(&sphere2);
+//    scene.addObject(&sphere1);
+//    scene.addObject(&sphere2);
+    scene.addObject(&plane);
     scene.addLight(&light);
 
     cam.render(scene, "sphere.bmp");
