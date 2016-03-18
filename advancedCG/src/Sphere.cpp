@@ -1,27 +1,5 @@
 #include <Objects.h>
 
-/* O B J E C T */
-
-/* getters */
-
-Color Object::getColor() const { return color; }
-
-
-/* setters */
-
-bool Object::setColor(const Color& col) { color = col; return true; }
-
-
-/* class methods */
-
-float Object::rayHitPosition(const Ray3& ray) const { return -1; }
-Vector3 Object::getNormal(const Vector3& hitPos) const {
-    Vector3 empty(0, 0, 0);
-    return empty;
-}
-
-
-/* S P H E R E */
 
 /* constructors */
 
@@ -48,6 +26,7 @@ Sphere::Sphere(const double X, const double Y, const double Z,
 /* getters */
 
 Vector3 Sphere::getCenter() const { return center; }
+
 double Sphere::getRadius() const { return radius; }
 
 
@@ -107,6 +86,14 @@ bool Sphere::setSphere(const double X, const double Y, const double Z,
     return false;
 }
 
+
+/* class methods */
+
+Vector3 Sphere::getNormal(const Vector3& hitPos) const {
+    Vector3 normal = (hitPos - getCenter())  / getRadius();
+    return normal;
+}
+
 float Sphere::rayHitPosition(const Ray3& ray) const {
 
     // thanks to
@@ -148,9 +135,4 @@ float Sphere::rayHitPosition(const Ray3& ray) const {
     }
 
     return t0;
-}
-
-Vector3 Sphere::getNormal(const Vector3& hitPos) const {
-    Vector3 normal = (hitPos - getCenter())  / getRadius();
-    return normal;
 }

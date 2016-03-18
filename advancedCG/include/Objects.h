@@ -112,6 +112,12 @@ class Sphere: public Object {
     /* class methods */
 
     /*
+    Paramters: Position on the sphere as a Vector3
+    Returns: The normal vector at that position
+    */
+    Vector3 getNormal(const Vector3 &) const;
+
+    /*
     Paramters: Ray to being sent into the Scene
     Returns: Position of where the ray intersects with the sphere. If it doens't
         hit, (-1, -1, -1) is returned instead.
@@ -119,12 +125,6 @@ class Sphere: public Object {
     Check if a ray intersects with the sphere
     */
     float rayHitPosition(const Ray3&) const;
-
-    /*
-    Paramters: Position on the sphere as a Vector3
-    Returns: The normal vector at that position
-    */
-    Vector3 getNormal(const Vector3 &) const;
 };
 
 #endif
