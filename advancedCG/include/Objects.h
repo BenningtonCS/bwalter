@@ -115,7 +115,7 @@ class Sphere: public Object {
     Paramters: Position on the sphere as a Vector3
     Returns: The normal vector at that position
     */
-    Vector3 getNormal(const Vector3 &) const;
+    Vector3 getNormal(const Vector3&) const;
 
     /*
     Paramters: Ray to being sent into the Scene
@@ -174,6 +174,8 @@ class Plane: public Object {
 
 
     /* class methods */
+
+    Vector3 getNormal(const Vector3&) const;
 
     /*
     Parameters: Ray to be sent into the scene

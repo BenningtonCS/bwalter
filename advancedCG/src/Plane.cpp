@@ -71,16 +71,15 @@ bool Plane::setPlane(const double nx, const double ny, const double nz,
 
 /* class methods */
 
+Vector3 Plane::getNormal(const Vector3& hitPos) const {
+    return getNormal();
+}
+
 float Plane::rayHitPosition(const Ray3& ray) const {
 
-    float t = -1;
+    float denom = getNormal() * ray.getDirection();
+    if (denom != 0)
+          return ((getPoint() - ray.getOrigin()) * getNormal()) / denom;
 
-//    printf("%.2f\t",((ray.getDirection() - getPoint()) * getNormal()));
-    if (((ray.getDirection() - getPoint()) * getNormal()) == 0) {
-        t = (((getPoint() - ray.getOrigin()) * getNormal()) /
-               (ray.getDirection() * getNormal()));
-
-    }
-    printf("%.2f\t", t);
-    return t;
+    return -1;
 }

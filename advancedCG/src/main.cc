@@ -14,9 +14,9 @@ int main(void) {
     Color white(1, 1, 1, 1);
 
     Sphere sphere1(0, 0, 100, 100, red);
-    Sphere sphere2(-150, -50, 10, 50, blue);
+    Sphere sphere2(-150, -50, 100, 50, blue);
 
-    Plane plane(-1, 0, 0, 0, 0, 0);
+    Plane plane(0, 0, -1, 0, 0, 100);
     plane.setColor(white);
 
     Vector3 dir(1, -1, 1);
@@ -25,8 +25,8 @@ int main(void) {
     Camera cam;
 
     Scene scene(cam);
-//    scene.addObject(&sphere1);
-//    scene.addObject(&sphere2);
+    scene.addObject(&sphere1);
+    scene.addObject(&sphere2);
     scene.addObject(&plane);
     scene.addLight(&light);
 
