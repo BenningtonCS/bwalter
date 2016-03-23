@@ -10,14 +10,16 @@ int main(void) {
 
 
     Color red(1, 0, 0, 1);
+    Color green(0, 1, 0, 1);
     Color blue(0, 0, 1, 1);
     Color white(1, 1, 1, 1);
 
     Sphere sphere1(0, 0, 100, 100, red);
     Sphere sphere2(-150, -50, 100, 50, blue);
 
-    Plane plane(0, 0, -1, 0, 0, 100);
-    plane.setColor(white);
+    Plane plane(0, 0, -1, 0, 0, 100, white);
+
+    Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
 
     Vector3 dir(1, -1, 1);
     DirectionalLight light(dir);
@@ -27,7 +29,8 @@ int main(void) {
     Scene scene(cam);
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
-    scene.addObject(&plane);
+//    scene.addObject(&plane);
+    scene.addObject(&disk);
     scene.addLight(&light);
 
     cam.render(scene, "sphere.bmp");

@@ -4,19 +4,30 @@
 /* constructors */
 
 Plane::Plane() {
-    setNormal(0, 1, 0);
-    setPoint(0, 0, 0);
+    setPlane(0, 1, 0, 0, 0, 0);
+}
+
+Plane::Plane(const Color& col) {
+    setPlane(0, 1, 0, 0, 0, 0, col);
 }
 
 Plane::Plane(const Vector3& n, const Vector3& p) {
-    setNormal(n);
-    setPoint(p);
+    setPlane(n, p);
+}
+
+Plane::Plane(const Vector3& n, const Vector3& p, const Color& col) {
+    setPlane(n, p, col);
 }
 
 Plane::Plane(const double nx, const double ny, const double nz,
              const double px, const double py, const double pz) {
-    setNormal(nx, ny, nz);
-    setPoint(px, py, pz);
+    setPlane(nx, ny, nz, px, py, pz);
+}
+
+Plane::Plane(const double nx, const double ny, const double nz,
+             const double px, const double py, const double pz,
+             const Color& col) {
+    setPlane(nx, ny, nz, px, py, pz, col);
 }
 
 
@@ -29,7 +40,7 @@ Vector3 Plane::getPoint() const { return point; }
 /* setters */
 
 bool Plane::setNormal(const Vector3& n) {
-    normal = n; return true;
+    normal = n.makeUnitVector(); return true;
 }
 
 bool Plane::setNormal(const double X, const double Y, const double Z) {
@@ -41,7 +52,7 @@ bool Plane::setNormal(const double X, const double Y, const double Z) {
 }
 
 bool Plane::setPoint(const Vector3& p) {
-    point = p; return true;
+    point = p.makeUnitVector(); return true;
 }
 
 bool Plane::setPoint(const double X, const double Y, const double Z) {
@@ -59,10 +70,25 @@ bool Plane::setPlane(const Vector3& n, const Vector3& p) {
     return false;
 }
 
+bool Plane::setPlane(const Vector3& n, const Vector3& p, const Color& col) {
+    if (setPlane(n, p) && setColor(col))
+        return true;
+
+    return false;
+}
+
 bool Plane::setPlane(const double nx, const double ny, const double nz,
                      const double px, const double py, const double pz) {
-
     if (setNormal(nx, ny, nz) && setPoint(px, py, pz))
+        return true;
+
+    return false;
+}
+
+bool Plane::setPlane(const double nx, const double ny, const double nz,
+                     const double px, const double py, const double pz,
+                     const Color& col) {
+    if (setPlane(nx, ny, nz, px, py, pz) && setColor(col))
         return true;
 
     return false;

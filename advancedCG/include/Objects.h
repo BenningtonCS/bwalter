@@ -5,7 +5,7 @@
 
     Abstract object class and various shapes inherited from that class.
 
-    Shapes include: Spheres, and more to come
+    Shapes include: Spheres, planes, disks, boxes, and triangles
 */
 
 #ifndef OBJECTS_H
@@ -140,9 +140,17 @@ class Plane: public Object {
     /* constructors */
 
     Plane();
-    Plane(const Vector3&, const Vector3&);              // normal, point
-    Plane(const double, const double, const double,     // x, y, z of normal
-          const double, const double, const double);    // x, y, z of point
+    Plane(const Vector3&, const Vector3&);               // normal, point
+
+    Plane(const Vector3&, const Vector3&, const Color&); // normal, point, color
+
+    Plane(const double, const double, const double,      // x, y, z of normal
+          const double, const double, const double);     // x, y, z of point
+
+    Plane(const double, const double, const double,      // x, y, z of normal
+          const double, const double, const double,      // x, y, z of point
+          const Color&);                                 // color
+
 
 
     /* getters */
@@ -159,7 +167,7 @@ class Plane: public Object {
 
     /*
     Paramters: The normal and/or point of the plane as either a Vector3 or in
-        (x, y, z) componants
+        (x, y, z) componants as well as the color (optional)
     Returns: true if set correctly, false if not
     */
     bool setNormal(const Vector3&);
@@ -169,8 +177,13 @@ class Plane: public Object {
     bool setPoint(const double, const double, const double);
 
     bool setPlane(const Vector3&, const Vector3&);
+    bool setPlane(const Vector3&, const Vector3&, const Color&);
     bool setPlane(const double, const double, const double,
                   const double, const double, const double);
+    bool setPlane(const double, const double, const double,
+                  const double, const double, const double,
+                  const Color&);
+
 
 
     /* class methods */
@@ -186,5 +199,64 @@ class Plane: public Object {
     */
     float rayHitPosition(const Ray3&) const;
 };
+
+
+/* D I S K */
+
+class Disk: public Object {
+  protected:
+    Vector3 normal;
+    Vector3 center;
+    float radius;
+
+  public:
+
+    /* constructors */
+
+    Disk();
+    Disk(const Vector3&, const Vector3&, const float);
+    Disk(const Vector3&, const Vector3&, const float, const Color&);
+    Disk(const double, const double, const double,
+         const double, const double, const double,
+         const float);
+    Disk(const double, const double, const double,
+         const double, const double, const double,
+         const float, const Color&);
+
+
+    /* getters */
+
+    Vector3 getNormal() const;
+    Vector3 getCenter() const;
+    float getRadius() const;
+
+
+    /* setters */
+
+    bool setNormal(const Vector3&);
+    bool setNormal(const double, const double, const double);
+
+    bool setCenter(const Vector3&);
+    bool setCenter(const double, const double, const double);
+
+    bool setRadius(const float);
+
+    bool setDisk(const Vector3&, const Vector3&, const float);
+    bool setDisk(const Vector3&, const Vector3&, const float, const Color&);
+
+    bool setDisk(const double, const double, const double,
+                 const double, const double, const double,
+                 const float);
+    bool setDisk(const double, const double, const double,
+                 const double, const double, const double,
+                 const float, const Color&);
+
+
+    /* class methods */
+    Vector3 getNormal(const Vector3&) const;
+
+    float rayHitPosition(const Ray3&) const;
+};
+
 
 #endif

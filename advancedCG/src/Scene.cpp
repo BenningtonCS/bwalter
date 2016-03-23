@@ -45,7 +45,7 @@ bool Scene::addLight(Light* l) {
 /* class methods */
 
 Color Scene::sendRay(const Ray3& ray) const {
-    Color color;
+    Color color = background;
 
     // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
