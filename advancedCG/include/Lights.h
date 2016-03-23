@@ -45,14 +45,19 @@ class DirectionalLight: public Light {
     DirectionalLight(const Vector3&);
     DirectionalLight(const Vector3&, const Color&);
 
+
     /* getters */
 
     Vector3 getDirection() const;
+
 
     /* setters */
 
     bool setDirection(const Vector3&);
     bool setDirection(const double, const double, const double);
+
+
+    /* class methods */
 
     float getIntensity(const Vector3&, const Object&) const;
 };
@@ -72,15 +77,22 @@ class PointLight: public Light {
     PointLight(const Vector3&);
     PointLight(const Vector3&, const Color&);
 
+
     /* getters */
 
     Vector3 getLocation() const;
+
 
     /* setters */
 
     bool setLocation(const Vector3&);
     bool setLocation(const double, const double, const double);
 
+
+    /* class methods */
+
+    Vector3 getDirection(const Vector3&) const;
+    float getIntensity(const Vector3&, const Object&) const;
 };
 
 #endif

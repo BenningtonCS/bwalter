@@ -16,6 +16,7 @@
 #define SCENE_H
 
 #include <vector>
+#include <limits>
 
 #include <Objects.h>
 #include <Camera.h>

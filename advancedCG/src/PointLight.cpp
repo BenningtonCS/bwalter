@@ -32,7 +32,7 @@ Vector3 PointLight::getLocation() const { return location; }
 /* setters */
 
 bool PointLight::setLocation(const Vector3& loc) {
-    location = loc.makeUnitVector();
+    location = loc;
     return true;
 }
 
@@ -42,4 +42,16 @@ bool PointLight::setLocation(const double X, const double Y, const double Z) {
         return true;
 
     return false;
+}
+
+
+/* class methods */
+
+Vector3 PointLight::getDirection(const Vector3& hitPos) const {
+    return (hitPos - getLocation()).makeUnitVector();
+
+}
+
+float PointLight::getIntensity(const Vector3& hitPos, const Object& obj) const {
+    return -(getDirection(hitPos) * obj.getNormal(hitPos));
 }

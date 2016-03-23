@@ -45,35 +45,43 @@ bool Scene::addLight(Light* l) {
 /* class methods */
 
 Color Scene::sendRay(const Ray3& ray) const {
-    Color color = background;
+    Color color;
+
+    float closestT = std::numeric_limits<float>::max();
+    Object* closestObj;
 
     // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
+
         float t = objs[i]->rayHitPosition(ray);
 
         // if it does, move through every light in the scene and check the
         // intensity of the light
-        if (t != -1) {
+        if (t < closestT && t != -1) {
 
-            Vector3 hitPos = ray.rayAtT(t);
-
-            for (unsigned int j=0; j<lights.size(); j++) {
-
-                // TODO: actually add the lights
-
-                float intensity = lights[j]->getIntensity(hitPos, *objs[i]);
-                if (intensity < objs[i]->getMaterial().getAmbient())
-                    intensity = objs[i]->getMaterial().getAmbient();
-
-                // get the color of the object at that point with lights
-                color.setColor(objs[i]->getColor().getr()*intensity,
-                               objs[i]->getColor().getg()*intensity,
-                               objs[i]->getColor().getb()*intensity,
-                               objs[i]->getColor().geta());
-            }
-
-            return color;
+            closestT = t;
+            closestObj = objs[i];
         }
+    }
+
+    if (closestT < std::numeric_limits<float>::max()) {
+        Vector3 hitPos = ray.rayAtT(closestT);
+
+        for (unsigned int j=0; j<lights.size(); j++) {
+
+            // TODO: actually add the lights
+
+            float intensity = lights[j]->getIntensity(hitPos, *closestObj);
+            if (intensity < closestObj->getMaterial().getAmbient())
+                intensity = closestObj->getMaterial().getAmbient();
+
+            // get the color of the object at that point with lights
+            color.setColor(closestObj->getColor().getr()*intensity,
+                           closestObj->getColor().getg()*intensity,
+                           closestObj->getColor().getb()*intensity,
+                           closestObj->getColor().geta());
+        }
+        return color;
     }
 
     return background;

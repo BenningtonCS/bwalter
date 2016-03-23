@@ -276,5 +276,4 @@ class Box: public Object {
     float rayHitPosition(const Ray3&) const;
 };
 
-
 #endif

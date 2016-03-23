@@ -1,6 +1,7 @@
 #ifndef MATERIALS_H
 #define MATERIALS_H
 
+
 class Material {
   protected:
     float ambient;

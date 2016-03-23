@@ -88,18 +88,9 @@ float Sphere::rayHitPosition(const Ray3& ray) const {
 
     float lengthInsideSphere2 = pow(getRadius(), 2) - centerToProjection2;
 
-    float t0, t1;
-    t0 = projectionOntoRay - sqrt(lengthInsideSphere2);
-    t1 = projectionOntoRay + sqrt(lengthInsideSphere2);
-
-    if (t0 > t1)
-        std::swap(t0, t1);
-
-    if (t0 < 0) {
-        t0 = t1;
-        if (t0 < 0)
-            return -1;
-    }
+    float t0 = projectionOntoRay - sqrt(lengthInsideSphere2);
+    if (t0 < 0)
+        return projectionOntoRay + sqrt(lengthInsideSphere2);
 
     return t0;
 }
