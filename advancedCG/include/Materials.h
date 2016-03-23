@@ -1,24 +1,26 @@
 #ifndef MATERIALS_H
 #define MATERIALS_H
 
-#include <Color.h>
-
 class Material {
   protected:
-    Color color;
     float ambient;
 
   public:
 
+    /* constructors */
+
+    Material();
+    Material(const float);
+
+
     /* getters */
 
-    Color getColor();
-    float getAmbient();
+    float getAmbient() const;
+
 
     /* setters */
 
-    bool setColor();
-    bool setAmbient();
+    bool setAmbient(const float);
 };
 
 #endif

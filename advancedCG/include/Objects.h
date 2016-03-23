@@ -16,12 +16,16 @@
 #include <Vector3.h>
 #include <Ray3.h>
 #include <Color.h>
+#include <Materials.h>
 
 class Object {
   protected:
       Color color;      // white by default
+      Material material;
 
   public:
+
+      Object();
 
       /* getters */
 
@@ -31,12 +35,15 @@ class Object {
       */
       Color getColor() const;
 
+      Material getMaterial() const;
 
       /* setters */
 
       bool setColor();
       bool setColor(const float, const float, const float, const float);
       bool setColor(const Color&);
+
+      bool setMaterial(const Material&);
 
 
       /* class methods */
@@ -229,16 +236,16 @@ class Disk: public Object {
 
 
 /* B O X */
-/*
+
 class Box: public Object {
   protected:
     Vector3 min;
     Vector3 max;
 
   public:
-*/
+
     /* constructors */
-/*
+
     Box();
     Box(const Vector3&, const Vector3&);
     Box(const Vector3&, const Vector3&, const Color&);
@@ -247,27 +254,27 @@ class Box: public Object {
     Box(const double, const double, const double,
         const double, const double, const double, const Color&);
 
-*/
+
     /* getters */
-/*
+
     Vector3 getMin() const;
     Vector3 getMax() const;
 
-*/
+
     /* setters */
-/*
+
     bool setMin(const Vector3&);
     bool setMin(const double, const double, const double);
 
     bool setMax(const Vector3&);
     bool setMax(const double, const double, const double);
 
-*/
+
     /* class methods */
-/*
+
     Vector3 getNormal(const Vector3&) const;
-    float rayHitPosition();
+    float rayHitPosition(const Ray3&) const;
 };
-*/
+
 
 #endif

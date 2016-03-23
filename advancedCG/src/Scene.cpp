@@ -55,9 +55,6 @@ Color Scene::sendRay(const Ray3& ray) const {
         // intensity of the light
         if (t != -1) {
 
-            // TODO: Figure out how to deal with objects being closer than
-            // others
-
             Vector3 hitPos = ray.rayAtT(t);
 
             for (unsigned int j=0; j<lights.size(); j++) {
@@ -65,7 +62,8 @@ Color Scene::sendRay(const Ray3& ray) const {
                 // TODO: actually add the lights
 
                 float intensity = lights[j]->getIntensity(hitPos, *objs[i]);
-                if (intensity < 0) intensity = 0;
+                if (intensity < objs[i]->getMaterial().getAmbient())
+                    intensity = objs[i]->getMaterial().getAmbient();
 
                 // get the color of the object at that point with lights
                 color.setColor(objs[i]->getColor().getr()*intensity,
