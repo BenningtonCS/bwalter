@@ -4,15 +4,13 @@
 /* constructors */
 
 Plane::Plane() {
-    setPlane(0, 1, 0, 0, 0, 0);
-}
-
-Plane::Plane(const Color& col) {
+    Color col(1, 1, 1, 1);
     setPlane(0, 1, 0, 0, 0, 0, col);
 }
 
 Plane::Plane(const Vector3& n, const Vector3& p) {
-    setPlane(n, p);
+    Color col(1, 1, 1, 1);
+    setPlane(n, p, col);
 }
 
 Plane::Plane(const Vector3& n, const Vector3& p, const Color& col) {
@@ -21,7 +19,8 @@ Plane::Plane(const Vector3& n, const Vector3& p, const Color& col) {
 
 Plane::Plane(const double nx, const double ny, const double nz,
              const double px, const double py, const double pz) {
-    setPlane(nx, ny, nz, px, py, pz);
+    Color col(1, 1, 1, 1);
+    setPlane(nx, ny, nz, px, py, pz, col);
 }
 
 Plane::Plane(const double nx, const double ny, const double nz,
@@ -52,7 +51,7 @@ bool Plane::setNormal(const double X, const double Y, const double Z) {
 }
 
 bool Plane::setPoint(const Vector3& p) {
-    point = p.makeUnitVector(); return true;
+    point = p; return true;
 }
 
 bool Plane::setPoint(const double X, const double Y, const double Z) {
