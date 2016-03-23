@@ -55,6 +55,9 @@ Color Scene::sendRay(const Ray3& ray) const {
         // intensity of the light
         if (t != -1) {
 
+            // TODO: Figure out how to deal with objects being closer than
+            // others
+
             Vector3 hitPos = ray.rayAtT(t);
 
             for (unsigned int j=0; j<lights.size(); j++) {

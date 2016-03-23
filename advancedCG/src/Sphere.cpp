@@ -3,23 +3,25 @@
 
 /* constructors */
 
-Sphere::Sphere() { setSphere(0, 0, 0, 1); }
+Sphere::Sphere() {
+    setCenter(0, 0, 0); setRadius(1); setColor();
+}
 Sphere::Sphere(const Vector3& cent, const double r) {
-    setSphere(cent, r);
+    setCenter(cent); setRadius(r); setColor();
 }
 
 Sphere::Sphere(const Vector3& cent, const double r, const Color& col) {
-    setSphere(cent, r, col);
+    setCenter(cent); setRadius(r); setColor(col);
 }
 
 Sphere::Sphere(const double X, const double Y, const double Z,
                const double r) {
-    setSphere(X, Y, Z, r);
+    setCenter(X, Y, Z); setRadius(r); setColor();
 }
 
 Sphere::Sphere(const double X, const double Y, const double Z,
                const double r, const Color& col) {
-    setSphere(X, Y, Z, r, col);
+    setCenter(X, Y, Z); setRadius(r); setColor(col);
 }
 
 
@@ -47,41 +49,6 @@ bool Sphere::setRadius(const double r) {
         radius = r;
         return true;
     }
-
-    return false;
-}
-
-bool Sphere::setSphere(const Vector3& cent, const double r) {
-    Color col;
-    if (setSphere(cent, r, color))
-        return true;
-
-    return false;
-}
-
-bool Sphere::setSphere(const Vector3& cent, const double r, const Color& col) {
-    if (setCenter(cent) && setRadius(r) && setColor(col))
-        return true;
-
-    return false;
-}
-
-bool Sphere::setSphere(const double X, const double Y, const double Z,
-                       const double r) {
-
-    Color col(1, 1, 1, 1);
-    if (setSphere(X, Y, Z, r, col))
-        return true;
-
-    return false;
-}
-
-bool Sphere::setSphere(const double X, const double Y, const double Z,
-                       const double r, const Color& col) {
-
-    if (center.setx(X) && center.sety(Y) && center.setz(Z) &&
-        setRadius(r) && setColor(col))
-        return true;
 
     return false;
 }

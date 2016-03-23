@@ -7,6 +7,22 @@ Color Object::getColor() const { return color; }
 
 
 /* setters */
+bool Object::setColor() {
+    Color c(1, 1, 1, 1);
+    if (setColor(c))
+        return true;
+
+    return false;
+}
+
+bool Object::setColor(const float r, const float g, const float b,
+                      const float a) {
+    Color c(r, g, b, a);
+    if (setColor(c))
+        return true;
+
+    return false;
+}
 
 bool Object::setColor(const Color& col) { color = col; return true; }
 

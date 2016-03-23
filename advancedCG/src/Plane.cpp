@@ -4,29 +4,26 @@
 /* constructors */
 
 Plane::Plane() {
-    Color col(1, 1, 1, 1);
-    setPlane(0, 1, 0, 0, 0, 0, col);
+    setNormal(0, 1, 0); setPoint(0, 0, 0); setColor();
 }
 
 Plane::Plane(const Vector3& n, const Vector3& p) {
-    Color col(1, 1, 1, 1);
-    setPlane(n, p, col);
+    setNormal(n); setPoint(p); setColor();
 }
 
 Plane::Plane(const Vector3& n, const Vector3& p, const Color& col) {
-    setPlane(n, p, col);
+    setNormal(n); setPoint(p); setColor(col);
 }
 
 Plane::Plane(const double nx, const double ny, const double nz,
              const double px, const double py, const double pz) {
-    Color col(1, 1, 1, 1);
-    setPlane(nx, ny, nz, px, py, pz, col);
+    setNormal(nx, ny, nz); setPoint(px, py, pz); setColor();
 }
 
 Plane::Plane(const double nx, const double ny, const double nz,
              const double px, const double py, const double pz,
              const Color& col) {
-    setPlane(nx, ny, nz, px, py, pz, col);
+    setNormal(nx, ny, nz); setPoint(px, py, pz); setColor(col);
 }
 
 
@@ -57,37 +54,6 @@ bool Plane::setPoint(const Vector3& p) {
 bool Plane::setPoint(const double X, const double Y, const double Z) {
     Vector3 p(X, Y, Z);
     if (setPoint(p))
-        return true;
-
-    return false;
-}
-
-bool Plane::setPlane(const Vector3& n, const Vector3& p) {
-    if (setNormal(n) && setPoint(p))
-        return true;
-
-    return false;
-}
-
-bool Plane::setPlane(const Vector3& n, const Vector3& p, const Color& col) {
-    if (setPlane(n, p) && setColor(col))
-        return true;
-
-    return false;
-}
-
-bool Plane::setPlane(const double nx, const double ny, const double nz,
-                     const double px, const double py, const double pz) {
-    if (setNormal(nx, ny, nz) && setPoint(px, py, pz))
-        return true;
-
-    return false;
-}
-
-bool Plane::setPlane(const double nx, const double ny, const double nz,
-                     const double px, const double py, const double pz,
-                     const Color& col) {
-    if (setPlane(nx, ny, nz, px, py, pz) && setColor(col))
         return true;
 
     return false;

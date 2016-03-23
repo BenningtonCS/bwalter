@@ -34,6 +34,8 @@ class Object {
 
       /* setters */
 
+      bool setColor();
+      bool setColor(const float, const float, const float, const float);
       bool setColor(const Color&);
 
 
@@ -93,20 +95,6 @@ class Sphere: public Object {
     Returns: true if set correctly, false if not
     */
     bool setRadius(const double);
-
-    /*
-    Paramters:
-        center - as either a Vector3 or 3 doubles
-        radius - as a double
-        color - as a Color (optional. This will be white be default)
-    Returns: true if set correctly, false if not
-    */
-    bool setSphere(const Vector3&, const double);
-    bool setSphere(const Vector3&, const double, const Color&);
-    bool setSphere(const double, const double, const double,
-                   const double);
-    bool setSphere(const double, const double, const double,
-                   const double, const Color&);
 
 
     /* class methods */
@@ -176,15 +164,6 @@ class Plane: public Object {
     bool setPoint(const Vector3&);
     bool setPoint(const double, const double, const double);
 
-    bool setPlane(const Vector3&, const Vector3&);
-    bool setPlane(const Vector3&, const Vector3&, const Color&);
-    bool setPlane(const double, const double, const double,
-                  const double, const double, const double);
-    bool setPlane(const double, const double, const double,
-                  const double, const double, const double,
-                  const Color&);
-
-
 
     /* class methods */
 
@@ -241,16 +220,6 @@ class Disk: public Object {
 
     bool setRadius(const float);
 
-    bool setDisk(const Vector3&, const Vector3&, const float);
-    bool setDisk(const Vector3&, const Vector3&, const float, const Color&);
-
-    bool setDisk(const double, const double, const double,
-                 const double, const double, const double,
-                 const float);
-    bool setDisk(const double, const double, const double,
-                 const double, const double, const double,
-                 const float, const Color&);
-
 
     /* class methods */
     Vector3 getNormal(const Vector3&) const;
@@ -258,5 +227,47 @@ class Disk: public Object {
     float rayHitPosition(const Ray3&) const;
 };
 
+
+/* B O X */
+/*
+class Box: public Object {
+  protected:
+    Vector3 min;
+    Vector3 max;
+
+  public:
+*/
+    /* constructors */
+/*
+    Box();
+    Box(const Vector3&, const Vector3&);
+    Box(const Vector3&, const Vector3&, const Color&);
+    Box(const double, const double, const double,
+        const double, const double, const double);
+    Box(const double, const double, const double,
+        const double, const double, const double, const Color&);
+
+*/
+    /* getters */
+/*
+    Vector3 getMin() const;
+    Vector3 getMax() const;
+
+*/
+    /* setters */
+/*
+    bool setMin(const Vector3&);
+    bool setMin(const double, const double, const double);
+
+    bool setMax(const Vector3&);
+    bool setMax(const double, const double, const double);
+
+*/
+    /* class methods */
+/*
+    Vector3 getNormal(const Vector3&) const;
+    float rayHitPosition();
+};
+*/
 
 #endif

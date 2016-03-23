@@ -3,31 +3,27 @@
 /* constructors */
 
 Disk::Disk() {
-    Color col;
-    setDisk(0, 1, 0, 0, 0, 0, 1, col);
+    setNormal(0, 1, 0); setCenter(0, 0, 0); setRadius(1); setColor();
 }
 
 Disk::Disk(const Vector3& n, const Vector3& c, const float r) {
-    Color col;
-    setDisk(n, c, r, col);
+    setNormal(n); setCenter(c); setRadius(r); setColor();
 }
 
 Disk::Disk(const Vector3& n, const Vector3& c, const float r, const Color& col) {
-    setDisk(n, c, r, col);
+    setNormal(n); setCenter(c); setRadius(r); setColor(col);
 }
 
 Disk::Disk(const double nx, const double ny, const double nz,
            const double cx, const double cy, const double cz,
            const float r) {
-    Color col;
-    setDisk(nx, ny, nz, cx, cy, cz, r, col);
-
+    setNormal(nx, ny, nz); setCenter(cx, cy, cz); setRadius(r); setColor();
 }
 
 Disk::Disk(const double nx, const double ny, const double nz,
            const double cx, const double cy, const double cz,
            const float r, const Color& col) {
-    setDisk(nx, ny, nz, cx, cy, cz, r, col);
+    setNormal(nx, ny, nz); setCenter(cx, cy, cz); setRadius(r); setColor(col);
 }
 
 
@@ -71,43 +67,6 @@ bool Disk::setRadius(const float r) {
     radius = r;
     return true;
 
-}
-
-bool Disk::setDisk(const Vector3& n, const Vector3& c, const float r) {
-    if (setNormal(n) && setCenter(c) && setRadius(r))
-        return true;
-
-    return false;
-}
-
-bool Disk::setDisk(const Vector3& n, const Vector3& c,  const float r,
-                   const Color& col) {
-    if (setDisk(n, c, r) && setColor(col))
-        return true;
-
-    return false;
-}
-
-bool Disk::setDisk(const double nx, const double ny, const double nz,
-                   const double cx, const double cy, const double cz,
-                   const float r) {
-    Vector3 n(nx, ny, nz);
-    Vector3 c(cx, cy, cz);
-    if (setDisk(n, c, r))
-        return true;
-
-    return false;
-}
-
-bool Disk::setDisk(const double nx, const double ny, const double nz,
-                   const double cx, const double cy, const double cz,
-                   const float r, const Color& col) {
-    Vector3 n(nx, ny, nz);
-    Vector3 c(cx, cy, cz);
-    if (setDisk(n, c, r) && setColor(col))
-        return true;
-
-    return false;
 }
 
 
