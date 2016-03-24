@@ -48,7 +48,7 @@ bool PointLight::setLocation(const double X, const double Y, const double Z) {
 /* class methods */
 
 Vector3 PointLight::getDirection(const Vector3& hitPos) const {
-    return (hitPos - getLocation()).makeUnitVector();
+    return (hitPos - getLocation()).normalize();
 
 }
 

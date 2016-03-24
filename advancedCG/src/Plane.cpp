@@ -36,7 +36,7 @@ Vector3 Plane::getPoint() const { return point; }
 /* setters */
 
 bool Plane::setNormal(const Vector3& n) {
-    normal = n.makeUnitVector(); return true;
+    normal = n.normalize(); return true;
 }
 
 bool Plane::setNormal(const double X, const double Y, const double Z) {

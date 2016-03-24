@@ -39,7 +39,7 @@ double Vector3::getMagnitudeSquared() const {
     return magnitude;
 }
 
-Vector3 Vector3::makeUnitVector() const {
+Vector3 Vector3::normalize() const {
     double magnitude = getMagnitude();
 
     Vector3 vector;

@@ -48,6 +48,7 @@ class Color {
     float getb() const;
     float geta() const;
 
+
     /* class methods */
 
     /*
@@ -59,6 +60,17 @@ class Color {
     call white.scale(0.5)
     */
     Color scale(const float) const;
+
+
+    /* operator overloads */
+    Color operator+(const Color&) const;
+    Color operator-(const Color&) const;
+    Color operator*(const Color&) const;
+    Color operator*(const float) const;
+    Color operator/(const Color&) const;
+    Color operator/(const float) const;
+    bool operator==(const Color&) const;
+    bool operator!=(const Color&) const;
 };
 
 #endif

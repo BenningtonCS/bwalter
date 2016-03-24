@@ -86,7 +86,7 @@ class Vector3 {
 
     Convert a Vector3 into a unit vector
     */
-    Vector3 makeUnitVector() const;
+    Vector3 normalize() const;
 
     /*
     Parameters: None

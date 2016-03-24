@@ -35,7 +35,7 @@ Vector3 DirectionalLight::getDirection() const {return direction; }
 /* setters */
 
 bool DirectionalLight::setDirection(const Vector3& dir) {
-    direction = dir.makeUnitVector();
+    direction = dir.normalize();
     return true;
 }
 bool DirectionalLight::setDirection(const double X, const double Y,

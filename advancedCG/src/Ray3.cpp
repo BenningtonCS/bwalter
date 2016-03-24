@@ -30,7 +30,7 @@ bool Ray3::setOrigin(const Vector3& orig) {
 }
 
 bool Ray3::setDirection(const Vector3& dir) {
-    direction = dir.makeUnitVector();
+    direction = dir.normalize();
     return true;
 }
 
@@ -42,7 +42,7 @@ bool Ray3::setOrigin(const double X, const double Y, const double Z) {
 
 bool Ray3::setDirection(const double X, const double Y, const double Z) {
     Vector3 dir(X, Y, Z);
-    direction = dir.makeUnitVector();
+    direction = dir.normalize();
     return true;
 }
 

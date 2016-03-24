@@ -67,5 +67,10 @@ Vector3 Box::getNormal(const Vector3& hitPos) const {
 }
 
 float Box::rayHitPosition(const Ray3& ray) const {
-    return 0;
+    /*
+    for (int i=0;i<6;i++) {
+        Vector3 normal();
+        Plane planemin(normal, min);
+    }
+    */
 }

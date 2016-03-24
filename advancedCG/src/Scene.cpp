@@ -45,7 +45,7 @@ bool Scene::addLight(Light* l) {
 /* class methods */
 
 Color Scene::sendRay(const Ray3& ray) const {
-    Color color;
+    Color color(0, 0, 0, 1);
 
     float closestT = std::numeric_limits<float>::max();
     Object* closestObj;
@@ -55,32 +55,40 @@ Color Scene::sendRay(const Ray3& ray) const {
 
         float t = objs[i]->rayHitPosition(ray);
 
-        // if it does, move through every light in the scene and check the
-        // intensity of the light
+        // check for the closest object
         if (t < closestT && t != -1) {
-
             closestT = t;
             closestObj = objs[i];
         }
     }
 
+    // if an object has been hit by the run, move through the lights in the
+    // scene and add them up
     if (closestT < std::numeric_limits<float>::max()) {
         Vector3 hitPos = ray.rayAtT(closestT);
 
         for (unsigned int j=0; j<lights.size(); j++) {
 
-            // TODO: actually add the lights
 
             float intensity = lights[j]->getIntensity(hitPos, *closestObj);
             if (intensity < closestObj->getMaterial().getAmbient())
                 intensity = closestObj->getMaterial().getAmbient();
 
             // get the color of the object at that point with lights
-            color.setColor(closestObj->getColor().getr()*intensity,
-                           closestObj->getColor().getg()*intensity,
-                           closestObj->getColor().getb()*intensity,
-                           closestObj->getColor().geta());
+
+            // Color of object * Color of light1 * intensity of light1 at point
+            // + Color of object * Color of light2 * intensity of light2 at point
+
+            float newr = color.getr() + closestObj->getColor().getr() *
+                         lights[j]->getColor().getr() * intensity;
+            float newg = color.getg() + closestObj->getColor().getg() *
+                         lights[j]->getColor().getg() * intensity;
+            float newb = color.getb() + closestObj->getColor().getb() *
+                         lights[j]->getColor().getb() * intensity;
+
+            color.setColor(newr, newg, newb, closestObj->getColor().geta());
         }
+
         return color;
     }
 

@@ -37,7 +37,7 @@ float Disk::getRadius() const { return radius; }
 /* setters */
 
 bool Disk::setNormal(const Vector3& n) {
-    normal = n.makeUnitVector(); return true;
+    normal = n.normalize(); return true;
 }
 
 bool Disk::setNormal(const double X, const double Y, const double Z) {
