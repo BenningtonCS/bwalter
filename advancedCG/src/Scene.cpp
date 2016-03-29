@@ -56,7 +56,7 @@ Color Scene::sendRay(const Ray3& ray) const {
         float t = objs[i]->rayHitPosition(ray);
 
         // check for the closest object
-        if (t < closestT && t != -1) {
+        if (t < closestT && t >= 0) {
             closestT = t;
             closestObj = objs[i];
         }

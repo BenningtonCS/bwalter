@@ -72,6 +72,9 @@ Color Color::scale(const float s) const {
     return col;
 }
 
+void Color::printColor() const {
+    printf("(%.2f, %.2f, %.2f, %.2f)\n", getr(), getg(), getb(), geta());
+}
 
 /* operator overloads */
 Color Color::operator+(const Color& col) const {
