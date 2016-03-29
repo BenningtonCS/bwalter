@@ -9,6 +9,8 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <math.h>
+
 #include <Vector3.h>
 #include <Canvas.h>
 #include <Ray3.h>
@@ -16,21 +18,13 @@
 class Scene;
 
 class Camera {
-  protected:
+protected:
     Vector3 location;   // Location of the camera (0, 0, -10) by default
     Vector3 lookAt;     // Where the camera is looking (0, 0, 0) by default
     Canvas canvas;      // 800x600 pixel image by default
     float pixelSize;    // size of each pixel in the world
 
   public:
-
-    /* constructors */
-
-    Camera();
-    Camera(const Vector3&, const Vector3&);           // location, lookAt
-    Camera(const double, const double, const double,  // location as (x, y, z)
-           const double, const double, const double); // lookAt as (x, y, z)
-
 
     /* getters */
 
@@ -82,8 +76,45 @@ class Camera {
 
     Renders a scene and writes it to a .bmp file
     */
-    void render(const Scene&, const char*);
-
+    virtual void render(const Scene&, const char*);
 };
+
+
+class OrthographicCam: public Camera {
+
+  public:
+    /* constructors */
+
+    OrthographicCam();
+    OrthographicCam(const Vector3&, const Vector3&);        // location, lookAt
+    OrthographicCam(const double, const double, const double,  // location
+                    const double, const double, const double); // lookAt
+
+
+    void render(const Scene&, const char*);
+};
+
+
+class PerspectiveCam: public Camera {
+  protected:
+    double FOV;
+
+    double getDistance() const;
+
+  public:
+    PerspectiveCam();
+    PerspectiveCam(const Vector3&, const Vector3&, const double);
+    PerspectiveCam(const double, const double, const double,  // location
+                   const double, const double, const double, // lookAt
+                   const double);
+
+
+    double getFOV() const;
+
+    bool setFOV(const double);
+
+    void render(const Scene&, const char*);
+};
+
 
 #endif
