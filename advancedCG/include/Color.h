@@ -9,6 +9,8 @@
 #ifndef COLOR_H
 #define COLOR_H
 
+#include <stdio.h>
+
 class Color {
 
   protected:
@@ -60,6 +62,8 @@ class Color {
     call white.scale(0.5)
     */
     Color scale(const float) const;
+
+    void printColor() const;
 
 
     /* operator overloads */
