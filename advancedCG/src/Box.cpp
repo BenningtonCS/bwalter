@@ -21,7 +21,7 @@ Box::Box(const double x1, const double y1, const double z1,
 }
 
 Box::Box(const double x1, const double y1, const double z1,
-         const double x2, const double y2, const double z1, const Color& col) {
+         const double x2, const double y2, const double z2, const Color& col) {
     setMin(x1, y1, z1); setMax(x2, y2, z2); setColor(col);
 }
 
@@ -39,7 +39,7 @@ bool Box::setMin(const Vector3& m) {
 }
 
 bool Box::setMin(const double X, const double Y, const double Z) {
-    Vector m(X, Y, Z);
+    Vector3 m(X, Y, Z);
     if (setMin(m))
         return true;
 
@@ -51,7 +51,7 @@ bool Box::setMax(const Vector3& m) {
 }
 
 bool Box::setMax(const double X, const double Y, const double Z) {
-    Vector m(X, Y, Z);
+    Vector3 m(X, Y, Z);
     if (setMax(m))
         return true;
 
@@ -67,10 +67,26 @@ Vector3 Box::getNormal(const Vector3& hitPos) const {
 }
 
 float Box::rayHitPosition(const Ray3& ray) const {
-    /*
-    for (int i=0;i<6;i++) {
-        Vector3 normal();
-        Plane planemin(normal, min);
-    }
-    */
+
+    // create 6 planes making up the box
+    Plane txmin(-1, 0, 0, min.getx(), 0, 0);
+    Plane txmax(1, 0, 0, max.getx(), 0, 0);
+
+    Plane tymin(0, -1, 0, 0, min.gety(), 0);
+    Plane tymax(0, 1, 0, 0, max.gety(), 0);
+
+    Plane tzmin(0, 0, -1, 0, 0, min.getz());
+    Plane tzmax(0, 0, 1, 0, 0, max.getz());
+
+    // get the points where the ray intersects with the planes in x
+    float tx0 = txmin.rayHitPosition(ray);
+    float tx1 = txmax.rayHitPosition(ray);
+
+    float ty0 = tymin.rayHitPosition(ray);
+    float ty1 = tymax.rayHitPosition(ray);
+
+    float tz0 = tzmin.rayHitPosition(ray);
+    float tz1 = tzmax.rayHitPosition(ray);
+
+
 }

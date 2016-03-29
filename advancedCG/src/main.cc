@@ -10,6 +10,7 @@ int main(void) {
 
 
     Color red(1, 0, 0, 1);
+    Color yellow(1, 1, 0, 1);
     Color green(0, 1, 0, 1);
     Color blue(0, 0, 1, 1);
     Color white(1, 1, 1, 1);
@@ -21,6 +22,8 @@ int main(void) {
     sphere1.setMaterial(mat);
     sphere2.setMaterial(mat);
 
+    Box box;
+
     Plane plane(0, 1, -1, 0, 0, 100, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
 
@@ -30,7 +33,7 @@ int main(void) {
     Vector3 dir2(-80, -100, -50);
     PointLight light2(dir2);
 
-    light2.setColor(green);
+    light.setColor(green);
 
     Camera cam;
 
@@ -38,9 +41,10 @@ int main(void) {
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
     scene.addObject(&plane);
+//    scene.addObject(&box);
 //    scene.addObject(&disk);
     scene.addLight(&light);
-    scene.addLight(&light2);
+        scene.addLight(&light2);
 
     cam.render(scene, "sphere.bmp");
 }
