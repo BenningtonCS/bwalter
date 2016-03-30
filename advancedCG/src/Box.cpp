@@ -63,30 +63,80 @@ bool Box::setMax(const double X, const double Y, const double Z) {
 
 Vector3 Box::getNormal(const Vector3& hitPos) const {
     Vector3 normal;
+    Vector3 m = min - hitPos;
+
+    if (m.getx() <= 0.0001) normal.setVector(-1, 0, 0);
+    if (m.gety() <= 0.0001) normal.setVector(0, -1, 0);
+    if (m.getz() <= 0.0001) normal.setVector(0, 0, -1);
+
+    if (hitPos.getx() == max.getx()) normal.setVector(1, 0, 0);
+    if (hitPos.gety() == max.gety()) normal.setVector(0, 1, 0);
+    if (hitPos.getz() == max.getz()) normal.setVector(0, 0, 1);
+
     return normal;
 }
 
 float Box::rayHitPosition(const Ray3& ray) const {
 
-    // create 6 planes making up the box
-    Plane txmin(-1, 0, 0, min.getx(), 0, 0);
-    Plane txmax(1, 0, 0, max.getx(), 0, 0);
+    float t = -1;
 
-    Plane tymin(0, -1, 0, 0, min.gety(), 0);
-    Plane tymax(0, 1, 0, 0, max.gety(), 0);
+    float denom = ray.getDirection().getx();
+    float tx0 = (min.getx() - ray.getOrigin().getx()) / denom;
+    float tx1 = (max.getx() - ray.getOrigin().getx()) / denom;
 
-    Plane tzmin(0, 0, -1, 0, 0, min.getz());
-    Plane tzmax(0, 0, 1, 0, 0, max.getz());
+    float tx0Real, tx1Real;
+    if (tx0 < tx1) {
+        tx0Real = tx0;
+        tx1Real = tx1;
+    } else {
+        tx0Real = tx1;
+        tx1Real = tx0;
+    }
 
-    // get the points where the ray intersects with the planes in x
-    float tx0 = txmin.rayHitPosition(ray);
-    float tx1 = txmax.rayHitPosition(ray);
+    denom = ray.getDirection().gety();
+    float ty0 = (min.gety() - ray.getOrigin().gety()) / denom;
+    float ty1 = (max.gety() - ray.getOrigin().gety()) / denom;
 
-    float ty0 = tymin.rayHitPosition(ray);
-    float ty1 = tymax.rayHitPosition(ray);
+    float ty0Real, ty1Real;
+    if (ty0 < ty1) {
+        ty0Real = ty0;
+        ty1Real = ty1;
+    } else {
+        ty0Real = ty1;
+        ty1Real = ty0;
+    }
 
-    float tz0 = tzmin.rayHitPosition(ray);
-    float tz1 = tzmax.rayHitPosition(ray);
+    denom = ray.getDirection().getz();
+    float tz0 = (min.getz() - ray.getOrigin().getz()) / denom;
+    float tz1 = (max.getz() - ray.getOrigin().getz()) / denom;
+
+    float tz0Real, tz1Real;
+    if (tz0 < tz1) {
+        tz0Real = tz0;
+        tz1Real = tz1;
+    } else {
+        tz0Real = tz1;
+        tz1Real = tz0;
+    }
 
 
+    // misses the box
+    if (tx1Real < ty0Real || tx1Real < tz0Real ||
+        ty1Real < tx0Real || ty1Real < tz0Real ||
+        tz1Real < tx0Real || tz1Real < ty0Real) {
+
+        return t;
+    }
+
+    // hits the box
+    if (tx0Real >= ty0Real && tx0Real >= tz0Real) t = tx0Real;
+    if (ty0Real >= tx0Real && ty0Real >= tz0Real) t = ty0Real;
+    if (tz0Real >= tx0Real && tz0Real >= ty0Real) t = tz0Real;
+/*
+    printf("%.2f\t%.2f\n", tx0Real, tx1Real);
+    printf("%.2f\t%.2f\n", ty0Real, ty1Real);
+    printf("%.2f\t%.2f\n", tz0Real, tz1Real);
+    printf("\n");
+*/
+    return t;
 }
