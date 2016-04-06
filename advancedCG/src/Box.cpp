@@ -78,8 +78,6 @@ Vector3 Box::getNormal(const Vector3& hitPos) const {
 
 float Box::rayHitPosition(const Ray3& ray) const {
 
-    float t = -1;
-
     float denom = ray.getDirection().getx();
     float tx0 = (min.getx() - ray.getOrigin().getx()) / denom;
     float tx1 = (max.getx() - ray.getOrigin().getx()) / denom;
@@ -119,6 +117,7 @@ float Box::rayHitPosition(const Ray3& ray) const {
         tz1Real = tz0;
     }
 
+    float t = -1;
 
     // misses the box
     if (tx1Real < ty0Real || tx1Real < tz0Real ||
@@ -132,11 +131,6 @@ float Box::rayHitPosition(const Ray3& ray) const {
     if (tx0Real >= ty0Real && tx0Real >= tz0Real) t = tx0Real;
     if (ty0Real >= tx0Real && ty0Real >= tz0Real) t = ty0Real;
     if (tz0Real >= tx0Real && tz0Real >= ty0Real) t = tz0Real;
-/*
-    printf("%.2f\t%.2f\n", tx0Real, tx1Real);
-    printf("%.2f\t%.2f\n", ty0Real, ty1Real);
-    printf("%.2f\t%.2f\n", tz0Real, tz1Real);
-    printf("\n");
-*/
+
     return t;
 }

@@ -2,6 +2,7 @@
 
 #include <Scene.h>
 
+
 /* constructors */
 
 Scene::Scene(const Camera& cam) {
@@ -62,23 +63,21 @@ Color Scene::sendRay(const Ray3& ray) const {
         }
     }
 
-    // if an object has been hit by the run, move through the lights in the
+    // if an object has been hit by the ray, move through the lights in the
     // scene and add them up
     if (closestT < std::numeric_limits<float>::max()) {
         Vector3 hitPos = ray.rayAtT(closestT);
 
         for (unsigned int j=0; j<lights.size(); j++) {
 
+            // check if object is in shadow
 
+            // get the intensity of the light on the object
             float intensity = lights[j]->getIntensity(hitPos, *closestObj);
             if (intensity < closestObj->getMaterial().getAmbient())
                 intensity = closestObj->getMaterial().getAmbient();
 
             // get the color of the object at that point with lights
-
-            // Color of object * Color of light1 * intensity of light1 at point
-            // + Color of object * Color of light2 * intensity of light2 at point
-
             float newr = color.getr() + closestObj->getColor().getr() *
                          lights[j]->getColor().getr() * intensity;
             float newg = color.getg() + closestObj->getColor().getg() *

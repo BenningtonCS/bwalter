@@ -2,6 +2,17 @@
 #include <Scene.h>
 
 
+/* C A M E R A */
+
+bool Camera::setUVW(const Vector3& u, const Vector3& v, const Vector3& w) {
+    this->u = u; this->v = v; this->w = w;
+    return true;
+}
+
+Vector3 Camera::getu() const { return u; }
+Vector3 Camera::getv() const { return v; }
+Vector3 Camera::getw() const { return w; }
+
 Vector3 Camera::getLocation() const { return location; }
 Vector3 Camera::getLookAt() const { return lookAt; }
 Canvas Camera::getCanvas() const { return canvas; }
@@ -49,6 +60,24 @@ bool Camera::setPixelSize(const float size) {
 
 void Camera::render(const Scene&, const char*) {}
 
+void Camera::setupUVW() {
+    Vector3 y(0, 1, 0);
+    Vector3 w = (getLookAt() - getLocation()).normalize();
+    Vector3 u = y.cross(w).normalize();
+    Vector3 v = w.cross(u).normalize();
+
+    setUVW(u, v, w);
+}
+
+Vector3 Camera::vectorToWorldCoordinates(const Vector3& v) const {
+    Vector3 U = getu(); Vector3 V = getv(); Vector3 W = getw();
+    return U*v.getx() + V*v.gety() + W*v.getz();
+}
+
+Vector3 Camera::pointToWorldCoordinates(const Vector3& point) const {
+	return vectorToWorldCoordinates(point) + location;
+}
+
 
 /* O R T H O G R A P H I C   C A M E R A */
 
@@ -74,12 +103,15 @@ OrthographicCam::OrthographicCam(
 
 void OrthographicCam::render(const Scene& scene, const char* fileName) {
 
+    setupUVW();
+
     int width = canvas.getWidth();
     int height = canvas.getHeight();
 
-    Vector3 origin(0, 0, 0);
-    Vector3 direction(0, 0, 1);
-    Ray3 ray(origin, direction);
+    Vector3 orig(0, 0, 0), dir(0, 0, 1);
+    Vector3 direction = vectorToWorldCoordinates(dir);
+
+    Ray3 ray(orig, direction);
 
     // move through the scene starting from the upper left to the lower right
     // left of the center of the image has -x coordinates and right has +x
@@ -87,7 +119,8 @@ void OrthographicCam::render(const Scene& scene, const char* fileName) {
     for (float x = -width/2; x < width/2; x++) {
         for (float y = -height/2; y < height/2; y++) {
 
-            origin.setVector(x + pixelSize/2, -y - pixelSize/2, 0);
+            orig.setVector(x + pixelSize/2, -y - pixelSize/2, 0);
+            Vector3 origin = vectorToWorldCoordinates(orig);
             ray.setOrigin(origin);
 
             Color color = scene.sendRay(ray);
@@ -144,11 +177,15 @@ bool PerspectiveCam::setFOV(const double fov) {
 }
 
 void PerspectiveCam::render(const Scene& scene, const char* fileName) {
+
+    setupUVW();
+
     int width = canvas.getWidth();
     int height = canvas.getHeight();
 
-    Vector3 origin(0, 0, -getDistance());
-    Vector3 direction(0, 0, 1);
+    Vector3 orig(0, 0, -getDistance());
+    Vector3 origin = pointToWorldCoordinates(orig);
+    Vector3 dir, direction;
     Ray3 ray(origin, direction);
 
     // move through the scene starting from the upper left to the lower right
@@ -159,7 +196,8 @@ void PerspectiveCam::render(const Scene& scene, const char* fileName) {
 
             Vector3 pixelLocation(x + pixelSize/2, -y - pixelSize/2, 0);
 
-            direction = (pixelLocation - origin).normalize();
+            dir = (pixelLocation - orig).normalize();
+            direction = vectorToWorldCoordinates(dir);
             ray.setDirection(direction);
 
             Color color = scene.sendRay(ray);

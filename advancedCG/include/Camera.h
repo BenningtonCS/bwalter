@@ -18,11 +18,15 @@
 class Scene;
 
 class Camera {
-protected:
+  protected:
     Vector3 location;   // Location of the camera (0, 0, -10) by default
     Vector3 lookAt;     // Where the camera is looking (0, 0, 0) by default
     Canvas canvas;      // 800x600 pixel image by default
     float pixelSize;    // size of each pixel in the world
+
+    Vector3 u, v, w;    // orthonormal basis
+
+    bool setUVW(const Vector3&, const Vector3&, const Vector3&);
 
   public:
 
@@ -37,6 +41,10 @@ protected:
     Vector3 getLookAt() const;
     Canvas getCanvas() const;
     float getPixelSize() const;
+
+    Vector3 getu() const;
+    Vector3 getv() const;
+    Vector3 getw() const;
 
 
     /* setters */
@@ -67,7 +75,6 @@ protected:
     */
     bool setPixelSize(const float);
 
-
     /* class methods */
 
     /*
@@ -77,6 +84,13 @@ protected:
     Renders a scene and writes it to a .bmp file
     */
     virtual void render(const Scene&, const char*);
+
+    /* Set up orthonormal basis */
+    void setupUVW();
+
+    Vector3 vectorToWorldCoordinates(const Vector3&) const;
+    Vector3 pointToWorldCoordinates(const Vector3&) const;
+
 };
 
 
@@ -115,6 +129,5 @@ class PerspectiveCam: public Camera {
 
     void render(const Scene&, const char*);
 };
-
 
 #endif
