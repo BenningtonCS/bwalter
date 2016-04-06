@@ -61,7 +61,7 @@ Vector3 Sphere::getNormal(const Vector3& hitPos) const {
     return normal;
 }
 
-float Sphere::rayHitPosition(const Ray3& ray) const {
+double Sphere::rayHitPosition(const Ray3& ray) const {
 
     // thanks to
     // http://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-

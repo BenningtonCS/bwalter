@@ -49,7 +49,7 @@ class Object {
       /* class methods */
 
       /* methods overloaded in child classes */
-      virtual float rayHitPosition(const Ray3&) const;
+      virtual double rayHitPosition(const Ray3&) const;
       virtual Vector3 getNormal(const Vector3&) const;
 };
 
@@ -119,7 +119,7 @@ class Sphere: public Object {
 
     Check if a ray intersects with the sphere.
     */
-    float rayHitPosition(const Ray3&) const;
+    double rayHitPosition(const Ray3&) const;
 };
 
 
@@ -183,7 +183,7 @@ class Plane: public Object {
 
     Check if a ray intersects with the plane
     */
-    float rayHitPosition(const Ray3&) const;
+    double rayHitPosition(const Ray3&) const;
 };
 
 
@@ -231,7 +231,7 @@ class Disk: public Object {
     /* class methods */
     Vector3 getNormal(const Vector3&) const;
 
-    float rayHitPosition(const Ray3&) const;
+    double rayHitPosition(const Ray3&) const;
 };
 
 
@@ -273,7 +273,7 @@ class Box: public Object {
     /* class methods */
 
     Vector3 getNormal(const Vector3&) const;
-    float rayHitPosition(const Ray3&) const;
+    double rayHitPosition(const Ray3&) const;
 };
 
 #endif

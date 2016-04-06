@@ -66,7 +66,7 @@ Vector3 Plane::getNormal(const Vector3& hitPos) const {
     return getNormal();
 }
 
-float Plane::rayHitPosition(const Ray3& ray) const {
+double Plane::rayHitPosition(const Ray3& ray) const {
 
     float denom = getNormal() * ray.getDirection();
     if (denom != 0)

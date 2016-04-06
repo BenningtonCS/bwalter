@@ -75,7 +75,7 @@ Vector3 Disk::getNormal(const Vector3& hitPos) const {
     return normal;
 }
 
-float Disk::rayHitPosition(const Ray3& ray) const {
+double Disk::rayHitPosition(const Ray3& ray) const {
     // create a plane over the disk and check if the ray hits the plane
     Plane plane(getNormal(), getCenter());
     float t = plane.rayHitPosition(ray);

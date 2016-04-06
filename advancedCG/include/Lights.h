@@ -27,6 +27,8 @@ class Light {
     /* class methods */
 
     virtual float getIntensity(const Vector3&, const Object&) const;
+    virtual Vector3 getDirection() const;
+    virtual Vector3 getDirection(const Vector3&) const;
 };
 
 class DirectionalLight: public Light {
@@ -49,6 +51,7 @@ class DirectionalLight: public Light {
     /* getters */
 
     Vector3 getDirection() const;
+    Vector3 getDirection(const Vector3&) const;
 
 
     /* setters */

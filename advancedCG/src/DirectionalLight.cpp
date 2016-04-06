@@ -30,6 +30,9 @@ bool DirectionalLight::setDirection() {
 /* getters */
 
 Vector3 DirectionalLight::getDirection() const {return direction; }
+Vector3 DirectionalLight::getDirection(const Vector3& tmp) const {
+    return direction;
+}
 
 
 /* setters */

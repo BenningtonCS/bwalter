@@ -76,7 +76,7 @@ Vector3 Box::getNormal(const Vector3& hitPos) const {
     return normal;
 }
 
-float Box::rayHitPosition(const Ray3& ray) const {
+double Box::rayHitPosition(const Ray3& ray) const {
 
     float denom = ray.getDirection().getx();
     float tx0 = (min.getx() - ray.getOrigin().getx()) / denom;

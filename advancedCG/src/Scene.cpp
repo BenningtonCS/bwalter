@@ -48,15 +48,15 @@ bool Scene::addLight(Light* l) {
 Color Scene::sendRay(const Ray3& ray) const {
     Color color(0, 0, 0, 1);
 
-    float closestT = std::numeric_limits<float>::max();
+    double closestT = std::numeric_limits<double>::max();
     Object* closestObj;
 
     // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
 
-        float t = objs[i]->rayHitPosition(ray);
+        double t = objs[i]->rayHitPosition(ray);
 
-        // check for the closest object
+        // find the closest object
         if (t < closestT && t >= 0) {
             closestT = t;
             closestObj = objs[i];
@@ -65,28 +65,58 @@ Color Scene::sendRay(const Ray3& ray) const {
 
     // if an object has been hit by the ray, move through the lights in the
     // scene and add them up
-    if (closestT < std::numeric_limits<float>::max()) {
+    if (closestT < std::numeric_limits<double>::max()) {
         Vector3 hitPos = ray.rayAtT(closestT);
 
         for (unsigned int j=0; j<lights.size(); j++) {
 
             // check if object is in shadow
+            //Vector3 v(0, 0.001, 0);
+            Vector3 shadowOrigin = ray.rayAtT(closestT);// + v;
+            Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
+            Ray3 shadowRay(shadowOrigin, shadowDirection);
+
+            double t = -1;
+            bool isInShadow = false;
+            for (unsigned int i=0; i<objs.size(); i++) {
+                //if (objs[i] != closestObj) {
+                    t = objs[i]->rayHitPosition(shadowRay);
+if (t < 1 && t > 0.01) {
+    printf("%.2f\t", t);
+}
+
+                    if (t > 1) {
+                        isInShadow = true;
+                    }
+                //}
+            }
+
+            if (isInShadow) continue;
 
             // get the intensity of the light on the object
+            float diffuse = 1 - closestObj->getMaterial().getAmbient();
             float intensity = lights[j]->getIntensity(hitPos, *closestObj);
-            if (intensity < closestObj->getMaterial().getAmbient())
-                intensity = closestObj->getMaterial().getAmbient();
 
             // get the color of the object at that point with lights
             float newr = color.getr() + closestObj->getColor().getr() *
-                         lights[j]->getColor().getr() * intensity;
+                         lights[j]->getColor().getr() * diffuse * intensity;
             float newg = color.getg() + closestObj->getColor().getg() *
-                         lights[j]->getColor().getg() * intensity;
+                         lights[j]->getColor().getg() * diffuse * intensity;
             float newb = color.getb() + closestObj->getColor().getb() *
-                         lights[j]->getColor().getb() * intensity;
+                         lights[j]->getColor().getb() * diffuse * intensity;
 
             color.setColor(newr, newg, newb, closestObj->getColor().geta());
+
         }
+
+        // get the color of the object at that point with lights
+        float ambient = closestObj->getMaterial().getAmbient();
+        float newr = color.getr() + closestObj->getColor().getr() * ambient;
+        float newg = color.getg() + closestObj->getColor().getg() * ambient;
+        float newb = color.getb() + closestObj->getColor().getb() * ambient;
+
+        color.setColor(newr, newg, newb, closestObj->getColor().geta());
+
 
         return color;
     }

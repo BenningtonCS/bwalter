@@ -34,3 +34,11 @@ bool Light::setColor(const float r, const float g, const float b,
 float Light::getIntensity(const Vector3& hitPos, const Object& obj) const {
     return 1;
 }
+
+Vector3 Light::getDirection() const {
+    Vector3 v; return v;
+}
+
+Vector3 Light::getDirection(const Vector3&) const {
+    Vector3 v; return v;
+}
