@@ -1,6 +1,9 @@
 #include <Color.h>
 
 Color::Color() { r=1; g=1; b=1; a=1; }
+Color::Color(const Color& c) {
+    r = c.getr(); g = c.getg(); b = c.getb(); a = c.geta();
+}
 Color::Color(const float red, const float green, const float blue) {
     setColor(red, green, blue, 1);
 }
@@ -39,6 +42,12 @@ bool Color::seta(const float alpha) {
     else a = alpha;
 
     return true;
+}
+
+bool Color::setColor(const Color& c) {
+    if (setr(c.getr()) && setg(c.getg()) && setb(c.getb()) && seta(c.geta()))
+        return true;
+    return false;
 }
 
 bool Color::setColor(const float red, const float green, const float blue) {

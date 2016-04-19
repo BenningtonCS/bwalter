@@ -71,24 +71,17 @@ Color Scene::sendRay(const Ray3& ray) const {
         for (unsigned int j=0; j<lights.size(); j++) {
 
             // check if object is in shadow
-            //Vector3 v(0, 0.001, 0);
-            Vector3 shadowOrigin = ray.rayAtT(closestT);// + v;
+            Vector3 shadowOrigin = ray.rayAtT(closestT);
             Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
             Ray3 shadowRay(shadowOrigin, shadowDirection);
 
             double t = -1;
             bool isInShadow = false;
             for (unsigned int i=0; i<objs.size(); i++) {
-                //if (objs[i] != closestObj) {
-                    t = objs[i]->rayHitPosition(shadowRay);
-if (t < 1 && t > 0.01) {
-    printf("%.2f\t", t);
-}
-
-                    if (t > 1) {
-                        isInShadow = true;
-                    }
-                //}
+                t = objs[i]->rayHitPosition(shadowRay);
+                if (t > 1) {
+                    isInShadow = true;
+                }
             }
 
             if (isInShadow) continue;
@@ -97,15 +90,9 @@ if (t < 1 && t > 0.01) {
             float diffuse = 1 - closestObj->getMaterial().getAmbient();
             float intensity = lights[j]->getIntensity(hitPos, *closestObj);
 
-            // get the color of the object at that point with lights
-            float newr = color.getr() + closestObj->getColor().getr() *
-                         lights[j]->getColor().getr() * diffuse * intensity;
-            float newg = color.getg() + closestObj->getColor().getg() *
-                         lights[j]->getColor().getg() * diffuse * intensity;
-            float newb = color.getb() + closestObj->getColor().getb() *
-                         lights[j]->getColor().getb() * diffuse * intensity;
-
-            color.setColor(newr, newg, newb, closestObj->getColor().geta());
+            Color newColor(color + closestObj->getColor() *
+                           lights[j]->getColor() * diffuse * intensity);
+            color.setColor(newColor);
 
         }
 

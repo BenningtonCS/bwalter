@@ -21,6 +21,7 @@ class Color {
     /* constructors */
 
     Color();
+    Color(const Color&);
     Color(const float, const float, const float);               // r, g, b
     Color(const float, const float, const float, const float);  // r, g, b, a
 
@@ -35,6 +36,7 @@ class Color {
     bool setg(const float);
     bool setb(const float);
     bool seta(const float);
+    bool setColor(const Color&);
     bool setColor(const float, const float, const float);              // rgb
     bool setColor(const float, const float, const float, const float); // rgba
 
