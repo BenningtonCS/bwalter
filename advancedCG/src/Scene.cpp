@@ -98,11 +98,8 @@ Color Scene::sendRay(const Ray3& ray) const {
 
         // get the color of the object at that point with lights
         float ambient = closestObj->getMaterial().getAmbient();
-        float newr = color.getr() + closestObj->getColor().getr() * ambient;
-        float newg = color.getg() + closestObj->getColor().getg() * ambient;
-        float newb = color.getb() + closestObj->getColor().getb() * ambient;
-
-        color.setColor(newr, newg, newb, closestObj->getColor().geta());
+        Color newColor(color + closestObj->getColor() * ambient);
+        color.setColor(newColor);
 
 
         return color;
