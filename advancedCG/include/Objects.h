@@ -20,22 +20,14 @@
 
 class Object {
   protected:
-      Color color;      // white by default
       Material material;
 
   public:
 
-      Object();
-
       /* getters */
 
-      /*
-      Parameters: None
-      Returns: The color of the object
-      */
-      Color getColor() const;
-
       Material getMaterial() const;
+      Color getColor() const;
 
       /* setters */
 

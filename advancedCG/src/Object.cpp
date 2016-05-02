@@ -1,14 +1,13 @@
 #include <Objects.h>
 
-Object::Object() { material.setAmbient(0); }
-
 /* getters */
 
-Color Object::getColor() const { return color; }
+Color Object::getColor() const { return material.getColor(); }
 Material Object::getMaterial() const { return material; }
 
 
 /* setters */
+
 bool Object::setColor() {
     Color c(1, 1, 1, 1);
     if (setColor(c))
@@ -27,8 +26,10 @@ bool Object::setColor(const float r, const float g, const float b,
 }
 
 bool Object::setColor(const Color& col) {
-    color = col;
-    return true;
+    if (material.setColor(col))
+        return true;
+
+    return false;
 }
 
 bool Object::setMaterial(const Material& mat) {
