@@ -87,11 +87,19 @@ Color Scene::sendRay(const Ray3& ray) const {
             if (isInShadow) continue;
 
             // get the intensity of the light on the object
-            float diffuse = 1 - closestObj->getMaterial().getAmbient();
-            float intensity = lights[j]->getIntensity(hitPos, *closestObj);
+            float diffuse = 1 - closestObj->getMaterial().getAmbient()
+                              - closestObj->getMaterial().getSpecular();
+
+            float intensity = lights[j]->getDiffuseIntensity(hitPos, *closestObj);
+
+            float specIntensity = lights[j]->getSpecularIntensity(hitPos,
+                                *closestObj, lights[j]->getDirection(), ray);
+
+    //        printf("%2.f\t", specIntensity);
 
             Color newColor(color + closestObj->getColor() *
-                           lights[j]->getColor() * diffuse * intensity);
+                           lights[j]->getColor() * (diffuse * intensity +
+                            closestObj->getMaterial().getSpecular() * specIntensity));
             color.setColor(newColor);
 
         }

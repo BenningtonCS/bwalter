@@ -1,6 +1,6 @@
 IDIR=include
 CC=g++
-CFLAGS=-Wall -I$(IDIR) -D_USE_MATH_DEFINES
+CFLAGS=-Wall -I$(IDIR) -D_USE_MATH_DEFINES -std=c++11
 SDIR=src
 OUT=main
 

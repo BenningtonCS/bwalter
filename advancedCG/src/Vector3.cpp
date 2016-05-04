@@ -11,9 +11,6 @@ Vector3::Vector3(double X, double Y, double Z) { setVector(X, Y, Z); }
 double Vector3::getx() const { return x; }
 double Vector3::gety() const { return y; }
 double Vector3::getz() const { return z; }
-void Vector3::getVector(double* X, double* Y, double* Z) const {
-    *X = x; *Y = y; *Z = z;
-}
 
 
 /* setters */

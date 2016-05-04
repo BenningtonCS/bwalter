@@ -5,6 +5,7 @@
 #include <Ray3.h>
 #include <Scene.h>
 #include <Vector3.h>
+//#include <Matrices.h>
 
 
 int main(void) {
@@ -15,12 +16,16 @@ int main(void) {
     Color blue(0, 0, 1, 1);
     Color white(1, 1, 1, 1);
 
-    Material mat(.01);
-
-    Sphere sphere1(0, 50, 0, 100, red);
+    Sphere sphere1(0, 50, 0, 100);
     Sphere sphere2(-170, -20, 200, 50, blue);
+
+    Material mat;
+    mat.setAmbient(0.05);
+    mat.setRoughness(0.5);
+    mat.setSpecular(0.5);
+    mat.setColor(red);
+
     sphere1.setMaterial(mat);
-    sphere2.setMaterial(mat);
 
     Box box;
     box.setMin(-300, -200, -200);
@@ -42,15 +47,28 @@ int main(void) {
 //    OrthographicCam cam;
     PerspectiveCam cam;
     cam.setLocation(-10, 0, -10);
+//    cam.setSampling(4, 1);
 
     Scene scene(cam);
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
-    scene.addObject(&plane);
+//    scene.addObject(&plane);
 //    scene.addObject(&box);
 //    scene.addObject(&disk);
     scene.addLight(&light);
     scene.addLight(&light2);
 
     cam.render(scene, "scene.bmp");
+/*
+    double m[4][4] =
+        {{1, 2, 3, 4},
+         {5, 6, 7, 8},
+         {9, 10, 11, 12},
+         {13, 14, 15, 16}};
+
+    Matrix4 matrix(m);
+
+    matrix.printMatrix();
+    printf("%.2f\n", matrix.det());
+*/
 }

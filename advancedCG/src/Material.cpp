@@ -5,11 +5,11 @@
 
 Material::Material() {
     Color white(1, 1, 1, 1);
-    setMaterial(white, 0);
+    setColor(white);
 }
 
-Material::Material(const Color& col, const float amb) {
-    setMaterial(col, amb);
+Material::Material(const Color& col) {
+    setColor(col);
 }
 
 
@@ -17,6 +17,8 @@ Material::Material(const Color& col, const float amb) {
 
 Color Material::getColor() const { return color; }
 float Material::getAmbient() const { return ambient; }
+float Material::getSpecular() const { return specular; }
+float Material::getRoughness() const { return roughness; }
 
 
 /* setters */
@@ -34,9 +36,19 @@ bool Material::setAmbient(const float amb) {
     return false;
 }
 
-bool Material::setMaterial(const Color& col, const float amb) {
-    if (setColor(col) && setAmbient(amb))
+bool Material::setSpecular(const float spec) {
+    if (0 <= spec && spec <= 1) {
+        specular = spec;
         return true;
+    }
+    return false;
+}
+
+bool Material::setRoughness(const float rough) {
+    if (rough >= 0) {
+        roughness = rough;
+        return true;
+    }
 
     return false;
 }

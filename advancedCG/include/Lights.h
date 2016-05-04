@@ -26,9 +26,11 @@ class Light {
 
     /* class methods */
 
-    virtual float getIntensity(const Vector3&, const Object&) const;
     virtual Vector3 getDirection() const;
     virtual Vector3 getDirection(const Vector3&) const;
+    virtual float getDiffuseIntensity(const Vector3&, const Object&) const;
+    float getSpecularIntensity(const Vector3&, const Object&,
+                               const Vector3&, const Ray3&) const;
 };
 
 class DirectionalLight: public Light {
@@ -62,7 +64,7 @@ class DirectionalLight: public Light {
 
     /* class methods */
 
-    float getIntensity(const Vector3&, const Object&) const;
+    float getDiffuseIntensity(const Vector3&, const Object&) const;
 };
 
 class PointLight: public Light {
@@ -95,7 +97,7 @@ class PointLight: public Light {
     /* class methods */
 
     Vector3 getDirection(const Vector3&) const;
-    float getIntensity(const Vector3&, const Object&) const;
+    float getDiffuseIntensity(const Vector3&, const Object&) const;
 };
 
 #endif

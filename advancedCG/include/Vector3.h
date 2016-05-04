@@ -37,13 +37,6 @@ class Vector3 {
     double gety() const;
     double getz() const;
 
-    /*
-    Parameters:
-        output: doubles to store x, y, and z coordinates
-    Returns: None
-    */
-    void getVector(double*, double*, double*) const;
-
 
     /* setters */
 

@@ -31,8 +31,23 @@ bool Light::setColor(const float r, const float g, const float b,
     return true;
 }
 
-float Light::getIntensity(const Vector3& hitPos, const Object& obj) const {
+float Light::getDiffuseIntensity(const Vector3& hitPos,
+                                 const Object& obj) const {
     return 1;
+}
+
+float Light::getSpecularIntensity(const Vector3& hitPos,
+                                  const Object& obj,
+                                  const Vector3& lightDir,
+                                  const Ray3& camDir) const {
+
+    Vector3 objNormal = obj.getNormal(hitPos);
+    Vector3 reflection(lightDir + objNormal*2*(lightDir*-1 * objNormal));
+
+    printf("%.2f\t", reflection * (camDir.getDirection()*-1));
+
+    return pow((reflection.normalize() * (camDir.getDirection()*-1)),
+                obj.getMaterial().getRoughness());
 }
 
 Vector3 Light::getDirection() const {

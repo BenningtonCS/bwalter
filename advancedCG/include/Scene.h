@@ -64,6 +64,9 @@ class Scene {
     bool addObject(Object*);
     bool addLight(Light*);
 
+
+    /* class methods */
+
     /*
     Parameters: Ray3 to shoot into the scene
     Returns: The color of the object it hits. If nothing is hit, this color
