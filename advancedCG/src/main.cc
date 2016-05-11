@@ -39,7 +39,7 @@ int main(void) {
 //    Vector3 dir(80, 200, -150);
     DirectionalLight light(dir);
 //    PointLight light(dir);
-    Vector3 dir2(-80, 200, -150);
+    Vector3 dir2(-80, 100, -150);
     PointLight light2(dir2);
 
 //    light.setColor(green);
@@ -55,7 +55,7 @@ int main(void) {
     scene.addObject(&plane);
 //    scene.addObject(&box);
 //    scene.addObject(&disk);
-    scene.addLight(&light);
+//    scene.addLight(&light);
     scene.addLight(&light2);
 
     cam.render(scene, "scene.bmp");

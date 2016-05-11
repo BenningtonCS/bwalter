@@ -74,7 +74,7 @@ Color Scene::sendRay(const Ray3& ray) const {
         for (unsigned int j=0; j<lights.size(); j++) {
 
             // check if object is in shadow
-            Vector3 shadowOrigin = ray.rayAtT(closestT);
+            Vector3 shadowOrigin = hitPos;
             Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
             Ray3 shadowRay(shadowOrigin, shadowDirection);
 
@@ -82,7 +82,7 @@ Color Scene::sendRay(const Ray3& ray) const {
             bool isInShadow = false;
             for (unsigned int i=0; i<objs.size(); i++) {
                 t = objs[i]->rayHitPosition(shadowRay);
-                if (t > 1) {
+                if (t > 1 && t < shadowDirection.getMagnitude()) {
                     isInShadow = true;
                 }
             }
