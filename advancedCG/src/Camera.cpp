@@ -17,6 +17,8 @@ Vector3 Camera::getLocation() const { return location; }
 Vector3 Camera::getLookAt() const { return lookAt; }
 Canvas Camera::getCanvas() const { return canvas; }
 float Camera::getPixelSize() const { return pixelSize; }
+int Camera::getNumSamples() const { return numSamples; }
+int Camera::getSampleType() const { return sampleType; }
 
 bool Camera::setLocation(const Vector3& loc) {
     location = loc;
@@ -52,6 +54,16 @@ bool Camera::setCanvas(const int width, const int height) {
 bool Camera::setPixelSize(const float size) {
     if (size > 0) {
         pixelSize = size;
+        return true;
+    }
+
+    return false;
+}
+
+bool Camera::setSampling(const int num, const int type) {
+    if (num >= 1 && (0 <= type || type <= 2)) {
+        numSamples = num;
+        sampleType = type;
         return true;
     }
 
@@ -101,6 +113,14 @@ OrthographicCam::OrthographicCam(
     setPixelSize(0.01);
 }
 
+Color OrthographicCam::simpleSample() const {
+//    int rows = floor(sqrt(numSamples));
+//    for (int i=0; i<numSamples; i++) {
+//    }
+    Color col;
+    return col;
+}
+
 void OrthographicCam::render(const Scene& scene, const char* fileName) {
 
     setupUVW();
@@ -119,15 +139,20 @@ void OrthographicCam::render(const Scene& scene, const char* fileName) {
     for (float x = -width/2; x < width/2; x++) {
         for (float y = -height/2; y < height/2; y++) {
 
-            orig.setVector(x + pixelSize/2, -y - pixelSize/2, 0);
-            Vector3 origin = vectorToWorldCoordinates(orig);
-            ray.setOrigin(origin);
+            if (sampleType == 1) {
+                simpleSample();
+            } else if (sampleType == 2) {
+            //    jitteredSample();
+            } else {
+                orig.setVector(x + pixelSize/2, -y - pixelSize/2, 0);
+                Vector3 origin = vectorToWorldCoordinates(orig);
+                ray.setOrigin(origin);
 
-            Color color = scene.sendRay(ray);
-
-            // set pixel colors, changing the upper left corner to have (x, y)
-            // coordinates of (0, 0) rather than the center
-            canvas.setPixel(x + width/2, y + height/2, color);
+                Color color = scene.sendRay(ray);
+                // set pixel colors, changing the upper left corner to have
+                // (x, y) coordinates of (0, 0) rather than the center
+                canvas.setPixel(x + width/2, y + height/2, color);
+            }
         }
     }
 

@@ -61,10 +61,6 @@ class DirectionalLight: public Light {
     bool setDirection(const Vector3&);
     bool setDirection(const double, const double, const double);
 
-
-    /* class methods */
-
-    float getDiffuseIntensity(const Vector3&, const Object&) const;
 };
 
 class PointLight: public Light {
@@ -97,7 +93,6 @@ class PointLight: public Light {
     /* class methods */
 
     Vector3 getDirection(const Vector3&) const;
-    float getDiffuseIntensity(const Vector3&, const Object&) const;
 };
 
 #endif

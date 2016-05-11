@@ -49,11 +49,3 @@ bool DirectionalLight::setDirection(const double X, const double Y,
 
     return false;
 }
-
-
-/* class methods */
-
-float DirectionalLight::getDiffuseIntensity(const Vector3& hitPos,
-                                            const Object& obj) const {
-    return -(getDirection() * obj.getNormal(hitPos));
-}

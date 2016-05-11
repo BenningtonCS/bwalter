@@ -24,6 +24,9 @@ class Camera {
     Canvas canvas;      // 800x600 pixel image by default
     float pixelSize;    // size of each pixel in the world
 
+    int numSamples = 1;     // number of samples per pixel
+    int sampleType = 0;     // 0: none; 1: simple; 2: jittered
+
     Vector3 u, v, w;    // orthonormal basis
 
     bool setUVW(const Vector3&, const Vector3&, const Vector3&);
@@ -45,6 +48,9 @@ class Camera {
     Vector3 getu() const;
     Vector3 getv() const;
     Vector3 getw() const;
+
+    int getNumSamples() const;
+    int getSampleType() const;
 
 
     /* setters */
@@ -75,6 +81,8 @@ class Camera {
     */
     bool setPixelSize(const float);
 
+    bool setSampling(const int, const int);
+
     /* class methods */
 
     /*
@@ -90,7 +98,6 @@ class Camera {
 
     Vector3 vectorToWorldCoordinates(const Vector3&) const;
     Vector3 pointToWorldCoordinates(const Vector3&) const;
-
 };
 
 
@@ -104,7 +111,7 @@ class OrthographicCam: public Camera {
     OrthographicCam(const double, const double, const double,  // location
                     const double, const double, const double); // lookAt
 
-
+    Color simpleSample() const;                
     void render(const Scene&, const char*);
 };
 

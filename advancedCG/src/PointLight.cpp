@@ -51,8 +51,3 @@ Vector3 PointLight::getDirection(const Vector3& hitPos) const {
     return (hitPos - getLocation()).normalize();
 
 }
-
-float PointLight::getDiffuseIntensity(const Vector3& hitPos,
-                                      const Object& obj) const {
-    return -(getDirection(hitPos) * obj.getNormal(hitPos));
-}

@@ -20,8 +20,8 @@ int main(void) {
     Sphere sphere2(-170, -20, 200, 50, blue);
 
     Material mat;
-    mat.setAmbient(0.05);
-    mat.setRoughness(0.5);
+    mat.setAmbient(0);
+    mat.setRoughness(10);
     mat.setSpecular(0.5);
     mat.setColor(red);
 
@@ -52,7 +52,7 @@ int main(void) {
     Scene scene(cam);
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
-//    scene.addObject(&plane);
+    scene.addObject(&plane);
 //    scene.addObject(&box);
 //    scene.addObject(&disk);
     scene.addLight(&light);

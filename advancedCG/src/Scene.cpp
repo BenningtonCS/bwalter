@@ -68,6 +68,9 @@ Color Scene::sendRay(const Ray3& ray) const {
     if (closestT < std::numeric_limits<double>::max()) {
         Vector3 hitPos = ray.rayAtT(closestT);
 
+        float diffuse = 1 - closestObj->getMaterial().getAmbient()
+                          - closestObj->getMaterial().getSpecular();
+
         for (unsigned int j=0; j<lights.size(); j++) {
 
             // check if object is in shadow
@@ -87,19 +90,16 @@ Color Scene::sendRay(const Ray3& ray) const {
             if (isInShadow) continue;
 
             // get the intensity of the light on the object
-            float diffuse = 1 - closestObj->getMaterial().getAmbient()
-                              - closestObj->getMaterial().getSpecular();
-
-            float intensity = lights[j]->getDiffuseIntensity(hitPos, *closestObj);
+            float intensity = lights[j]->getDiffuseIntensity(hitPos,
+                                                             *closestObj);
 
             float specIntensity = lights[j]->getSpecularIntensity(hitPos,
-                                *closestObj, lights[j]->getDirection(), ray);
-
-    //        printf("%2.f\t", specIntensity);
+                                *closestObj, lights[j]->getDirection(hitPos), ray);
 
             Color newColor(color + closestObj->getColor() *
-                           lights[j]->getColor() * (diffuse * intensity +
-                            closestObj->getMaterial().getSpecular() * specIntensity));
+                           lights[j]->getColor() *
+                           (diffuse * intensity + specIntensity *
+                            closestObj->getMaterial().getSpecular()));
             color.setColor(newColor);
 
         }
@@ -108,7 +108,6 @@ Color Scene::sendRay(const Ray3& ray) const {
         float ambient = closestObj->getMaterial().getAmbient();
         Color newColor(color + closestObj->getColor() * ambient);
         color.setColor(newColor);
-
 
         return color;
     }
