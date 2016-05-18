@@ -31,6 +31,18 @@ bool Light::setColor(const float r, const float g, const float b,
     return true;
 }
 
+Vector3 Light::getDirection() const {
+    Vector3 v; return v;
+}
+
+Vector3 Light::getDirection(const Vector3&) const {
+    Vector3 v; return v;
+}
+
+double Light::getDistanceTo(const Vector3& point) const {
+    return 0;
+}
+
 float Light::getDiffuseIntensity(const Vector3& hitPos,
                                  const Object& obj) const {
     float val = ((getDirection(hitPos)*-1) * obj.getNormal(hitPos));
@@ -56,10 +68,16 @@ float Light::getSpecularIntensity(const Vector3& hitPos,
     return val;
 }
 
-Vector3 Light::getDirection() const {
-    Vector3 v; return v;
-}
+Color Light::getReflectedColor(const Vector3& hitPos,
+                                   const Object& obj,
+                                   const Vector3& lightDir,
+                                   const Ray3& camDir) const {
 
-Vector3 Light::getDirection(const Vector3&) const {
-    Vector3 v; return v;
+    Vector3 objNormal = obj.getNormal(hitPos);
+    Vector3 eye = camDir.getDirection() * -1;
+    Vector3 reflectedRay = eye*-1 + objNormal * (objNormal * eye) * 2;
+
+    return obj.getMaterial().getColor() * obj.getMaterial().getReflection() /
+           (objNormal * reflectedRay);
+
 }

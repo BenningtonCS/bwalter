@@ -28,6 +28,9 @@ PointLight::PointLight(const Vector3& loc, const Color& col) {
 
 Vector3 PointLight::getLocation() const { return location; }
 
+double PointLight::getDistanceTo(const Vector3& point) const {
+    return (getLocation() - point).getMagnitude();
+}
 
 /* setters */
 

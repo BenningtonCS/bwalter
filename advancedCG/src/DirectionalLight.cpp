@@ -4,11 +4,11 @@
 /* constructors */
 
 DirectionalLight::DirectionalLight() {
-    setColor(); setDirection();
+    setColor(); setDirection(1, -1, 1);
 }
 
 DirectionalLight::DirectionalLight(const Color& col) {
-    setColor(col); setDirection();
+    setColor(col); setDirection(1, -1, 1);
 }
 
 DirectionalLight::DirectionalLight(const Vector3& dir) {
@@ -20,13 +20,6 @@ DirectionalLight::DirectionalLight(const Vector3& dir, const Color& col) {
 }
 
 
-/* private */
-
-bool DirectionalLight::setDirection() {
-    setDirection(1, -1, 1); return true;
-}
-
-
 /* getters */
 
 Vector3 DirectionalLight::getDirection() const {return direction; }
@@ -34,6 +27,9 @@ Vector3 DirectionalLight::getDirection(const Vector3& tmp) const {
     return direction;
 }
 
+double DirectionalLight::getDistanceTo(const Vector3& point) const {
+    return std::numeric_limits<double>::max();
+}
 
 /* setters */
 

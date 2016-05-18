@@ -28,17 +28,17 @@ class Light {
 
     virtual Vector3 getDirection() const;
     virtual Vector3 getDirection(const Vector3&) const;
+    virtual double getDistanceTo(const Vector3&) const;
     virtual float getDiffuseIntensity(const Vector3&, const Object&) const;
     float getSpecularIntensity(const Vector3&, const Object&,
+                               const Vector3&, const Ray3&) const;
+    Color getReflectedColor(const Vector3&, const Object&,
                                const Vector3&, const Ray3&) const;
 };
 
 class DirectionalLight: public Light {
   protected:
     Vector3 direction;  // direction of the light. (0, 0, 0) by default
-
-  private:
-    bool setDirection();
 
   public:
 
@@ -54,6 +54,7 @@ class DirectionalLight: public Light {
 
     Vector3 getDirection() const;
     Vector3 getDirection(const Vector3&) const;
+    double getDistanceTo(const Vector3&) const;
 
 
     /* setters */
@@ -82,6 +83,7 @@ class PointLight: public Light {
     /* getters */
 
     Vector3 getLocation() const;
+    double getDistanceTo(const Vector3&) const;
 
 
     /* setters */

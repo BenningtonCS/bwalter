@@ -9,7 +9,6 @@
 
 
 int main(void) {
-
     Color red(1, 0, 0, 1);
     Color yellow(1, 1, 0, 1);
     Color green(0, 1, 0, 1);
@@ -35,10 +34,10 @@ int main(void) {
     Plane plane(0, 1, 0, 0, -100, 0, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
 
-    Vector3 dir(200, -500, -100);
-//    Vector3 dir(80, 200, -150);
-    DirectionalLight light(dir);
-//    PointLight light(dir);
+//    Vector3 dir(200, -500, -100);
+    Vector3 dir(80, 200, -150);
+//    DirectionalLight light(dir);
+    PointLight light(dir);
     Vector3 dir2(-80, 100, -150);
     PointLight light2(dir2);
 
@@ -55,10 +54,11 @@ int main(void) {
     scene.addObject(&plane);
 //    scene.addObject(&box);
 //    scene.addObject(&disk);
-//    scene.addLight(&light);
+    scene.addLight(&light);
     scene.addLight(&light2);
 
     cam.render(scene, "scene.bmp");
+
 /*
     double m[4][4] =
         {{1, 2, 3, 4},
