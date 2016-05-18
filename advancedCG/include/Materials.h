@@ -9,6 +9,8 @@ class Material {
     float ambient = 0;
     float specular = 0;
     float roughness = 0;
+    float ior = 0;
+    float reflection = 0;
 
   public:
 
@@ -24,6 +26,8 @@ class Material {
     float getAmbient() const;
     float getSpecular() const;
     float getRoughness() const;
+    float getIOR() const;
+    float getReflection() const;
 
 
     /* setters */
@@ -32,6 +36,8 @@ class Material {
     bool setAmbient(const float);
     bool setSpecular(const float);
     bool setRoughness(const float);
+    bool setIOR(const float);
+    bool setReflection(const float);
 };
 
 #endif
