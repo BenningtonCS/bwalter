@@ -29,6 +29,7 @@ class Scene {
     std::vector<Object*> objs;      // objects in the scene (empty by default)
     std::vector<Light*> lights;     // lights in the scene (empty by default)
     Color background;               // background color. (black by default)
+    int maxDepth = 10;              // maximum depth of relfections
 
   public:
 
@@ -73,6 +74,8 @@ class Scene {
         is the color of the background of the scene
     */
     Color sendRay(const Ray3&) const;
+
+    Color sendRay(const Ray3&, const int) const;
 };
 
 #endif

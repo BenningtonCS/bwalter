@@ -32,8 +32,7 @@ class Light {
     virtual float getDiffuseIntensity(const Vector3&, const Object&) const;
     float getSpecularIntensity(const Vector3&, const Object&,
                                const Vector3&, const Ray3&) const;
-    Color getReflectedColor(const Vector3&, const Object&,
-                               const Vector3&, const Ray3&) const;
+    Ray3 getReflectedRay(const Vector3&, const Object&, const Ray3&) const;
 };
 
 class DirectionalLight: public Light {

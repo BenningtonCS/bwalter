@@ -63,21 +63,18 @@ float Light::getSpecularIntensity(const Vector3& hitPos,
     if (base < 0) base = 0;
     if (base > 1) base = 1;
     float e = obj.getMaterial().getRoughness();
-    float val = pow(base, e);
 
-    return val;
+    return pow(base, e);
 }
 
-Color Light::getReflectedColor(const Vector3& hitPos,
-                                   const Object& obj,
-                                   const Vector3& lightDir,
-                                   const Ray3& camDir) const {
+Ray3 Light::getReflectedRay(const Vector3& hitPos,
+                            const Object& obj,
+                            const Ray3& camDir) const {
 
     Vector3 objNormal = obj.getNormal(hitPos);
-    Vector3 eye = camDir.getDirection() * -1;
-    Vector3 reflectedRay = eye*-1 + objNormal * (objNormal * eye) * 2;
+    Vector3 eye = camDir.getOrigin() - hitPos;
+    Vector3 reflectedDir = eye*-1 + objNormal * (objNormal * eye) * 2;
+    Ray3 reflectedRay(hitPos, reflectedDir.normalize());
 
-    return obj.getMaterial().getColor() * obj.getMaterial().getReflection() /
-           (objNormal * reflectedRay);
-
+    return reflectedRay;
 }

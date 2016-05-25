@@ -46,6 +46,10 @@ bool Scene::addLight(Light* l) {
 /* class methods */
 
 Color Scene::sendRay(const Ray3& ray) const {
+    return sendRay(ray, 0);
+}
+
+Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
     Color color(0, 0, 0, 1);
 
     double closestT = std::numeric_limits<double>::max();
@@ -63,14 +67,16 @@ Color Scene::sendRay(const Ray3& ray) const {
         }
     }
 
+    Material closestObjMat = closestObj->getMaterial();
+
     // if an object has been hit by the ray, move through the lights in the
     // scene and add them up
     if (closestT < std::numeric_limits<double>::max()) {
 
-        float diffuseCo = 1 - closestObj->getMaterial().getAmbient()
-                          - closestObj->getMaterial().getSpecular();
-
         Vector3 hitPos = ray.rayAtT(closestT);
+        float diffuseCo = 1 - closestObjMat.getAmbient()
+                          - closestObjMat.getSpecular()
+                          - closestObjMat.getReflection();
 
         for (unsigned int j=0; j<lights.size(); j++) {
 
@@ -96,19 +102,27 @@ Color Scene::sendRay(const Ray3& ray) const {
             float specular = lights[j]->getSpecularIntensity(hitPos,
                              *closestObj, lights[j]->getDirection(hitPos), ray)
                              * closestObj->getMaterial().getSpecular();
-            Color reflection = lights[j]->getReflectedColor(hitPos,
-                             *closestObj, lights[j]->getDirection(hitPos), ray)
-                             * closestObj->getMaterial().getReflection();
 
-            Color newColor(color + reflection + closestObj->getColor() *
+            Color newColor(color + closestObj->getColor() *
                            lights[j]->getColor() * (diffuse + specular));
-            color.setColor(newColor);
 
+            // get reflections
+            if (recursionDepth < maxDepth) {
+                if (closestObjMat.getReflection() > 0) {
+                    Ray3 reflRay = lights[j]->getReflectedRay(hitPos, *closestObj, ray);
+                    Color reflColor = sendRay(reflRay, recursionDepth+1) *
+                                      closestObjMat.getReflection() /
+                                      (closestObj->getNormal(hitPos) * reflRay.getDirection());
+                    newColor = newColor + reflColor;
+                }
+            }
+
+            color.setColor(newColor);
         }
 
         // get the color of the object at that point with lights
-        float ambient = closestObj->getMaterial().getAmbient();
-        Color newColor(color + closestObj->getColor() * ambient);
+        float ambient = closestObjMat.getAmbient();
+        Color newColor(color + closestObjMat.getColor() * ambient);
         color.setColor(newColor);
 
         return color;

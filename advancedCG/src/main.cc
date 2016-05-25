@@ -15,21 +15,22 @@ int main(void) {
     Color blue(0, 0, 1, 1);
     Color white(1, 1, 1, 1);
 
-    Sphere sphere1(0, 50, 0, 100);
+    Sphere sphere1(200, 50, 0, 100);
     Sphere sphere2(-170, -20, 200, 50, blue);
 
     Material mat;
     mat.setAmbient(0);
-    mat.setRoughness(10);
-    mat.setSpecular(0.5);
+    mat.setRoughness(0);
+    mat.setSpecular(0);
     mat.setColor(red);
+    mat.setReflection(1);
 
     sphere1.setMaterial(mat);
 
     Box box;
-    box.setMin(-300, -200, -200);
+    box.setMin(-300, -90, -200);
     box.setMax(-200, 100, -50);
-    box.setColor(yellow);
+    box.setColor(green);
 
     Plane plane(0, 1, 0, 0, -100, 0, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
@@ -45,14 +46,14 @@ int main(void) {
 
 //    OrthographicCam cam;
     PerspectiveCam cam;
-    cam.setLocation(-10, 0, -10);
+    cam.setLocation(0, 0, -10);
 //    cam.setSampling(4, 1);
 
     Scene scene(cam);
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
     scene.addObject(&plane);
-//    scene.addObject(&box);
+    scene.addObject(&box);
 //    scene.addObject(&disk);
     scene.addLight(&light);
     scene.addLight(&light2);
