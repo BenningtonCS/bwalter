@@ -75,6 +75,5 @@ Ray3 Light::getReflectedRay(const Vector3& hitPos,
     Vector3 eye = camDir.getOrigin() - hitPos;
     Vector3 reflectedDir = eye*-1 + objNormal * (objNormal * eye) * 2;
     Ray3 reflectedRay(hitPos, reflectedDir.normalize());
-
     return reflectedRay;
 }

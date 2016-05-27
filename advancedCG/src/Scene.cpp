@@ -101,7 +101,7 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
                               *closestObj) * diffuseCo;
             float specular = lights[j]->getSpecularIntensity(hitPos,
                              *closestObj, lights[j]->getDirection(hitPos), ray)
-                             * closestObj->getMaterial().getSpecular();
+                             * closestObjMat.getSpecular();
 
             Color newColor(color + closestObj->getColor() *
                            lights[j]->getColor() * (diffuse + specular));
@@ -109,10 +109,18 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
             // get reflections
             if (recursionDepth < maxDepth) {
                 if (closestObjMat.getReflection() > 0) {
-                    Ray3 reflRay = lights[j]->getReflectedRay(hitPos, *closestObj, ray);
+
+                    Ray3 reflRay = lights[j]->getReflectedRay(hitPos,
+                                                *closestObj, ray);
+
+                    reflRay.setOrigin(reflRay.getOrigin() +
+                                      closestObj->getNormal(hitPos) * 0.1);
+
                     Color reflColor = sendRay(reflRay, recursionDepth+1) *
-                                      closestObjMat.getReflection() /
-                                      (closestObj->getNormal(hitPos) * reflRay.getDirection());
+                                              closestObjMat.getReflection() /
+                                              (closestObj->getNormal(hitPos) *
+                                               reflRay.getDirection());
+
                     newColor = newColor + reflColor;
                 }
             }
