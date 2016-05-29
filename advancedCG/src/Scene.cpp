@@ -90,7 +90,7 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
             double t = -1;
             bool isInShadow = false;
             for (unsigned int i=0; i<objs.size(); i++) {
-                t = objs[i]->rayHitPosition(transShadowRay);
+                t = objs[i]->rayHitPosition(shadowRay);
                 if (t > 1 && t < lights[j]->getDistanceTo(hitPos)) {
                     isInShadow = true;
                 }

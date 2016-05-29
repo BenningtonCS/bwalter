@@ -37,7 +37,7 @@ int main(void) {
     box.setMax(-200, 100, -50);
     box.setColor(green);
 
-    sphere2.scale(1, 10, 1);
+    sphere2.scale(.5, 1, 1);
     box.rotatey(45);
     box.translate(0, 0, -100);
 
