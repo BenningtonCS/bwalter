@@ -15,12 +15,15 @@
 
 #include <Vector3.h>
 #include <Ray3.h>
+#include <Matrix4.h>
 #include <Color.h>
 #include <Materials.h>
 
 class Object {
   protected:
       Material material;
+      Matrix4 transformMatrix;
+      Matrix4 inverseMatrix;
 
   public:
 
@@ -28,6 +31,8 @@ class Object {
 
       Material getMaterial() const;
       Color getColor() const;
+      Matrix4 getTransformMatrix() const;
+      Matrix4 getInverseMatrix() const;
 
       /* setters */
 
@@ -43,6 +48,12 @@ class Object {
       /* methods overloaded in child classes */
       virtual double rayHitPosition(const Ray3&) const;
       virtual Vector3 getNormal(const Vector3&) const;
+
+      void rotatex(const float);
+      void rotatey(const float);
+      void rotatez(const float);
+
+
 };
 
 

@@ -58,7 +58,9 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
     // move through every object in the scene and check if the ray hits it
     for (unsigned int i=0; i<objs.size(); i++) {
 
-        double t = objs[i]->rayHitPosition(ray);
+        // deal with object transformation by transforming the ray hitting it
+        Ray3 transformedRay = objs[i]->getInverseMatrix().transformRay(ray);
+        double t = objs[i]->rayHitPosition(transformedRay);
 
         // find the closest object
         if (t < closestT && t >= 0) {
@@ -81,9 +83,8 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
         for (unsigned int j=0; j<lights.size(); j++) {
 
             // check if object is in shadow
-            Vector3 shadowOrigin = hitPos;
             Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
-            Ray3 shadowRay(shadowOrigin, shadowDirection);
+            Ray3 shadowRay(hitPos, shadowDirection);
 
             double t = -1;
             bool isInShadow = false;

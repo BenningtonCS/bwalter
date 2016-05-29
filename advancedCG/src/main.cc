@@ -5,10 +5,11 @@
 #include <Ray3.h>
 #include <Scene.h>
 #include <Vector3.h>
-//#include <Matrices.h>
+#include <Matrix4.h>
 
 
 int main(void) {
+
     Color red(1, 0, 0, 1);
     Color yellow(1, 1, 0, 1);
     Color green(0, 1, 0, 1);
@@ -20,17 +21,23 @@ int main(void) {
 
     Material mat;
     mat.setAmbient(0);
-    mat.setRoughness(0);
-    mat.setSpecular(0);
+    mat.setRoughness(.2);
+    mat.setSpecular(.6);
     mat.setColor(red);
-    mat.setReflection(1);
-
+    mat.setReflection(.2);
     sphere1.setMaterial(mat);
+
+    Material mat2;
+    mat2.setColor(blue);
+    mat2.setReflection(.2);
+    sphere2.setMaterial(mat2);
 
     Box box;
     box.setMin(-300, -90, -200);
     box.setMax(-200, 100, -50);
     box.setColor(green);
+
+    box.rotatex(45);
 
     Plane plane(0, 1, 0, 0, -100, 0, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
@@ -60,16 +67,5 @@ int main(void) {
 
     cam.render(scene, "scene.bmp");
 
-/*
-    double m[4][4] =
-        {{1, 2, 3, 4},
-         {5, 6, 7, 8},
-         {9, 10, 11, 12},
-         {13, 14, 15, 16}};
-
-    Matrix4 matrix(m);
-
-    matrix.printMatrix();
-    printf("%.2f\n", matrix.det());
-*/
+    box.getTransformMatrix().printMatrix();
 }

@@ -4,7 +4,8 @@
 
 Color Object::getColor() const { return material.getColor(); }
 Material Object::getMaterial() const { return material; }
-
+Matrix4 Object::getTransformMatrix() const { return transformMatrix; }
+Matrix4 Object::getInverseMatrix() const { return inverseMatrix; }
 
 /* setters */
 
@@ -43,4 +44,19 @@ double Object::rayHitPosition(const Ray3& ray) const { return -1; }
 Vector3 Object::getNormal(const Vector3& hitPos) const {
     Vector3 empty(0, 0, 0);
     return empty;
+}
+
+void Object::rotatex(const float deg) {
+    transformMatrix = transformMatrix.getRotationX(deg)*transformMatrix;
+    inverseMatrix = inverseMatrix*transformMatrix.getRotationX(-deg);
+}
+
+void Object::rotatey(const float deg) {
+    transformMatrix = transformMatrix.getRotationY(deg)*transformMatrix;
+    inverseMatrix = inverseMatrix*transformMatrix.getRotationY(-deg);
+}
+
+void Object::rotatez(const float deg) {
+    transformMatrix = transformMatrix.getRotationZ(deg)*transformMatrix;
+    inverseMatrix = inverseMatrix*transformMatrix.getRotationZ(-deg);
 }
