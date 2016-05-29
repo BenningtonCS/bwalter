@@ -58,7 +58,7 @@ bool Sphere::setRadius(const double r) {
 
 Vector3 Sphere::getNormal(const Vector3& hitPos) const {
     Vector3 normal = (hitPos - getCenter())  / getRadius();
-    return normal;
+    return inverseMatrix.getTranspose().transformVector(normal);
 }
 
 double Sphere::rayHitPosition(const Ray3& ray) const {

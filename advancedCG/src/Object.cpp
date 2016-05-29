@@ -60,3 +60,25 @@ void Object::rotatez(const float deg) {
     transformMatrix = transformMatrix.getRotationZ(deg)*transformMatrix;
     inverseMatrix = inverseMatrix*transformMatrix.getRotationZ(-deg);
 }
+
+
+void Object::scale(const Vector3& v) {
+    transformMatrix = transformMatrix.getScaleBy(v)*transformMatrix;
+    inverseMatrix = inverseMatrix*transformMatrix.getScaleBy(v*-1);
+}
+
+void Object::translate(const Vector3& v) {
+    transformMatrix = transformMatrix.getTranslateBy(v)*transformMatrix;
+    inverseMatrix = inverseMatrix*transformMatrix.getTranslateBy(v*-1);
+}
+
+
+void Object::scale(const double x, const double y, const double z) {
+    Vector3 v(x, y, z);
+    scale(v);
+}
+
+void Object::translate(const double x, const double y, const double z) {
+    Vector3 v(x, y, z);
+    translate(v);
+}

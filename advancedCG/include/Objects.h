@@ -53,7 +53,11 @@ class Object {
       void rotatey(const float);
       void rotatez(const float);
 
+      void scale(const Vector3&);
+      void translate(const Vector3&);
 
+      void scale(const double, const double, const double);
+      void translate(const double, const double, const double);
 };
 
 

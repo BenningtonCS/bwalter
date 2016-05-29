@@ -37,7 +37,9 @@ int main(void) {
     box.setMax(-200, 100, -50);
     box.setColor(green);
 
-    box.rotatex(45);
+    sphere1.translate(0, 0, -50);
+    sphere2.scale(2, 2, 2);
+    box.rotatey(45);
 
     Plane plane(0, 1, 0, 0, -100, 0, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
@@ -66,6 +68,4 @@ int main(void) {
     scene.addLight(&light2);
 
     cam.render(scene, "scene.bmp");
-
-    box.getTransformMatrix().printMatrix();
 }

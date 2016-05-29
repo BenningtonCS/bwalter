@@ -85,11 +85,12 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
             // check if object is in shadow
             Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
             Ray3 shadowRay(hitPos, shadowDirection);
+            Ray3 transShadowRay = closestObj->getInverseMatrix().transformRay(shadowRay);
 
             double t = -1;
             bool isInShadow = false;
             for (unsigned int i=0; i<objs.size(); i++) {
-                t = objs[i]->rayHitPosition(shadowRay);
+                t = objs[i]->rayHitPosition(transShadowRay);
                 if (t > 1 && t < lights[j]->getDistanceTo(hitPos)) {
                     isInShadow = true;
                 }

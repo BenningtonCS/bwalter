@@ -10,8 +10,6 @@
 class Matrix4 {
   protected:
     double matrix[4][4];
-    double inverse[4][4];
-
 
     /* class methods */
 
@@ -29,7 +27,6 @@ class Matrix4 {
     /* getters */
 
     double (*getMatrix())[4];
-    double (*getInverse())[4];
 
 
     /* setters */
@@ -42,9 +39,14 @@ class Matrix4 {
     void printMatrix() const;
     double det() const;
 
+    Matrix4 getTranspose() const;
+
     Vector3 transformPoint(const Vector3&) const;
     Vector3 transformVector(const Vector3&) const;
     Ray3 transformRay(const Ray3&) const;
+
+    Matrix4 getScaleBy(const Vector3&) const;
+    Matrix4 getTranslateBy(const Vector3&) const;
 
     Matrix4 getRotationX(const float) const;
     Matrix4 getRotationY(const float) const;

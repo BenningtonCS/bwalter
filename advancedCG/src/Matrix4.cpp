@@ -20,7 +20,6 @@ Matrix4::Matrix4(const double nums[][4]) {
 /* getters */
 
 double (*Matrix4::getMatrix())[4] { return matrix; }
-double (*Matrix4::getInverse())[4] { return inverse; }
 
 
 /* setters */
@@ -82,6 +81,17 @@ double Matrix4::det() const {
            matrix[0][2]*det3(c) - matrix[0][3]*det3(d);
 }
 
+Matrix4 Matrix4::getTranspose() const {
+    double m[4][4] =
+        {{matrix[0][0], matrix[1][0], matrix[2][0], matrix[3][0]},
+         {matrix[0][1], matrix[1][1], matrix[2][1], matrix[3][1]},
+         {matrix[0][2], matrix[1][2], matrix[2][2], matrix[3][2]},
+         {matrix[0][3], matrix[1][3], matrix[2][3], matrix[3][3]}};
+
+    Matrix4 transpose(m);
+    return transpose;
+}
+
 Vector3 Matrix4::transformPoint(const Vector3& p) const {
     double x, y, z;
     x = p.getx(); y = p.gety(); z = p.getz();
@@ -107,6 +117,28 @@ Ray3 Matrix4::transformRay(const Ray3& r) const {
     Vector3 direction = transformVector(r.getDirection());
     Ray3 result(origin, direction);
     return result;
+}
+
+Matrix4 Matrix4::getScaleBy(const Vector3& v) const {
+    double m[4][4] =
+        {{v.getx(), 0, 0, 0},
+         {0, v.gety(), 0, 0},
+         {0, 0, v.getz(), 0},
+         {0, 0, 0, 1}};
+
+    Matrix4 scale(m);
+    return scale;
+}
+
+Matrix4 Matrix4::getTranslateBy(const Vector3& v) const {
+    double m[4][4] =
+        {{1, 0, 0, v.getx()},
+         {0, 1, 0, v.gety()},
+         {0, 0, 1, v.getz()},
+         {0, 0, 0, 1}};
+
+    Matrix4 translate(m);
+    return translate;
 }
 
 Matrix4 Matrix4::getRotationX(const float degrees) const {
