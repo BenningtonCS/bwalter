@@ -72,7 +72,7 @@ bool Disk::setRadius(const float r) {
 
 /* class methods */
 Vector3 Disk::getNormal(const Vector3& hitPos) const {
-    return normal;
+    return inverseMatrix.getTranspose().transformVector(normal);
 }
 
 double Disk::rayHitPosition(const Ray3& ray) const {

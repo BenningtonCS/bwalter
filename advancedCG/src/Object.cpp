@@ -38,6 +38,7 @@ bool Object::setMaterial(const Material& mat) {
     return true;
 }
 
+
 /* class methods */
 
 double Object::rayHitPosition(const Ray3& ray) const { return -1; }

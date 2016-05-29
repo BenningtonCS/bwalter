@@ -73,7 +73,7 @@ Vector3 Box::getNormal(const Vector3& hitPos) const {
     if (hitPos.gety() == max.gety()) normal.setVector(0, 1, 0);
     if (hitPos.getz() == max.getz()) normal.setVector(0, 0, 1);
 
-    return normal;
+    return inverseMatrix.getTranspose().transformVector(normal);
 }
 
 double Box::rayHitPosition(const Ray3& ray) const {

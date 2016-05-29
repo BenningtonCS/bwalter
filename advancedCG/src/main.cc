@@ -17,7 +17,7 @@ int main(void) {
     Color white(1, 1, 1, 1);
 
     Sphere sphere1(200, 50, 0, 100);
-    Sphere sphere2(-170, -20, 200, 50, blue);
+    Sphere sphere2(0, 0, 0, 50, blue);
 
     Material mat;
     mat.setAmbient(0);
@@ -37,11 +37,13 @@ int main(void) {
     box.setMax(-200, 100, -50);
     box.setColor(green);
 
-    sphere1.translate(0, 0, -50);
-    sphere2.scale(2, 2, 2);
+    sphere2.scale(1, 10, 1);
     box.rotatey(45);
+    box.translate(0, 0, -100);
+
 
     Plane plane(0, 1, 0, 0, -100, 0, white);
+    Plane plane2(0, 0, -1, 0, 0, 500, white);
     Disk disk(-1, -1, -1, 150, -50, 10, 50, green);
 
 //    Vector3 dir(200, -500, -100);
@@ -62,6 +64,7 @@ int main(void) {
     scene.addObject(&sphere1);
     scene.addObject(&sphere2);
     scene.addObject(&plane);
+    scene.addObject(&plane2);
     scene.addObject(&box);
 //    scene.addObject(&disk);
     scene.addLight(&light);

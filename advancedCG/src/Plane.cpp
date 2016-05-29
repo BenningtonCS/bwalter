@@ -29,7 +29,10 @@ Plane::Plane(const double nx, const double ny, const double nz,
 
 /* getters */
 
-Vector3 Plane::getNormal() const { return normal; }
+Vector3 Plane::getNormal() const {
+    return inverseMatrix.getTranspose().transformVector(normal);
+}
+
 Vector3 Plane::getPoint() const { return point; }
 
 
