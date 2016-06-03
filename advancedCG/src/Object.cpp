@@ -65,7 +65,8 @@ void Object::rotatez(const float deg) {
 
 void Object::scale(const Vector3& v) {
     transformMatrix = transformMatrix.getScaleBy(v)*transformMatrix;
-    inverseMatrix = inverseMatrix*transformMatrix.getScaleBy(v*-1);
+    Vector3 inverse(1/v.getx(), 1/v.gety(), 1/v.getz());
+    inverseMatrix = inverseMatrix*transformMatrix.getScaleBy(inverse);
 }
 
 void Object::translate(const Vector3& v) {

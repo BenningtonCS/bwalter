@@ -64,14 +64,15 @@ bool Box::setMax(const double X, const double Y, const double Z) {
 Vector3 Box::getNormal(const Vector3& hitPos) const {
     Vector3 normal;
     Vector3 m = min - hitPos;
+    Vector3 m2 = max - hitPos;
 
-    if (m.getx() <= 0.0001) normal.setVector(-1, 0, 0);
-    if (m.gety() <= 0.0001) normal.setVector(0, -1, 0);
-    if (m.getz() <= 0.0001) normal.setVector(0, 0, -1);
+    if (fabs(m.getx()) <= 0.0001) normal.setVector(-1, 0, 0);
+    if (fabs(m.gety()) <= 0.0001) normal.setVector(0, -1, 0);
+    if (fabs(m.getz()) <= 0.0001) normal.setVector(0, 0, -1);
 
-    if (hitPos.getx() == max.getx()) normal.setVector(1, 0, 0);
-    if (hitPos.gety() == max.gety()) normal.setVector(0, 1, 0);
-    if (hitPos.getz() == max.getz()) normal.setVector(0, 0, 1);
+    if (fabs(m2.getx()) <= 0.0001) normal.setVector(1, 0, 0);
+    if (fabs(m2.gety()) <= 0.0001) normal.setVector(0, 1, 0);
+    if (fabs(m2.getz()) <= 0.0001) normal.setVector(0, 0, 1);
 
     return inverseMatrix.getTranspose().transformVector(normal);
 }

@@ -63,7 +63,7 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
         double t = objs[i]->rayHitPosition(transformedRay);
 
         // find the closest object
-        if (t < closestT && t >= 0) {
+        if (t < closestT && t > 1) {
             closestT = t;
             closestObj = objs[i];
         }
@@ -74,8 +74,10 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
     // if an object has been hit by the ray, move through the lights in the
     // scene and add them up
     if (closestT < std::numeric_limits<double>::max()) {
-
-        Vector3 hitPos = ray.rayAtT(closestT);
+        Ray3 transformedRay = closestObj->getInverseMatrix().transformRay(ray);
+        Vector3 surfaceHitPos = transformedRay.rayAtT(closestT);
+        Vector3 hitPos = closestObj->getTransformMatrix().transformPoint(surfaceHitPos);
+        
         float diffuseCo = 1 - closestObjMat.getAmbient()
                           - closestObjMat.getSpecular()
                           - closestObjMat.getReflection();
@@ -85,13 +87,16 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
             // check if object is in shadow
             Vector3 shadowDirection = lights[j]->getDirection(hitPos) * -1;
             Ray3 shadowRay(hitPos, shadowDirection);
+            
+            //Not quite... You want the shadow ray to be transformed into the spaces of the objects it's checking against (those casting the shadow), not the object you are trying to color (the one recieving the shadow)
             Ray3 transShadowRay = closestObj->getInverseMatrix().transformRay(shadowRay);
 
             double t = -1;
             bool isInShadow = false;
+            double distanceToLight = lights[j]->getDistanceTo(hitPos);
             for (unsigned int i=0; i<objs.size(); i++) {
                 t = objs[i]->rayHitPosition(shadowRay);
-                if (t > 1 && t < lights[j]->getDistanceTo(hitPos)) {
+                if (t > 1 && t < distanceToLight) {
                     isInShadow = true;
                 }
             }
@@ -116,7 +121,8 @@ Color Scene::sendRay(const Ray3& ray, const int recursionDepth) const {
                                                 *closestObj, ray);
 
                     reflRay.setOrigin(reflRay.getOrigin() +
-                                      closestObj->getNormal(hitPos) * 0.1);
+                                      closestObj->getNormal(surfaceHitPos) * 0.1);
+                    //Why do I get a segmentation fault without this line??
 
                     Color reflColor = sendRay(reflRay, recursionDepth+1) *
                                               closestObjMat.getReflection() /

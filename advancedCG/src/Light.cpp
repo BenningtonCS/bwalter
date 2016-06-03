@@ -45,7 +45,8 @@ double Light::getDistanceTo(const Vector3& point) const {
 
 float Light::getDiffuseIntensity(const Vector3& hitPos,
                                  const Object& obj) const {
-    float val = ((getDirection(hitPos)*-1) * obj.getNormal(hitPos));
+    Vector3 transformedPosition = obj.getInverseMatrix().transformPoint(hitPos);
+    float val = ((getDirection(hitPos)*-1) * obj.getNormal(transformedPosition));
     if (val < 0) return 0;
     if (val > 1) return 1;
     return val;
@@ -55,8 +56,8 @@ float Light::getSpecularIntensity(const Vector3& hitPos,
                                   const Object& obj,
                                   const Vector3& lightDir,
                                   const Ray3& camDir) const {
-
-    Vector3 objNormal = obj.getNormal(hitPos);
+    Vector3 transformedPosition = obj.getInverseMatrix().transformPoint(hitPos);
+    Vector3 objNormal = obj.getNormal(transformedPosition);
     Vector3 reflection(lightDir + objNormal*2*(lightDir*-1 * objNormal));
 
     float base = reflection * (camDir.getDirection()*-1);
@@ -70,9 +71,9 @@ float Light::getSpecularIntensity(const Vector3& hitPos,
 Ray3 Light::getReflectedRay(const Vector3& hitPos,
                             const Object& obj,
                             const Ray3& camDir) const {
-
-    Vector3 objNormal = obj.getNormal(hitPos);
-    Vector3 eye = camDir.getOrigin() - hitPos;
+    Vector3 transformedPosition = obj.getInverseMatrix().transformPoint(hitPos);
+    Vector3 objNormal = obj.getNormal(transformedPosition);
+    Vector3 eye = (camDir.getOrigin() - hitPos).normalize();
     Vector3 reflectedDir = eye*-1 + objNormal * (objNormal * eye) * 2;
     Ray3 reflectedRay(hitPos, reflectedDir.normalize());
     return reflectedRay;
